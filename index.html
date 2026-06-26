@@ -367,13 +367,14 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .howbtn svg{width:14px;height:14px}
 .howbtn:hover{border-color:var(--navy);background:#f2f6fa}
 .bigmodal.dark .howbtn{background:#1b3a57;color:#eaf2fa;border-color:#284a6a}
-.howsheet{max-width:720px;max-height:88vh;overflow-y:auto;overflow-x:hidden}
-.howbody{padding:20px 26px 24px;max-height:none}
-.steps4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
-.steps4 .st{display:flex;gap:11px;background:#f6f8fb;border:1px solid var(--line);border-radius:9px;padding:13px 15px}
-.steps4 .stn{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--fd);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center}
-.steps4 .st b{font-size:14px;color:var(--ink);display:block;margin-bottom:2px}
-.steps4 .st p{font-size:12.5px;color:var(--body);line-height:1.45}
+.howsheet{max-width:840px;max-height:90vh;overflow-y:auto;overflow-x:hidden}
+.howbody{padding:22px 30px 26px;max-height:none}
+.steps{display:flex;flex-direction:column;margin-bottom:8px}
+.step{display:flex;gap:18px;padding:18px 2px;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .stn{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--fd);font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.step .sttx b{display:block;font-size:16.5px;color:var(--ink);margin-bottom:6px;line-height:1.3}
+.step .sttx p{font-size:14.5px;color:var(--body);line-height:1.65}
 .acc-hint{font-size:12px;color:var(--muted);font-family:var(--fd);letter-spacing:.4px;text-transform:uppercase;margin:4px 0 10px}
 .acc{border:1px solid #c2ccd6;border-radius:9px;overflow:hidden;margin-bottom:10px;background:#fff}
 .acc-h{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:14px 14px 14px 17px;background:#eef3f8;border:none;cursor:pointer;font-family:var(--fb);font-size:15px;font-weight:700;color:var(--navy);transition:.12s}
@@ -387,11 +388,11 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .acc-b ul{margin:0;padding-left:18px}
 .acc-b li{font-size:13.5px;color:var(--body);line-height:1.55;margin-bottom:6px}
 .acc-b p{font-size:13.5px;color:var(--body);line-height:1.55;margin:4px 0}
-.acc-b code,.steps4 code{font-family:var(--fd);font-size:12px;background:#eef2f6;color:var(--navy);padding:1px 5px;border-radius:3px}
+.acc-b code,.step code{font-family:var(--fd);font-size:12.5px;background:#eef2f6;color:var(--navy);padding:1px 5px;border-radius:3px}
 .acc-b pre{font-family:var(--fd);font-size:11.5px;line-height:1.55;background:#15314a;color:#cfe6ef;padding:13px 15px;border-radius:7px;overflow:auto;margin:8px 0;white-space:pre}
 .acc-flag{font-size:13px;color:var(--body);background:#f6f8fb;border:1px solid var(--line);border-radius:7px;padding:9px 12px;margin-top:9px;line-height:1.5}
 .hownote{margin-top:14px;font-size:12.5px;color:var(--body);background:#f6f8fb;border:1px solid var(--line);border-radius:8px;padding:11px 14px;line-height:1.5}
-@media(max-width:620px){.steps4{grid-template-columns:1fr}}
+@media(max-width:620px){.howbody{padding:18px 18px 22px}.step{gap:13px;padding:15px 2px}.step .sttx b{font-size:15.5px}}
 .toast{position:fixed;bottom:54px;left:50%;transform:translateX(-50%) translateY(20px);background:#15314a;color:#fff;padding:11px 20px;font-size:13px;font-family:var(--fd);z-index:90;opacity:0;transition:.25s;pointer-events:none;border-radius:4px;border-left:3px solid var(--gold)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -742,11 +743,35 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
     </div>
     <div class="howbody">
 
-      <div class="steps4">
-        <div class="st"><span class="stn">1</span><div><b>Describe it to AI</b><p>Plain English: &ldquo;Build a searchable catalog of RAPT&rsquo;s layers.&rdquo; The AI writes one <code>index.html</code>.</p></div></div>
-        <div class="st"><span class="stn">2</span><div><b>Open it</b><p>Double-click the file &mdash; it runs in any browser. No server, no build step.</p></div></div>
-        <div class="st"><span class="stn">3</span><div><b>Host where gov trusts</b><p>Your <b>ArcGIS Online / Enterprise</b> or <b>cloud.gov</b> (FedRAMP) &mdash; already authorized.</p></div></div>
-        <div class="st"><span class="stn">4</span><div><b>Embed in Experience Builder</b><p>Add the <b>Embed</b> widget &rarr; point it at the hosted <b>URL</b>.</p></div></div>
+      <div class="steps">
+        <div class="step">
+          <span class="stn">1</span>
+          <div class="sttx">
+            <b>Describe what you want to an AI tool, in plain English</b>
+            <p>You don&rsquo;t write the code. Any current AI coding assistant can do this &mdash; you describe the goal in normal language: &ldquo;Build a searchable catalog of RAPT&rsquo;s layers that previews them on a map and adds them to a user&rsquo;s map.&rdquo; It writes a single, self-contained HTML file. You refine it the same way &mdash; &ldquo;make it full-screen,&rdquo; &ldquo;add a table view,&rdquo; &ldquo;let the filters stack&rdquo; &mdash; and it edits the file each time. No framework to choose, no boilerplate to learn.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="stn">2</span>
+          <div class="sttx">
+            <b>Point it at the real RAPT layers</b>
+            <p>The 106 layers aren&rsquo;t made up &mdash; they come straight from RAPT&rsquo;s published web map through the ArcGIS REST API. You request the item&rsquo;s data (<code>&hellip;/items/&lt;itemId&gt;/data?f=json</code>) and read its <code>operationalLayers</code> list: each layer&rsquo;s title, service URL, and item id. That list <em>is</em> the catalog. The same approach works against any RAPT or ArcGIS web map you own.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="stn">3</span>
+          <div class="sttx">
+            <b>Open the file &mdash; that&rsquo;s the whole app</b>
+            <p>The result is one <code>index.html</code>. Double-click it and it runs in any browser: no server, no database, no build step. Fonts and the ArcGIS Maps SDK load from a CDN; everything else &mdash; search, filters, the three layouts, the live map preview, add-to-map &mdash; is plain JavaScript running in the browser. It&rsquo;s the same web technology Experience Builder is built on, which is why it embeds cleanly.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="stn">4</span>
+          <div class="sttx">
+            <b>Host it where the government accepts it, then embed the URL</b>
+            <p>For production you move that one file into your authorized environment &mdash; either rebuilt as a custom Experience Builder widget (it deploys inside your ArcGIS Enterprise / portal, so nothing leaves your authorized space), or placed on FedRAMP static hosting such as cloud.gov Pages. Then add EB&rsquo;s <b>Embed</b> widget and point it at that URL. The sections below cover the hosting and safety details.</p>
+          </div>
+        </div>
       </div>
 
       <p class="acc-hint">Tap any section to expand &#9662;</p>
