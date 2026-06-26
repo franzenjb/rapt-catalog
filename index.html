@@ -632,6 +632,7 @@ const sel=new Set();
 let curFocus=null;
 const CATSHORT={'Hazards, Weather & Risk':'Hazards','Infrastructure & Lifelines':'Infrastructure','People & Community':'People'};
 const geoLabel=l=>l.geo==='Service'?(l.rt?'Live feed':'Point / service'):l.geo;
+const geoArea=l=>({County:'County',['Census Tract']:'Census tract',Tribal:'Tribal area'}[l.geo]||'National / point');
 const plusSvg=()=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="6" x2="12" y2="18"/><line x1="6" y1="12" x2="18" y2="12"/></svg>';
 const checkSvg=()=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg>';
 
@@ -702,7 +703,7 @@ function renderDetail(){
     <div class="dt-tags">${chips}</div>
     <dl class="dt-facts">
       <div><dt>Type</dt><dd>${ltypeLabel}</dd></div>
-      <div><dt>Geography</dt><dd>${geoLabel(l)}</dd></div>
+      <div><dt>Geography</dt><dd>${geoArea(l)}</dd></div>
       <div><dt>Updates</dt><dd>${l.rt?'Real-time feed':'Static / periodic'}</dd></div>
     </dl>
     <button class="dt-add ${on?'on':''}" onclick="toggle(${l.i})">${on?checkSvg()+' In your map':plusSvg()+' Add to map'}</button>`;
