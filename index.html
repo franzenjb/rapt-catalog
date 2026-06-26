@@ -165,7 +165,10 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .listbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 16px;border-bottom:1px solid var(--line);background:#fff;flex-shrink:0}
 .listbar #resultmeta{font-family:var(--fb);font-size:13px;color:var(--body)}
 .listbar #resultmeta b{color:var(--ink);font-weight:700}
-.listbar .metatag{font-family:var(--fd);font-size:11px;background:var(--navy);color:#fff;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.4px}
+.listbar{flex-wrap:wrap;row-gap:7px}
+.listbar .metatag{font-family:var(--fd);font-size:11px;background:var(--navy);color:#fff;padding:2px 5px 2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.4px;display:inline-flex;align-items:center;gap:4px}
+.listbar .metatag x{cursor:pointer;font-style:normal;opacity:.75;font-size:13px;line-height:1}
+.listbar .metatag x:hover{opacity:1}
 .clearbtn{font-family:var(--fb);font-size:12.5px;font-weight:600;color:var(--navy);background:none;border:1px solid #c2ccd6;border-radius:6px;padding:5px 11px;cursor:pointer}
 .clearbtn:hover{background:#f2f6fa;border-color:var(--navy)}
 .layerlist{flex:1;overflow-y:auto;background:#fff}
@@ -726,7 +729,8 @@ const tagCounts={};LAYERS.forEach(l=>l.tags.forEach(t=>tagCounts[t]=(tagCounts[t
 const TOPTAGS=Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
 
 /* ---------- state ---------- */
-let curCat='all', curTag=null;
+let curCat='all';
+const curTags=new Set();
 const sel=new Set();
 
 /* restore from hash */
@@ -752,21 +756,21 @@ const checkSvg=()=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
   document.querySelectorAll('.seg[data-cat]').forEach(s=>{const k=map[s.dataset.cat];if(k&&!s.querySelector('svg'))s.insertAdjacentHTML('afterbegin',svgIcon(k));});
 })();
 
-function setTag(t){curTag=curTag===t?null:t;render();}
+function setTag(t){curTags.has(t)?curTags.delete(t):curTags.add(t);render();}
 function setCat(c,el){curCat=c.replace(/&amp;/g,'&');document.querySelectorAll('.seg[data-cat]').forEach(p=>p.classList.remove('active'));el.classList.add('active');render();}
-function clearFilters(){curTag=null;curCat='all';document.getElementById('q').value='';document.querySelectorAll('.seg[data-cat]').forEach(p=>p.classList.toggle('active',p.dataset.cat==='all'));render();}
+function clearFilters(){curTags.clear();curCat='all';document.getElementById('q').value='';document.querySelectorAll('.seg[data-cat]').forEach(p=>p.classList.toggle('active',p.dataset.cat==='all'));render();}
 function toggleRail(){const lay=document.getElementById('catlayout');lay.classList.toggle('norail');document.getElementById('railToggle').classList.toggle('on',!lay.classList.contains('norail'));}
 
 function matches(l){
   const q=document.getElementById('q').value.trim().toLowerCase();
   if(curCat!=='all'&&l.cat!==curCat)return false;
-  if(curTag&&!l.tags.includes(curTag))return false;
+  if(curTags.size){for(const t of curTags){if(!l.tags.includes(t))return false;}}
   if(q&&!(l.title.toLowerCase().includes(q)||l.tags.join(' ').toLowerCase().includes(q)||l.cat.toLowerCase().includes(q)))return false;
   return true;
 }
 function renderFacets(){
   document.getElementById('tagfacets').innerHTML=TOPTAGS.map(t=>
-    `<button class="facet ${curTag===t?'active':''}" onclick="setTag('${t.replace(/'/g,"\\'")}')">${svgIcon(t)}<span class="fl">${t}</span><span class="fc">${tagCounts[t]}</span></button>`).join('');
+    `<button class="facet ${curTags.has(t)?'active':''}" onclick="setTag('${t.replace(/'/g,"\\'")}')">${svgIcon(t)}<span class="fl">${t}</span><span class="fc">${tagCounts[t]}</span></button>`).join('');
 }
 const grid=document.getElementById('grid');
 const badgeFor=l=>l.rt?'<span class="lrbadge live">LIVE</span>':(l.geo==='Service'?'<span class="lrbadge svc">SERVICE</span>':'');
@@ -812,13 +816,13 @@ function tableHTML(list){
 function render(){
   renderFacets();
   const list=LAYERS.filter(matches);
-  const active=(curCat!=='all'||curTag||document.getElementById('q').value.trim());
+  const active=(curCat!=='all'||curTags.size||document.getElementById('q').value.trim());
   const cards=viewMode==='cards', table=viewMode==='table';
   const lay=document.getElementById('catlayout');
   lay.classList.toggle('cards',cards);
   lay.classList.toggle('table',table);
   document.querySelectorAll('.vt').forEach(b=>b.classList.toggle('active',b.dataset.view===viewMode));
-  document.getElementById('resultmeta').innerHTML=`<b>${list.length}</b> of ${LAYERS.length} layers`+(curTag?` · <span class="metatag">${curTag}</span>`:'');
+  document.getElementById('resultmeta').innerHTML=`<b>${list.length}</b> of ${LAYERS.length} layers`+[...curTags].map(t=>` <span class="metatag">${t}<x onclick="event.stopPropagation();setTag('${t.replace(/'/g,"\\'")}')">&times;</x></span>`).join('');
   document.getElementById('clearFilters').style.display=active?'inline-flex':'none';
   if(curFocus!=null&&!list.some(l=>l.i===curFocus))curFocus=null;
   grid.className=table?'datatable':cards?'cardgrid':'layerlist';
