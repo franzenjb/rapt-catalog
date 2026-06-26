@@ -100,6 +100,10 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .lc-stat span{font-family:var(--fd);font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
 .lc-btn{margin-top:26px;background:linear-gradient(180deg,#cab35e,#a98a34);color:#241f08;border:none;padding:16px 34px;font-family:var(--fb);font-weight:700;font-size:17.5px;cursor:pointer;border-radius:10px;letter-spacing:.2px;box-shadow:0 8px 20px rgba(169,138,52,.32);transition:.14s;display:inline-flex;align-items:center;gap:9px}
 .lc-btn:hover{filter:brightness(1.05);transform:translateY(-2px);box-shadow:0 12px 26px rgba(169,138,52,.38)}
+.lc-how{display:inline-flex;align-items:center;gap:8px;margin-top:16px;margin-left:2px;background:none;border:none;color:var(--navy);font-family:var(--fb);font-size:14px;font-weight:600;cursor:pointer;padding:6px 2px}
+.lc-how svg{width:16px;height:16px}
+.lc-how span,.lc-how{text-underline-offset:3px}
+.lc-how:hover{color:var(--blue);text-decoration:underline}
 .pane-right{width:160px;flex-shrink:0;background:#eef1f5;border-left:1px solid var(--line);overflow-y:auto}
 .toolitem{padding:11px 14px;font-size:13px;color:var(--body);border-bottom:1px solid var(--line)}
 .presets-head{background:linear-gradient(180deg,#cab35e,#a98a34);color:#241f08;font-weight:700;font-size:13px;padding:8px 14px;margin-top:6px}
@@ -363,18 +367,21 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .howbtn svg{width:14px;height:14px}
 .howbtn:hover{border-color:var(--navy);background:#f2f6fa}
 .bigmodal.dark .howbtn{background:#1b3a57;color:#eaf2fa;border-color:#284a6a}
-.howsheet{max-width:720px}
+.howsheet{max-width:720px;max-height:88vh;overflow-y:auto;overflow-x:hidden}
 .howbody{padding:20px 26px 24px;max-height:none}
 .steps4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
 .steps4 .st{display:flex;gap:11px;background:#f6f8fb;border:1px solid var(--line);border-radius:9px;padding:13px 15px}
 .steps4 .stn{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--fd);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center}
 .steps4 .st b{font-size:14px;color:var(--ink);display:block;margin-bottom:2px}
 .steps4 .st p{font-size:12.5px;color:var(--body);line-height:1.45}
-.acc{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:9px;background:#fff}
-.acc-h{display:flex;align-items:center;width:100%;text-align:left;padding:13px 16px;background:#fff;border:none;cursor:pointer;font-family:var(--fb);font-size:14.5px;font-weight:700;color:var(--ink);transition:.1s}
-.acc-h:hover{background:#f5f8fb}
-.acc-chev{margin-left:auto;color:var(--muted);font-size:13px;transition:.2s}
-.acc.open .acc-chev{transform:rotate(180deg)}
+.acc-hint{font-size:12px;color:var(--muted);font-family:var(--fd);letter-spacing:.4px;text-transform:uppercase;margin:4px 0 10px}
+.acc{border:1px solid #c2ccd6;border-radius:9px;overflow:hidden;margin-bottom:10px;background:#fff}
+.acc-h{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:14px 14px 14px 17px;background:#eef3f8;border:none;cursor:pointer;font-family:var(--fb);font-size:15px;font-weight:700;color:var(--navy);transition:.12s}
+.acc-h:hover{background:#e0eaf3}
+.acc.open .acc-h{background:var(--navy);color:#fff}
+.acc-chev{margin-left:auto;width:25px;height:25px;flex-shrink:0;border-radius:50%;background:#fff;border:1px solid #c2ccd6;color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1;transition:.22s}
+.acc-h:hover .acc-chev{border-color:var(--navy)}
+.acc.open .acc-chev{transform:rotate(180deg);background:var(--gold);border-color:var(--gold);color:#241f08}
 .acc-b{display:none;padding:2px 16px 15px}
 .acc.open .acc-b{display:block}
 .acc-b ul{margin:0;padding-left:18px}
@@ -580,6 +587,10 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
           <div class="lc-stat"><b>3</b><span>Categories</span></div>
         </div>
         <button class="lc-btn" onclick="openCatalog()">Browse the Layer Catalog <span aria-hidden="true">&rarr;</span></button>
+        <button class="lc-how" onclick="openHow()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.2a2.8 2.8 0 0 1 5.4 1c0 1.8-2.6 2.3-2.6 4"/><line x1="12" y1="17.4" x2="12.01" y2="17.4"/></svg>
+          How this was built &mdash; for developers
+        </button>
       </div>
     </div>
     <aside class="pane-right">
@@ -735,10 +746,12 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
         <div class="st"><span class="stn">1</span><div><b>Describe it to AI</b><p>Plain English: &ldquo;Build a searchable catalog of RAPT&rsquo;s layers.&rdquo; The AI writes one <code>index.html</code>.</p></div></div>
         <div class="st"><span class="stn">2</span><div><b>Open it</b><p>Double-click the file &mdash; it runs in any browser. No server, no build step.</p></div></div>
         <div class="st"><span class="stn">3</span><div><b>Host where gov trusts</b><p>Your <b>ArcGIS Online / Enterprise</b> or <b>cloud.gov</b> (FedRAMP) &mdash; already authorized.</p></div></div>
-        <div class="st"><span class="stn">4</span><div><b>Embed in Experience Builder</b><p>Add the <b>Embed</b> widget &rarr; point it at the hosted <b>URL</b> (not inline code).</p></div></div>
+        <div class="st"><span class="stn">4</span><div><b>Embed in Experience Builder</b><p>Add the <b>Embed</b> widget &rarr; point it at the hosted <b>URL</b>.</p></div></div>
       </div>
 
-      <div class="acc open">
+      <p class="acc-hint">Tap any section to expand &#9662;</p>
+
+      <div class="acc">
         <button class="acc-h" onclick="accT(this)">What it actually is<span class="acc-chev">&#9662;</span></button>
         <div class="acc-b"><ul>
           <li>One HTML file. No server, no database, no build.</li>
@@ -752,14 +765,13 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
         <div class="acc-b"><ul>
           <li><b>A &mdash; Custom EB widget (best for your team).</b> EB widgets are React. Wrap this same logic as a widget &mdash; it runs <b>natively inside your EB app</b>, no outside hosting, no new approval. Ships with the app to ArcGIS.</li>
           <li><b>B &mdash; Hosted page + Embed widget.</b> Keep it as one HTML page, host it (see next), and point EB&rsquo;s <b>Embed</b> widget at the <b>URL</b>. Fastest way to reuse exactly what you see here.</li>
-        </ul>
-        <p class="acc-flag"><b>Important:</b> the Embed widget&rsquo;s <b>inline-code</b> box caps out around <b>8,000 characters</b> &mdash; fine for a small snippet, but a real tool (this one is ~80,000) won&rsquo;t fit. So you don&rsquo;t paste the code; you <b>host the file and embed its URL</b>.</p></div>
+        </ul></div>
       </div>
 
-      <div class="acc">
-        <button class="acc-h" onclick="accT(this)">Host the HTML file safely (government-approved)<span class="acc-chev">&#9662;</span></button>
+      <div class="acc open">
+        <button class="acc-h" onclick="accT(this)">Hosting the HTML file safely<span class="acc-chev">&#9662;</span></button>
         <div class="acc-b">
-          <p>Since the file can&rsquo;t go inline, it lives on a host the government already trusts and EB embeds its <b>URL</b>. Best to simplest, for a FEMA / Esri shop:</p>
+          <p>The real production question: <b>where does the file live so the government accepts it?</b> EB simply embeds that URL. Best to simplest, for a FEMA / Esri shop:</p>
           <ul>
             <li><b>1. Custom EB widget &mdash; no external host at all.</b> Rebuild it as an Experience Builder widget; it deploys <b>inside your ArcGIS Enterprise / portal</b>, which already holds the ATO. Nothing leaves your authorized environment.</li>
             <li><b>2. cloud.gov Pages (Federalist).</b> GSA-run, <b>FedRAMP-authorized</b> static hosting built for federal sites. Push the file, get a <b>.gov</b> URL, embed it &mdash; the cleanest external answer for a static HTML app.</li>
