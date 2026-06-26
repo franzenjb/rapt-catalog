@@ -831,21 +831,19 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
       </div>
 
       <div class="acc">
-        <button class="acc-h" onclick="accT(this)">A tiny working example<span class="acc-chev">&#9662;</span></button>
+        <button class="acc-h" onclick="accT(this)">How the Embed widget works<span class="acc-chev">&#9662;</span></button>
         <div class="acc-b">
-          <p>The whole idea in ~10 lines &mdash; a searchable layer list:</p>
-<pre>&lt;input placeholder="Search layers" oninput="f(this.value)"&gt;
-&lt;ul id="list"&gt;&lt;/ul&gt;
-&lt;script&gt;
-  const layers = ["Flood Hazard","Hospitals","Census Tracts"]; // from RAPT
-  function f(q){
-    list.innerHTML = layers
-      .filter(n =&gt; n.toLowerCase().includes(q.toLowerCase()))
-      .map(n =&gt; "&lt;li&gt;"+n+"&lt;/li&gt;").join("");
-  }
-  f("");
-&lt;/script&gt;</pre>
-          <p>Then in Experience Builder: <b>Insert &rarr; Embed &rarr; paste your hosted URL.</b> That&rsquo;s the whole pipeline.</p>
+          <p>Experience Builder&rsquo;s Embed widget gives you two ways to add content &mdash; you either paste <b>HTML</b>, or paste a <b>link</b>:</p>
+          <ul>
+            <li><b>Paste HTML (the &ldquo;Code&rdquo; box).</b> This is only for a small, static snippet, and it has two hard limits:
+              <ul>
+                <li>About <b>8,000 characters</b> maximum &mdash; a real tool (this one is roughly 80,000) simply won&rsquo;t fit.</li>
+                <li><b>Inline styling only.</b> Experience Builder strips out scripts and style blocks for safety, so anything interactive &mdash; search, filters, the map &mdash; will not run.</li>
+              </ul>
+            </li>
+            <li><b>Paste a link (the &ldquo;URL&rdquo; box).</b> No size limit, fully interactive. Experience Builder shows your live, hosted page inside the app exactly as it works on its own.</li>
+          </ul>
+          <p>So anything meaningful &mdash; anything beyond a few lines of static text &mdash; <b>has to be hosted and added by its link</b>. That&rsquo;s the only reason hosting comes up at all: not because it&rsquo;s hard, but because the paste-HTML box is just for tiny static snippets.</p>
         </div>
       </div>
 
