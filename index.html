@@ -121,12 +121,14 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .search{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;border:1px solid #b8c4cf;border-radius:5px;padding:8px 14px;background:#fff}
 .search input{border:none;outline:none;font-family:var(--fb);font-size:14px;width:100%;background:none;color:var(--ink)}
 .search svg{flex-shrink:0;opacity:.5}
-.pill{font-family:var(--fb);font-size:13px;font-weight:600;border:1px solid #b8c4cf;background:#fff;color:var(--body);border-radius:5px;padding:7px 13px;cursor:pointer;white-space:nowrap;transition:.12s}
+.pill{font-family:var(--fb);font-size:13px;font-weight:600;border:1px solid #b8c4cf;background:#fff;color:var(--body);border-radius:5px;padding:7px 13px;cursor:pointer;white-space:nowrap;transition:.12s;display:inline-flex;align-items:center;gap:6px}
+.pill svg{width:15px;height:15px;flex-shrink:0}
 .pill:hover{border-color:var(--navy)}
 .pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .pill .ct{font-family:var(--fd);font-weight:700;font-size:11px;margin-left:5px}
 .tagscroll{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.tagchip{font-family:var(--fd);font-size:11px;letter-spacing:.3px;border:1px solid #cdd6df;background:#fff;color:var(--body);border-radius:4px;padding:4px 9px;cursor:pointer}
+.tagchip{font-family:var(--fd);font-size:11px;letter-spacing:.3px;border:1px solid #cdd6df;background:#fff;color:var(--body);border-radius:4px;padding:4px 9px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.tagchip svg{width:13px;height:13px;flex-shrink:0}
 .tagchip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
 .meta{font-size:12px;color:var(--body);margin-top:10px;font-family:var(--fd)}
 
@@ -452,27 +454,27 @@ const RAPT_DATA=[["NWS - Fire Weather Outlooks", "https://mapservices.weather.no
 /* ---------- derive ---------- */
 const CATCOLORS={'Hazards, Weather & Risk':'#c33d2e','Infrastructure & Lifelines':'#2766a3','People & Community':'#0f8285'};
 const CATBG={'Hazards, Weather & Risk':'#f1d8d0','Infrastructure & Lifelines':'#d7e6f4','People & Community':'#cfeaea'};
-/* Topic icon library — clean line glyphs, inherit category color via stroke */
+/* Single icon source — used by BOTH the filter buttons and the catalog cards. Inherits color via currentColor. */
 const ICONS={
-  Fire:'<path d="M12 3c.4 2.4 1.8 3.7 3 4.9C16.3 9.2 17 10.6 17 12.4a5 5 0 0 1-10 0c0-1.3.5-2.4 1.4-3.2.3.9 1 1.5 1.7 1.5C9.5 8 11 6 12 3z"/>',
-  Flood:'<path d="M12 2.8l5.7 5.7a8 8 0 1 1-11.4 0z"/><path d="M9 13.5c1 1.1 2 1.1 3 0s2-1.1 3 0"/>',
-  Wind:'<path d="M9.6 4.6A2 2 0 1 1 11 8H3"/><path d="M12.6 19.4A2 2 0 1 0 14 16H3"/><path d="M17.7 7.7A2.5 2.5 0 1 1 19.5 12H3"/>',
-  Earthquake:'<polyline points="2 12 5 12 7 6 11 18 14 9 16 14 18 12 22 12"/>',
-  'Risk Index':'<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
-  'Real-Time':'<circle cx="12" cy="12" r="2"/><path d="M8.1 8.1a5.7 5.7 0 0 0 0 7.8M15.9 15.9a5.7 5.7 0 0 0 0-7.8M5.4 5.4a9.5 9.5 0 0 0 0 13.2M18.6 18.6a9.5 9.5 0 0 0 0-13.2"/>',
-  Health:'<path d="M12 21C6 16.5 3 13 3 9a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1c0 4-3 7.5-9 12z"/>',
-  Housing:'<path d="M3 10.6 12 3l9 7.6"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/>',
-  Household:'<path d="M3 10.6 12 3l9 7.6"/><path d="M5 9.5V21h14V9.5"/><circle cx="9.5" cy="13.4" r="1.2"/><circle cx="14.5" cy="13.4" r="1.2"/><path d="M8 19c.6-2 7.4-2 8 0"/>',
-  Education:'<path d="M12 4 2 9l10 5 10-5z"/><path d="M5.5 11v4.6c0 1.5 13 1.5 13 0V11"/>',
-  'Older Adults':'<circle cx="10" cy="4.2" r="2"/><path d="M10 6.6c-1.7 0-2.8 1.3-3 3.1L6 19"/><path d="M10 10.2 12.6 13l2.3 2.6"/><path d="M16 8.6V20"/>',
-  'Access & Functional Needs':'<circle cx="12" cy="4" r="1.8"/><path d="M12 6v6"/><path d="M8.5 8.5h7"/><path d="M12 12 9.5 19M12 12l3 4 3 1"/>',
-  'Transportation Access':'<rect x="3" y="5" width="18" height="11" rx="2"/><line x1="3" y1="11" x2="21" y2="11"/><circle cx="7.5" cy="18" r="1.3"/><circle cx="16.5" cy="18" r="1.3"/>',
-  'Digital Access':'<path d="M5 12.6a11 11 0 0 1 14 0"/><path d="M1.5 9a16 16 0 0 1 21 0"/><path d="M8.5 16.1a6 6 0 0 1 7 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>',
-  Language:'<path d="M21 14a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/>',
-  'Social Capital':'<circle cx="6" cy="7" r="2.3"/><circle cx="18" cy="7" r="2.3"/><circle cx="12" cy="17" r="2.3"/><path d="M7.7 8.7 10.6 14.4M16.3 8.7 13.4 14.4"/>',
-  Civic:'<path d="M3 21h18"/><path d="M5 21V9l7-4 7 4v12"/><path d="M9 21v-6h6v6"/><line x1="8.5" y1="11.5" x2="8.5" y2="14"/><line x1="15.5" y1="11.5" x2="15.5" y2="14"/>',
+  Fire:'<path d="M12 2.5c.5 2.9 2 4.3 3.2 5.5C16.6 9.3 17.3 10.9 17.3 12.7a5.3 5.3 0 0 1-10.6 0c0-1.6.7-2.8 1.7-3.7.3 1 1.1 1.8 2 1.8C9.2 8.3 11 6.1 12 2.5z"/>',
+  Flood:'<path d="M12 2.5l5.9 5.9a8.3 8.3 0 1 1-11.8 0z"/><path d="M8.4 13.2c1.2 1.3 2.4 1.3 3.6 0s2.4-1.3 3.6 0"/>',
+  Wind:'<circle cx="12" cy="12" r="1.6"/><path d="M12.6 10.5c2.7-2.5 7.6-1.2 7.6 2.5 0 2.1-1.8 3.1-3.4 3.1"/><path d="M11.4 13.5c-2.7 2.5-7.6 1.2-7.6-2.5 0-2.1 1.8-3.1 3.4-3.1"/>',
+  Earthquake:'<path d="M2 13h3.4l1.8-6L11 19l2.2-9.5 1.8 5 1.4-2.5H22"/><path d="M3 21h18"/>',
+  'Risk Index':'<path d="M4.5 17.5a8 8 0 1 1 15 0"/><path d="M12 17.5l4.4-5"/><circle cx="12" cy="17.5" r="1.3"/>',
+  'Real-Time':'<circle cx="12" cy="12" r="2.1"/><path d="M8 8a5.7 5.7 0 0 0 0 8M16 16a5.7 5.7 0 0 0 0-8M5.3 5.3a9.6 9.6 0 0 0 0 13.4M18.7 18.7a9.6 9.6 0 0 0 0-13.4"/>',
+  Health:'<rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M12 8.5v7M8.5 12h7"/>',
+  Housing:'<path d="M3 11 12 3l9 8"/><path d="M5 9.4V21h14V9.4"/><rect x="10" y="14.5" width="4" height="6.5"/>',
+  Household:'<path d="M3 11 12 3l9 8"/><path d="M5 9.4V21h14V9.4"/><circle cx="9.5" cy="14" r="1.3"/><circle cx="14.5" cy="14" r="1.3"/><path d="M7.8 20c.6-2.2 7.8-2.2 8.4 0"/>',
+  Education:'<path d="M12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.4 12 1.4 12 0v-4.5"/><path d="M22 9v4.5"/>',
+  'Older Adults':'<circle cx="10.5" cy="4" r="2"/><path d="M10.5 6.5c-1.4 0-2.5 1-3 2.8L6 19"/><path d="M10.5 10l2.6 3 2 3"/><path d="M16 9v11"/>',
+  'Access & Functional Needs':'<circle cx="12.5" cy="3.8" r="1.9"/><path d="M11 7l.6 4.8H16l1.9 5.4"/><circle cx="11" cy="16.5" r="5"/><path d="M16.5 21h1.6"/>',
+  'Transportation Access':'<rect x="3" y="5" width="18" height="11" rx="2"/><line x1="3" y1="11" x2="21" y2="11"/><circle cx="7.5" cy="18.5" r="1.3"/><circle cx="16.5" cy="18.5" r="1.3"/>',
+  'Digital Access':'<path d="M5 12.6a11 11 0 0 1 14 0"/><path d="M1.6 9a16 16 0 0 1 20.8 0"/><path d="M8.6 16.1a6 6 0 0 1 6.8 0"/><circle cx="12" cy="20" r="0.7" fill="currentColor" stroke="none"/>',
+  Language:'<path d="M3 5.5a1.5 1.5 0 0 1 1.5-1.5h8A1.5 1.5 0 0 1 14 5.5v4A1.5 1.5 0 0 1 12.5 11H8l-3.5 3v-3A1.5 1.5 0 0 1 3 9.5z"/><path d="M16 9.5h3.5A1.5 1.5 0 0 1 21 11v4a1.5 1.5 0 0 1-1.5 1.5H18V20l-3.5-3.5"/>',
+  'Social Capital':'<circle cx="6" cy="7.5" r="2.2"/><circle cx="18" cy="7.5" r="2.2"/><circle cx="12" cy="16.5" r="2.2"/><path d="M7.8 8.9 10.4 14.6M16.2 8.9 13.6 14.6M8.2 7.5h7.6"/>',
+  Civic:'<path d="M3 21h18"/><path d="M5 21V10l7-4.5 7 4.5v11"/><line x1="9" y1="12.5" x2="9" y2="18"/><line x1="12" y1="12.5" x2="12" y2="18"/><line x1="15" y1="12.5" x2="15" y2="18"/>',
   Economic:'<line x1="12" y1="2.5" x2="12" y2="21.5"/><path d="M16.5 6H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H7"/>',
-  'Resilience Index':'<path d="M12 21s7-3.5 7-9V5l-7-2.5L5 5v7c0 5.5 7 9 7 9z"/>',
+  'Resilience Index':'<path d="M12 21s7-3.5 7-9V5l-7-2.5L5 5v7c0 5.5 7 9 7 9z"/><path d="M9 11.6l2.2 2.2L15 10"/>',
   Demographics:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M16 5.2a3 3 0 0 1 0 5.6"/><path d="M17 15.3c2 .6 3.5 1.9 3.5 4.7"/>',
   Tribal:'<path d="M20 4a6 6 0 0 0-8.5 0L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="3" y2="21"/><line x1="16.5" y1="14" x2="9" y2="14"/>',
   'Census Tract':'<rect x="3" y="3" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1"/>',
@@ -482,15 +484,18 @@ const ICONS={
   people:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M16 5.2a3 3 0 0 1 0 5.6"/><path d="M17 15.3c2 .6 3.5 1.9 3.5 4.7"/>',
   layers:'<polygon points="12 2.5 2.5 7 12 11.5 21.5 7 12 2.5"/><polyline points="2.5 16.5 12 21 21.5 16.5"/><polyline points="2.5 11.5 12 16 21.5 11.5"/>'
 };
+function svgIcon(key){
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[key]||ICONS.layers}</svg>`;
+}
 const TOPIC_PRIORITY=['Fire','Flood','Wind','Earthquake','Risk Index','Real-Time','Health','Housing','Education','Older Adults','Access & Functional Needs','Transportation Access','Digital Access','Language','Social Capital','Civic','Economic','Resilience Index','Household','Demographics','Tribal','Census Tract','County'];
 function topicOf(l){for(const t of TOPIC_PRIORITY){if(l.tags.includes(t))return t;}return null;}
 function iconFor(l){
-  const c=CATCOLORS[l.cat], topic=topicOf(l);
+  const topic=topicOf(l);
   const key=(topic&&ICONS[topic])?topic
     :l.cat.startsWith('Hazards')?'storm'
     :l.cat.startsWith('Infrastructure')?'infra'
     :(l.geo==='County'?'County':l.geo==='Census Tract'?'Census Tract':l.geo==='Tribal'?'Tribal':'people');
-  return `<svg viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[key]||ICONS.layers}</svg>`;
+  return svgIcon(key);
 }
 function summarize(r){
   const [title,,, ltype,cat,geo,tags,rt]=r;
@@ -524,8 +529,14 @@ const sel=new Set();
 /* ---------- render catalog ---------- */
 const tagrow=document.getElementById('tagrow');
 function renderTags(){
-  tagrow.innerHTML=TOPTAGS.map(t=>`<span class="tagchip ${curTag===t?'active':''}" onclick="setTag('${t.replace(/'/g,"\\'")}')">${t} <span style="font-weight:700">${tagCounts[t]}</span></span>`).join('');
+  tagrow.innerHTML=TOPTAGS.map(t=>`<span class="tagchip ${curTag===t?'active':''}" onclick="setTag('${t.replace(/'/g,"\\'")}')">${svgIcon(t)}${t} <span style="font-weight:700">${tagCounts[t]}</span></span>`).join('');
 }
+/* same icon set on the category pills */
+function decorateCatPills(){
+  const map={'all':'layers','Hazards, Weather & Risk':'storm','Infrastructure & Lifelines':'infra','People & Community':'people'};
+  document.querySelectorAll('.pill[data-cat]').forEach(p=>{const k=map[p.dataset.cat];if(k&&!p.querySelector('svg'))p.insertAdjacentHTML('afterbegin',svgIcon(k));});
+}
+decorateCatPills();
 function setTag(t){curTag=curTag===t?null:t;renderTags();render();}
 function setCat(c,el){curCat=c.replace(/&amp;/g,'&');document.querySelectorAll('.pill[data-cat]').forEach(p=>p.classList.remove('active'));el.classList.add('active');render();}
 
