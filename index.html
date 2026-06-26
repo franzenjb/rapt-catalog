@@ -124,11 +124,11 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .pill{font-family:var(--fb);font-size:13px;font-weight:600;border:1px solid #b8c4cf;background:#fff;color:var(--body);border-radius:5px;padding:7px 13px;cursor:pointer;white-space:nowrap;transition:.12s}
 .pill:hover{border-color:var(--navy)}
 .pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.pill .ct{font-family:var(--fd);opacity:.7;font-size:11px;margin-left:5px}
+.pill .ct{font-family:var(--fd);opacity:.9;font-size:11px;margin-left:5px}
 .tagscroll{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .tagchip{font-family:var(--fd);font-size:11px;letter-spacing:.3px;border:1px solid #cdd6df;background:#fff;color:var(--body);border-radius:4px;padding:4px 9px;cursor:pointer}
 .tagchip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.meta{font-size:12px;color:var(--muted);margin-top:10px;font-family:var(--fd)}
+.meta{font-size:12px;color:var(--body);margin-top:10px;font-family:var(--fd)}
 
 /* Card grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;padding:18px 0 120px}
@@ -488,7 +488,7 @@ const sel=new Set();
 /* ---------- render catalog ---------- */
 const tagrow=document.getElementById('tagrow');
 function renderTags(){
-  tagrow.innerHTML=TOPTAGS.map(t=>`<span class="tagchip ${curTag===t?'active':''}" onclick="setTag('${t.replace(/'/g,"\\'")}')">${t} <span style="opacity:.5">${tagCounts[t]}</span></span>`).join('');
+  tagrow.innerHTML=TOPTAGS.map(t=>`<span class="tagchip ${curTag===t?'active':''}" onclick="setTag('${t.replace(/'/g,"\\'")}')">${t} <span style="opacity:.85">${tagCounts[t]}</span></span>`).join('');
 }
 function setTag(t){curTag=curTag===t?null:t;renderTags();render();}
 function setCat(c,el){curCat=c.replace(/&amp;/g,'&');document.querySelectorAll('.pill[data-cat]').forEach(p=>p.classList.remove('active'));el.classList.add('active');render();}
