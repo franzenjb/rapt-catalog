@@ -790,14 +790,6 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
         </ul></div>
       </div>
 
-      <div class="acc">
-        <button class="acc-h" onclick="accT(this)">Build it yourself &mdash; two ways<span class="acc-chev">&#9662;</span></button>
-        <div class="acc-b"><ul>
-          <li><b>A &mdash; Custom EB widget (best for your team).</b> EB widgets are React. Wrap this same logic as a widget &mdash; it runs <b>natively inside your EB app</b>, no outside hosting, no new approval. Ships with the app to ArcGIS.</li>
-          <li><b>B &mdash; Hosted page + Embed widget.</b> Keep it as one HTML page, host it (see next), and point EB&rsquo;s <b>Embed</b> widget at the <b>URL</b>. Fastest way to reuse exactly what you see here.</li>
-        </ul></div>
-      </div>
-
       <div class="acc open">
         <button class="acc-h" onclick="accT(this)">Adding it: the Embed widget + your link<span class="acc-chev">&#9662;</span></button>
         <div class="acc-b">
@@ -820,9 +812,9 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
           </ul>
           <p>So the question isn&rsquo;t &ldquo;can we host this safely&rdquo; &mdash; it&rsquo;s just <b>where the file goes</b>. Any of these:</p>
           <ul>
-            <li><b>Inside Experience Builder, as a widget</b> &mdash; it rides along with your ArcGIS portal, so there&rsquo;s no separate hosting at all.</li>
             <li><b>The same approved place your web content already lives</b> &mdash; whatever already serves your fema.gov-type pages.</li>
             <li><b>cloud.gov</b> &mdash; the government&rsquo;s own already-approved web hosting, if you want a clean stand-alone home for it.</li>
+            <li><b>Your ArcGIS / portal</b> &mdash; the page can also live in the Esri environment you already run.</li>
           </ul>
           <p class="acc-flag">The one thing to avoid for production is a random commercial host (like the one this quick demo sits on). Anywhere already trusted for your other web content is fine.</p>
         </div>
