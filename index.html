@@ -50,9 +50,9 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 /* ===== Stage = live RAPT shell ===== */
 .stage{position:fixed;top:56px;bottom:30px;left:0;right:0;z-index:20;
   background:
-    repeating-linear-gradient(0deg,rgba(120,130,110,.07) 0 1px,transparent 1px 46px),
-    repeating-linear-gradient(90deg,rgba(120,130,110,.07) 0 1px,transparent 1px 46px),
-    radial-gradient(120% 120% at 60% 40%,#ece7d9,#dcd6c6)}
+    repeating-linear-gradient(0deg,rgba(60,95,135,.06) 0 1px,transparent 1px 48px),
+    repeating-linear-gradient(90deg,rgba(60,95,135,.06) 0 1px,transparent 1px 48px),
+    radial-gradient(130% 130% at 55% 35%,#f4f7fb,#e1e8f0)}
 .shell{display:flex;height:100%}
 .pane-left{width:190px;flex-shrink:0;background:linear-gradient(180deg,#1f4061,#15314a);color:#cddaE7;overflow-y:auto}
 .pane-left{color:#cddae7}
@@ -67,12 +67,18 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .pane-divider{height:10px}
 .rapt-map{flex:1;position:relative;display:flex;align-items:center;justify-content:center;padding:20px}
 .explorer-pill{position:absolute;top:14px;right:18px;background:linear-gradient(180deg,#27537a,#1b3d5c);color:#eaf2fa;font-family:var(--fh);font-weight:700;font-size:12px;padding:6px 16px;border-radius:16px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
-.launch-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--gold);max-width:440px;padding:26px 30px;border-radius:4px;box-shadow:0 16px 44px rgba(0,0,0,.22)}
-.lc-kicker{font-family:var(--fd);font-size:11px;letter-spacing:1.6px;color:var(--navy)}
-.launch-card h3{font-family:var(--fh);font-size:22px;color:var(--ink);margin:8px 0 8px}
-.launch-card p{font-size:14px;color:var(--body);line-height:1.5}
-.lc-btn{margin-top:18px;background:linear-gradient(180deg,#cab35e,#a98a34);color:#241f08;border:none;padding:12px 24px;font-family:var(--fb);font-weight:700;font-size:14px;cursor:pointer;border-radius:4px;letter-spacing:.2px}
-.lc-btn:hover{filter:brightness(1.06)}
+.launch-card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--gold);max-width:780px;width:92%;padding:46px 54px 48px;border-radius:14px;box-shadow:0 26px 70px rgba(20,41,58,.20)}
+.lc-ic{display:inline-flex;align-items:center;justify-content:center;width:62px;height:62px;border-radius:15px;background:#eef3f8;color:var(--navy);margin-bottom:20px}
+.lc-ic svg{width:34px;height:34px}
+.lc-kicker{font-family:var(--fd);font-size:13px;letter-spacing:2px;color:var(--navy);font-weight:600}
+.launch-card h3{font-family:var(--fh);font-size:38px;color:var(--ink);margin:11px 0 16px;line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
+.launch-card p{font-size:18px;color:var(--body);line-height:1.6;max-width:60ch}
+.lc-stats{display:flex;gap:34px;margin:26px 0 4px}
+.lc-stat{display:flex;flex-direction:column;gap:2px}
+.lc-stat b{font-family:var(--fb);font-size:28px;font-weight:700;color:var(--navy);line-height:1}
+.lc-stat span{font-family:var(--fd);font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.lc-btn{margin-top:26px;background:linear-gradient(180deg,#cab35e,#a98a34);color:#241f08;border:none;padding:16px 34px;font-family:var(--fb);font-weight:700;font-size:17.5px;cursor:pointer;border-radius:10px;letter-spacing:.2px;box-shadow:0 8px 20px rgba(169,138,52,.32);transition:.14s;display:inline-flex;align-items:center;gap:9px}
+.lc-btn:hover{filter:brightness(1.05);transform:translateY(-2px);box-shadow:0 12px 26px rgba(169,138,52,.38)}
 .pane-right{width:160px;flex-shrink:0;background:#eef1f5;border-left:1px solid var(--line);overflow-y:auto}
 .toolitem{padding:11px 14px;font-size:13px;color:var(--body);border-bottom:1px solid var(--line)}
 .presets-head{background:linear-gradient(180deg,#cab35e,#a98a34);color:#241f08;font-weight:700;font-size:13px;padding:8px 14px;margin-top:6px}
@@ -313,7 +319,10 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
   .pane-left .pane-title,.navitem span,.navitem.blue,.nav-new{display:none}
   .navitem{justify-content:center;padding:11px 0}
   .navitem.launch{padding-left:0;border-left-width:4px}
-  .launch-card{max-width:none;padding:20px}
+  .launch-card{max-width:none;width:auto;padding:28px 24px}
+  .launch-card h3{font-size:27px}
+  .launch-card p{font-size:16px}
+  .lc-stats{gap:24px}
   .maplayout{grid-template-columns:1fr}
   .mappanel{max-height:240px;border-right:none;border-bottom:1px solid #0d2236}
   #mapNode{height:55vh}
@@ -450,10 +459,16 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
     <div class="rapt-map">
       <span class="explorer-pill">RAPT Explorer Standard</span>
       <div class="launch-card">
+        <span class="lc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2.5 2.5 7 12 11.5 21.5 7 12 2.5"/><polyline points="2.5 16.5 12 21 21.5 16.5"/><polyline points="2.5 11.5 12 16 21.5 11.5"/></svg></span>
         <div class="lc-kicker">RAPT RESOURCE CENTER</div>
-        <h3>Browse the full layer library</h3>
-        <p>106 searchable layers across Hazards, Infrastructure, and People &amp; Community. Find what you need in seconds, preview on the map, then add them to your own map.</p>
-        <button class="lc-btn" onclick="openCatalog()">Open Layer Catalog &rarr;</button>
+        <h3>Find the right layer in seconds</h3>
+        <p>Every RAPT layer in one friendly place &mdash; hazards, infrastructure, and people &amp; community. Search it, preview it on the map, and add what you need to your own map. No menu&#8209;digging.</p>
+        <div class="lc-stats">
+          <div class="lc-stat"><b>106</b><span>Layers</span></div>
+          <div class="lc-stat"><b>12</b><span>Live Feeds</span></div>
+          <div class="lc-stat"><b>3</b><span>Categories</span></div>
+        </div>
+        <button class="lc-btn" onclick="openCatalog()">Browse the Layer Catalog <span aria-hidden="true">&rarr;</span></button>
       </div>
     </div>
     <aside class="pane-right">
