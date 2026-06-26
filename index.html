@@ -100,10 +100,9 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .lc-stat span{font-family:var(--fd);font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
 .lc-btn{margin-top:26px;background:linear-gradient(180deg,#cab35e,#a98a34);color:#241f08;border:none;padding:16px 34px;font-family:var(--fb);font-weight:700;font-size:17.5px;cursor:pointer;border-radius:10px;letter-spacing:.2px;box-shadow:0 8px 20px rgba(169,138,52,.32);transition:.14s;display:inline-flex;align-items:center;gap:9px}
 .lc-btn:hover{filter:brightness(1.05);transform:translateY(-2px);box-shadow:0 12px 26px rgba(169,138,52,.38)}
-.lc-how{display:inline-flex;align-items:center;gap:8px;margin-top:16px;margin-left:2px;background:none;border:none;color:var(--navy);font-family:var(--fb);font-size:14px;font-weight:600;cursor:pointer;padding:6px 2px}
-.lc-how svg{width:16px;height:16px}
-.lc-how span,.lc-how{text-underline-offset:3px}
-.lc-how:hover{color:var(--blue);text-decoration:underline}
+.lc-how{display:inline-flex;align-items:center;gap:9px;margin-top:16px;background:#fff;border:1px solid #c2ccd6;color:var(--navy);font-family:var(--fb);font-size:15px;font-weight:600;cursor:pointer;padding:12px 22px;border-radius:9px;transition:.14s}
+.lc-how svg{width:18px;height:18px}
+.lc-how:hover{border-color:var(--navy);background:#f2f6fa}
 .pane-right{width:160px;flex-shrink:0;background:#eef1f5;border-left:1px solid var(--line);overflow-y:auto}
 .toolitem{padding:11px 14px;font-size:13px;color:var(--body);border-bottom:1px solid var(--line)}
 .presets-head{background:linear-gradient(180deg,#cab35e,#a98a34);color:#241f08;font-weight:700;font-size:13px;padding:8px 14px;margin-top:6px}
@@ -601,7 +600,7 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
         <button class="lc-btn" onclick="openCatalog()">Browse the Layer Catalog <span aria-hidden="true">&rarr;</span></button>
         <button class="lc-how" onclick="openHow()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.2a2.8 2.8 0 0 1 5.4 1c0 1.8-2.6 2.3-2.6 4"/><line x1="12" y1="17.4" x2="12.01" y2="17.4"/></svg>
-          How this was built &mdash; for developers
+          How this was built
         </button>
       </div>
     </div>
