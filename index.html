@@ -382,6 +382,7 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .acc-b p{font-size:13.5px;color:var(--body);line-height:1.55;margin:4px 0}
 .acc-b code,.steps4 code{font-family:var(--fd);font-size:12px;background:#eef2f6;color:var(--navy);padding:1px 5px;border-radius:3px}
 .acc-b pre{font-family:var(--fd);font-size:11.5px;line-height:1.55;background:#15314a;color:#cfe6ef;padding:13px 15px;border-radius:7px;overflow:auto;margin:8px 0;white-space:pre}
+.acc-flag{font-size:13px;color:var(--body);background:#f6f8fb;border:1px solid var(--line);border-radius:7px;padding:9px 12px;margin-top:9px;line-height:1.5}
 .hownote{margin-top:14px;font-size:12.5px;color:var(--body);background:#f6f8fb;border:1px solid var(--line);border-radius:8px;padding:11px 14px;line-height:1.5}
 @media(max-width:620px){.steps4{grid-template-columns:1fr}}
 .toast{position:fixed;bottom:54px;left:50%;transform:translateX(-50%) translateY(20px);background:#15314a;color:#fff;padding:11px 20px;font-size:13px;font-family:var(--fd);z-index:90;opacity:0;transition:.25s;pointer-events:none;border-radius:4px;border-left:3px solid var(--gold)}
@@ -734,7 +735,7 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
         <div class="st"><span class="stn">1</span><div><b>Describe it to AI</b><p>Plain English: &ldquo;Build a searchable catalog of RAPT&rsquo;s layers.&rdquo; The AI writes one <code>index.html</code>.</p></div></div>
         <div class="st"><span class="stn">2</span><div><b>Open it</b><p>Double-click the file &mdash; it runs in any browser. No server, no build step.</p></div></div>
         <div class="st"><span class="stn">3</span><div><b>Host where gov trusts</b><p>Your <b>ArcGIS Online / Enterprise</b> or <b>cloud.gov</b> (FedRAMP) &mdash; already authorized.</p></div></div>
-        <div class="st"><span class="stn">4</span><div><b>Embed in Experience Builder</b><p>Add the <b>Embed</b> widget, paste the URL. Done.</p></div></div>
+        <div class="st"><span class="stn">4</span><div><b>Embed in Experience Builder</b><p>Add the <b>Embed</b> widget &rarr; point it at the hosted <b>URL</b> (not inline code).</p></div></div>
       </div>
 
       <div class="acc open">
@@ -750,17 +751,22 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
         <button class="acc-h" onclick="accT(this)">Build it yourself &mdash; two ways<span class="acc-chev">&#9662;</span></button>
         <div class="acc-b"><ul>
           <li><b>A &mdash; Custom EB widget (best for your team).</b> EB widgets are React. Wrap this same logic as a widget &mdash; it runs <b>natively inside your EB app</b>, no outside hosting, no new approval. Ships with the app to ArcGIS.</li>
-          <li><b>B &mdash; Hosted page + Embed widget.</b> Keep it as one HTML page, host it (below), and point EB&rsquo;s <b>Embed</b> widget at the URL. Fastest way to reuse exactly what you see here.</li>
-        </ul></div>
+          <li><b>B &mdash; Hosted page + Embed widget.</b> Keep it as one HTML page, host it (see next), and point EB&rsquo;s <b>Embed</b> widget at the <b>URL</b>. Fastest way to reuse exactly what you see here.</li>
+        </ul>
+        <p class="acc-flag"><b>Important:</b> the Embed widget&rsquo;s <b>inline-code</b> box caps out around <b>8,000 characters</b> &mdash; fine for a small snippet, but a real tool (this one is ~80,000) won&rsquo;t fit. So you don&rsquo;t paste the code; you <b>host the file and embed its URL</b>.</p></div>
       </div>
 
       <div class="acc">
-        <button class="acc-h" onclick="accT(this)">Hosting the government accepts<span class="acc-chev">&#9662;</span></button>
-        <div class="acc-b"><ul>
-          <li><b>Already authorized:</b> publish inside the <b>ArcGIS Enterprise / ArcGIS Online</b> you already run &mdash; it carries your agency&rsquo;s authorization.</li>
-          <li><b>Static page:</b> <b>cloud.gov</b> / cloud.gov Pages (GSA, <b>FedRAMP</b>), or AWS GovCloud / Azure Government under your existing ATO.</li>
-          <li><b>Not for production:</b> Vercel / Netlify / GitHub Pages are perfect for a quick prototype (like this demo) &mdash; not for an ATO&rsquo;d production app.</li>
-        </ul></div>
+        <button class="acc-h" onclick="accT(this)">Host the HTML file safely (government-approved)<span class="acc-chev">&#9662;</span></button>
+        <div class="acc-b">
+          <p>Since the file can&rsquo;t go inline, it lives on a host the government already trusts and EB embeds its <b>URL</b>. Best to simplest, for a FEMA / Esri shop:</p>
+          <ul>
+            <li><b>1. Custom EB widget &mdash; no external host at all.</b> Rebuild it as an Experience Builder widget; it deploys <b>inside your ArcGIS Enterprise / portal</b>, which already holds the ATO. Nothing leaves your authorized environment.</li>
+            <li><b>2. cloud.gov Pages (Federalist).</b> GSA-run, <b>FedRAMP-authorized</b> static hosting built for federal sites. Push the file, get a <b>.gov</b> URL, embed it &mdash; the cleanest external answer for a static HTML app.</li>
+            <li><b>3. Your agency cloud under its ATO.</b> <b>AWS GovCloud</b> (S3 + CloudFront) or <b>Azure Government</b> static hosting, or an approved agency web server / CDN.</li>
+          </ul>
+          <p class="acc-flag"><b>Not for production:</b> Vercel / Netlify / GitHub Pages (where this demo lives) are great for prototyping the idea &mdash; not for an ATO&rsquo;d production app.</p>
+        </div>
       </div>
 
       <div class="acc">
