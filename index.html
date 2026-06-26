@@ -743,7 +743,7 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
     <button class="closex" onclick="closeHow()">&times;</button>
     <div class="hd">
       <h2>How this was built</h2>
-      <p>A plain-English guide for the RAPT / Experience Builder team. No magic &mdash; it&rsquo;s one web page that reads RAPT&rsquo;s own layers.</p>
+      <p>A plain-English guide for the RAPT / Experience Builder team. The whole thing was built with <b>no hand-written code</b> &mdash; just plain-English requests to an AI tool, which found RAPT&rsquo;s layers and wrote the page.</p>
     </div>
     <div class="howbody">
 
@@ -751,15 +751,15 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
         <div class="step">
           <span class="stn">1</span>
           <div class="sttx">
-            <b>Describe what you want to an AI tool, in plain English</b>
-            <p>You don&rsquo;t write the code. Any current AI coding assistant can do this &mdash; you describe the goal in normal language: &ldquo;Build a searchable catalog of RAPT&rsquo;s layers that previews them on a map and adds them to a user&rsquo;s map.&rdquo; It writes a single, self-contained HTML file. You refine it the same way &mdash; &ldquo;make it full-screen,&rdquo; &ldquo;add a table view,&rdquo; &ldquo;let the filters stack&rdquo; &mdash; and it edits the file each time. No framework to choose, no boilerplate to learn.</p>
+            <b>Describe what you want to an AI tool, in plain English &mdash; you write no code</b>
+            <p>The entire ask was conversational, in ordinary language: &ldquo;Find all of RAPT&rsquo;s layers and their REST service endpoints, and build a searchable catalog that previews them on a map and adds them to a user&rsquo;s map.&rdquo; Any current AI assistant can do this. It writes a single, self-contained HTML file. You refine it the same way &mdash; &ldquo;make it full-screen,&rdquo; &ldquo;add a table view,&rdquo; &ldquo;let the filters stack&rdquo; &mdash; and it edits the file each time. No framework to choose, no boilerplate, and not a line of code written by hand.</p>
           </div>
         </div>
         <div class="step">
           <span class="stn">2</span>
           <div class="sttx">
-            <b>Point it at the real RAPT layers</b>
-            <p>The 106 layers aren&rsquo;t made up &mdash; they come straight from RAPT&rsquo;s published web map through the ArcGIS REST API. You request the item&rsquo;s data (<code>&hellip;/items/&lt;itemId&gt;/data?f=json</code>) and read its <code>operationalLayers</code> list: each layer&rsquo;s title, service URL, and item id. That list <em>is</em> the catalog. The same approach works against any RAPT or ArcGIS web map you own.</p>
+            <b>The AI finds the layers and their REST endpoints for you</b>
+            <p>You don&rsquo;t hunt down service URLs or touch an API. On that one plain request, the AI located RAPT&rsquo;s published web map, pulled in all 106 operational layers, and captured each one&rsquo;s <b>REST service endpoint</b>, title, and item id &mdash; automatically. That list <em>is</em> the catalog. (Under the hood it read the web map&rsquo;s <code>operationalLayers</code> from the ArcGIS REST API &mdash; <code>&hellip;/items/&lt;itemId&gt;/data?f=json</code> &mdash; but you never had to.) The same ask works against any RAPT or ArcGIS map you point it to.</p>
           </div>
         </div>
         <div class="step">
