@@ -357,6 +357,33 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .urlrow .ucopy:hover{background:var(--blue);color:#fff}
 .closex{position:absolute;top:18px;right:26px;font-size:26px;color:#fff;cursor:pointer;background:none;border:none;line-height:1;z-index:1}
 .sheet .ft{padding:14px 28px 22px;font-size:12px;color:var(--muted)}
+
+/* "How it's built" button + modal */
+.howbtn{display:inline-flex;align-items:center;gap:6px;font-family:var(--fb);font-size:12px;font-weight:600;border:1px solid var(--line);background:#fff;color:var(--navy);padding:5px 11px;border-radius:14px;cursor:pointer;white-space:nowrap}
+.howbtn svg{width:14px;height:14px}
+.howbtn:hover{border-color:var(--navy);background:#f2f6fa}
+.bigmodal.dark .howbtn{background:#1b3a57;color:#eaf2fa;border-color:#284a6a}
+.howsheet{max-width:720px}
+.howbody{padding:20px 26px 24px;max-height:none}
+.steps4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.steps4 .st{display:flex;gap:11px;background:#f6f8fb;border:1px solid var(--line);border-radius:9px;padding:13px 15px}
+.steps4 .stn{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--fd);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.steps4 .st b{font-size:14px;color:var(--ink);display:block;margin-bottom:2px}
+.steps4 .st p{font-size:12.5px;color:var(--body);line-height:1.45}
+.acc{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:9px;background:#fff}
+.acc-h{display:flex;align-items:center;width:100%;text-align:left;padding:13px 16px;background:#fff;border:none;cursor:pointer;font-family:var(--fb);font-size:14.5px;font-weight:700;color:var(--ink);transition:.1s}
+.acc-h:hover{background:#f5f8fb}
+.acc-chev{margin-left:auto;color:var(--muted);font-size:13px;transition:.2s}
+.acc.open .acc-chev{transform:rotate(180deg)}
+.acc-b{display:none;padding:2px 16px 15px}
+.acc.open .acc-b{display:block}
+.acc-b ul{margin:0;padding-left:18px}
+.acc-b li{font-size:13.5px;color:var(--body);line-height:1.55;margin-bottom:6px}
+.acc-b p{font-size:13.5px;color:var(--body);line-height:1.55;margin:4px 0}
+.acc-b code,.steps4 code{font-family:var(--fd);font-size:12px;background:#eef2f6;color:var(--navy);padding:1px 5px;border-radius:3px}
+.acc-b pre{font-family:var(--fd);font-size:11.5px;line-height:1.55;background:#15314a;color:#cfe6ef;padding:13px 15px;border-radius:7px;overflow:auto;margin:8px 0;white-space:pre}
+.hownote{margin-top:14px;font-size:12.5px;color:var(--body);background:#f6f8fb;border:1px solid var(--line);border-radius:8px;padding:11px 14px;line-height:1.5}
+@media(max-width:620px){.steps4{grid-template-columns:1fr}}
 .toast{position:fixed;bottom:54px;left:50%;transform:translateX(-50%) translateY(20px);background:#15314a;color:#fff;padding:11px 20px;font-size:13px;font-family:var(--fd);z-index:90;opacity:0;transition:.25s;pointer-events:none;border-radius:4px;border-left:3px solid var(--gold)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -581,6 +608,10 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
           <div class="s"><div class="v hl" id="sLive">12</div><div class="l">Live Feeds</div></div>
           <div class="s"><div class="v" id="sSel">0</div><div class="l">Selected</div></div>
         </div>
+        <button class="howbtn" onclick="openHow()" title="How this was built — for developers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.2a2.8 2.8 0 0 1 5.4 1c0 1.8-2.6 2.3-2.6 4"/><line x1="12" y1="17.4" x2="12.01" y2="17.4"/></svg>
+          How it&rsquo;s built
+        </button>
         <button class="themetog" id="themeTog" onclick="toggleTheme()">◐ Dark</button>
         <span class="mh-x" title="Close panel" onclick="closeCatalog()">&times;</span>
       </div>
@@ -690,6 +721,82 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
     <div class="ft">Concept demo. Item-backed deep links carry original RAPT symbology; the in-app preview map uses default symbology for speed.</div>
   </div>
 </div>
+<div class="modal" id="howModal" onclick="if(event.target===this)closeHow()">
+  <div class="sheet howsheet">
+    <button class="closex" onclick="closeHow()">&times;</button>
+    <div class="hd">
+      <h2>How this was built</h2>
+      <p>A plain-English guide for the RAPT / Experience Builder team. No magic &mdash; it&rsquo;s one web page that reads RAPT&rsquo;s own layers.</p>
+    </div>
+    <div class="howbody">
+
+      <div class="steps4">
+        <div class="st"><span class="stn">1</span><div><b>Describe it to AI</b><p>Plain English: &ldquo;Build a searchable catalog of RAPT&rsquo;s layers.&rdquo; The AI writes one <code>index.html</code>.</p></div></div>
+        <div class="st"><span class="stn">2</span><div><b>Open it</b><p>Double-click the file &mdash; it runs in any browser. No server, no build step.</p></div></div>
+        <div class="st"><span class="stn">3</span><div><b>Host where gov trusts</b><p>Your <b>ArcGIS Online / Enterprise</b> or <b>cloud.gov</b> (FedRAMP) &mdash; already authorized.</p></div></div>
+        <div class="st"><span class="stn">4</span><div><b>Embed in Experience Builder</b><p>Add the <b>Embed</b> widget, paste the URL. Done.</p></div></div>
+      </div>
+
+      <div class="acc open">
+        <button class="acc-h" onclick="accT(this)">What it actually is<span class="acc-chev">&#9662;</span></button>
+        <div class="acc-b"><ul>
+          <li>One HTML file. No server, no database, no build.</li>
+          <li>The 106 layers are RAPT&rsquo;s real web-map layers, read straight from ArcGIS REST.</li>
+          <li>Search, filters, and the layouts are plain browser JavaScript &mdash; the same web tech Experience Builder runs on.</li>
+        </ul></div>
+      </div>
+
+      <div class="acc">
+        <button class="acc-h" onclick="accT(this)">Build it yourself &mdash; two ways<span class="acc-chev">&#9662;</span></button>
+        <div class="acc-b"><ul>
+          <li><b>A &mdash; Custom EB widget (best for your team).</b> EB widgets are React. Wrap this same logic as a widget &mdash; it runs <b>natively inside your EB app</b>, no outside hosting, no new approval. Ships with the app to ArcGIS.</li>
+          <li><b>B &mdash; Hosted page + Embed widget.</b> Keep it as one HTML page, host it (below), and point EB&rsquo;s <b>Embed</b> widget at the URL. Fastest way to reuse exactly what you see here.</li>
+        </ul></div>
+      </div>
+
+      <div class="acc">
+        <button class="acc-h" onclick="accT(this)">Hosting the government accepts<span class="acc-chev">&#9662;</span></button>
+        <div class="acc-b"><ul>
+          <li><b>Already authorized:</b> publish inside the <b>ArcGIS Enterprise / ArcGIS Online</b> you already run &mdash; it carries your agency&rsquo;s authorization.</li>
+          <li><b>Static page:</b> <b>cloud.gov</b> / cloud.gov Pages (GSA, <b>FedRAMP</b>), or AWS GovCloud / Azure Government under your existing ATO.</li>
+          <li><b>Not for production:</b> Vercel / Netlify / GitHub Pages are perfect for a quick prototype (like this demo) &mdash; not for an ATO&rsquo;d production app.</li>
+        </ul></div>
+      </div>
+
+      <div class="acc">
+        <button class="acc-h" onclick="accT(this)">Federal safety checklist<span class="acc-chev">&#9662;</span></button>
+        <div class="acc-b"><ul>
+          <li><b>Authorized host</b> &mdash; FedRAMP or an existing ATO (ArcGIS Enterprise, cloud.gov, GovCloud).</li>
+          <li><b>508 accessible</b> &mdash; keyboard navigation, color contrast (WCAG AA), labels.</li>
+          <li><b>No secrets in the browser</b> &mdash; public/read-only services or a platform token; never credentials in the HTML.</li>
+          <li><b>Authoritative data</b> &mdash; the real RAPT services, no copies.</li>
+        </ul></div>
+      </div>
+
+      <div class="acc">
+        <button class="acc-h" onclick="accT(this)">A tiny working example<span class="acc-chev">&#9662;</span></button>
+        <div class="acc-b">
+          <p>The whole idea in ~10 lines &mdash; a searchable layer list:</p>
+<pre>&lt;input placeholder="Search layers" oninput="f(this.value)"&gt;
+&lt;ul id="list"&gt;&lt;/ul&gt;
+&lt;script&gt;
+  const layers = ["Flood Hazard","Hospitals","Census Tracts"]; // from RAPT
+  function f(q){
+    list.innerHTML = layers
+      .filter(n =&gt; n.toLowerCase().includes(q.toLowerCase()))
+      .map(n =&gt; "&lt;li&gt;"+n+"&lt;/li&gt;").join("");
+  }
+  f("");
+&lt;/script&gt;</pre>
+          <p>Then in Experience Builder: <b>Insert &rarr; Embed &rarr; paste your hosted URL.</b> That&rsquo;s the whole pipeline.</p>
+        </div>
+      </div>
+
+      <div class="hownote">This live demo is a <b>prototype</b> on a commercial host to show the idea fast. The production version belongs inside your authorized ArcGIS / cloud.gov environment.</div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <div class="raptfoot">
@@ -1060,6 +1167,10 @@ try{if(localStorage.getItem('raptTheme')==='dark'){document.querySelector('.bigm
 /* ---------- launch from RAPT ---------- */
 function openCatalog(){document.getElementById('catOverlay').classList.add('open');}
 function closeCatalog(){document.getElementById('catOverlay').classList.remove('open');}
+function openHow(){document.getElementById('howModal').classList.add('show');}
+function closeHow(){document.getElementById('howModal').classList.remove('show');}
+function accT(btn){btn.parentElement.classList.toggle('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeHow();});
 document.getElementById('catOverlay').addEventListener('click',e=>{if(e.target.id==='catOverlay')closeCatalog();});
 
 /* ---------- go ---------- */
