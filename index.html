@@ -396,6 +396,10 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .acc-b code,.step code{font-family:var(--fd);font-size:16px;background:#eef2f6;color:var(--navy);padding:1px 6px;border-radius:3px}
 .acc-b pre{font-family:var(--fd);font-size:15px;line-height:1.55;background:#15314a;color:#cfe6ef;padding:15px 17px;border-radius:8px;overflow:auto;margin:10px 0;white-space:pre}
 .acc-flag{font-size:17px;color:var(--body);background:#f6f8fb;border:1px solid var(--line);border-radius:8px;padding:12px 15px;margin-top:11px;line-height:1.55}
+.sec-h{font-size:23px;color:var(--navy);font-weight:700;margin:28px 0 12px;padding-bottom:9px;border-bottom:2px solid var(--gold)}
+.sec-b p{font-size:18px;color:var(--body);line-height:1.6;margin:7px 0}
+.sec-b ul{margin:7px 0;padding-left:22px}
+.sec-b li{font-size:18px;color:var(--body);line-height:1.6;margin-bottom:9px}
 .whyclose{margin-top:20px;border:1px solid #c2ccd6;border-radius:11px;padding:22px 24px;background:#eef3f8}
 .why-h{font-size:23px;color:var(--navy);font-weight:700;margin-bottom:15px}
 .why-item{font-size:18px;color:var(--body);line-height:1.6;margin-bottom:13px}
@@ -779,57 +783,46 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 
       <div class="trybox"><b>Stop here and try those three steps yourself.</b> That&rsquo;s the whole prototype &mdash; describe it, let the AI find the layers, open the file &mdash; in plain words, with no code. Once you&rsquo;ve felt how fast it is, the sections below answer the one real question for production: <b>where to host the file so the government accepts it.</b></div>
 
-      <p class="acc-hint">Tap any section to expand &#9662;</p>
+      <h3 class="sec-h">What it actually is</h3>
+      <div class="sec-b"><ul>
+        <li>One HTML file. No server, no database, no build.</li>
+        <li>The 106 layers are RAPT&rsquo;s real web-map layers, read straight from ArcGIS.</li>
+        <li>Search, filters, and the layouts are plain web code &mdash; the same web technology Experience Builder runs on.</li>
+      </ul></div>
 
-      <div class="acc">
-        <button class="acc-h" onclick="accT(this)">What it actually is<span class="acc-chev">&#9662;</span></button>
-        <div class="acc-b"><ul>
-          <li>One HTML file. No server, no database, no build.</li>
-          <li>The 106 layers are RAPT&rsquo;s real web-map layers, read straight from ArcGIS REST.</li>
-          <li>Search, filters, and the layouts are plain browser JavaScript &mdash; the same web tech Experience Builder runs on.</li>
-        </ul></div>
+      <h3 class="sec-h">Adding it: the Embed widget + your link</h3>
+      <div class="sec-b">
+        <p>Adding the catalog to your app is one step. In Experience Builder, drop in the <b>Embed</b> widget and give it the <b>web address (link)</b> of your hosted page:</p>
+        <p><b>Insert &rarr; Embed &rarr; paste the link.</b></p>
+        <p>The live, fully interactive catalog appears right inside your app &mdash; search, filters, the map &mdash; working exactly as it does on its own. Nothing to rebuild.</p>
+        <p>The only thing this needs is for the page to be <b>hosted</b> somewhere it can be reached by a link &mdash; which is next.</p>
       </div>
 
-      <div class="acc open">
-        <button class="acc-h" onclick="accT(this)">Adding it: the Embed widget + your link<span class="acc-chev">&#9662;</span></button>
-        <div class="acc-b">
-          <p>Adding the catalog to your app is one step. In Experience Builder, drop in the <b>Embed</b> widget and give it the <b>web address (link)</b> of your hosted page:</p>
-          <p><b>Insert &rarr; Embed &rarr; paste the link.</b></p>
-          <p>The live, fully interactive catalog appears right inside your app &mdash; search, filters, the map &mdash; working exactly as it does on its own. Nothing to rebuild.</p>
-          <p>The only thing this needs is for the page to be <b>hosted</b> somewhere it can be reached by a link (next).</p>
-        </div>
+      <h3 class="sec-h">Hosting it is easier than it sounds</h3>
+      <div class="sec-b">
+        <p><b>Don&rsquo;t let &ldquo;hosting&rdquo; sound bigger than it is.</b> You already host fema.gov, the RAPT tool, and your maps &mdash; on systems the government has already approved. This is one small web page. It fits the very same place your approved web content already lives. You&rsquo;re not hosting something new and risky; you&rsquo;re hosting one more simple file next to things far bigger than it.</p>
+        <p>And a single static page is one of the <b>safest</b> things you can host:</p>
+        <ul>
+          <li>No database to secure.</li>
+          <li>No behind-the-scenes server code that could be attacked.</li>
+          <li>It stores nothing and changes nothing &mdash; it only reads your Esri layers, live, and only what the signed-in person is already allowed to see.</li>
+        </ul>
+        <p>So the question isn&rsquo;t &ldquo;can we host this safely&rdquo; &mdash; it&rsquo;s just <b>where the file goes</b>:</p>
+        <ul>
+          <li><b>The same approved place your web content already lives</b> &mdash; whatever already serves your fema.gov-type pages.</li>
+          <li><b>cloud.gov</b> &mdash; the government&rsquo;s own already-approved web hosting, if you want a clean stand-alone home for it.</li>
+        </ul>
+        <p class="acc-flag">The one thing to avoid for production is a random commercial host (like the one this quick demo sits on). Anywhere already trusted for your other web content is fine.</p>
       </div>
 
-      <div class="acc open">
-        <button class="acc-h" onclick="accT(this)">Hosting it is easier than it sounds<span class="acc-chev">&#9662;</span></button>
-        <div class="acc-b">
-          <p><b>Don&rsquo;t let &ldquo;hosting&rdquo; sound bigger than it is.</b> You already host fema.gov, the RAPT tool, and your maps &mdash; on systems the government has already approved. This is one small web page. It fits the very same place your approved web content already lives. You&rsquo;re not hosting something new and risky; you&rsquo;re hosting one more simple file next to things far bigger than it.</p>
-          <p>And a single static page is one of the <b>safest</b> things you can host:</p>
-          <ul>
-            <li>No database to secure.</li>
-            <li>No behind-the-scenes server code that could be attacked.</li>
-            <li>It stores nothing and changes nothing &mdash; it only reads your Esri layers, live, and only what the signed-in person is already allowed to see.</li>
-          </ul>
-          <p>So the question isn&rsquo;t &ldquo;can we host this safely&rdquo; &mdash; it&rsquo;s just <b>where the file goes</b>. Any of these:</p>
-          <ul>
-            <li><b>The same approved place your web content already lives</b> &mdash; whatever already serves your fema.gov-type pages.</li>
-            <li><b>cloud.gov</b> &mdash; the government&rsquo;s own already-approved web hosting, if you want a clean stand-alone home for it.</li>
-            <li><b>Your ArcGIS / portal</b> &mdash; the page can also live in the Esri environment you already run.</li>
-          </ul>
-          <p class="acc-flag">The one thing to avoid for production is a random commercial host (like the one this quick demo sits on). Anywhere already trusted for your other web content is fine.</p>
-        </div>
-      </div>
-
-      <div class="acc">
-        <button class="acc-h" onclick="accT(this)">Why it&rsquo;s safe, in plain terms<span class="acc-chev">&#9662;</span></button>
-        <div class="acc-b"><ul>
-          <li><b>Nothing is stored.</b> No database, no copies of data &mdash; there is nothing to breach.</li>
-          <li><b>No passwords or keys live in the file.</b> It reaches public layers directly, and hands you off to the normal Esri sign-in for protected ones.</li>
-          <li><b>It only reads.</b> It can show layers; it can&rsquo;t change your services.</li>
-          <li><b>Built to be accessible.</b> Keyboard-friendly, readable contrast, proper labels &mdash; the usual Section 508 expectations.</li>
-          <li><b>Authoritative data.</b> It points at your real RAPT layers, never a copy.</li>
-        </ul></div>
-      </div>
+      <h3 class="sec-h">Why it&rsquo;s safe, in plain terms</h3>
+      <div class="sec-b"><ul>
+        <li><b>Nothing is stored.</b> No database, no copies of data &mdash; there is nothing to breach.</li>
+        <li><b>No passwords or keys live in the file.</b> It reaches public layers directly, and hands you off to the normal Esri sign-in for protected ones.</li>
+        <li><b>It only reads.</b> It can show layers; it can&rsquo;t change your services.</li>
+        <li><b>Built to be accessible.</b> Keyboard-friendly, readable contrast, proper labels &mdash; the usual Section 508 expectations.</li>
+        <li><b>Authoritative data.</b> It points at your real RAPT layers, never a copy.</li>
+      </ul></div>
 
 
       <div class="whyclose">
