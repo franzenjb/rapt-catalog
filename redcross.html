@@ -728,8 +728,8 @@ body.embed .mh-x{display:none}
     </div>
     <div class="sourcebanner">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-3.8 7-9.2V5.3L12 2.7 5 5.3v6.5C5 17.2 12 21 12 21z"/><path d="M8.7 12.2l2.1 2.1 4.7-5"/></svg>
-      <div class="sb-main"><b>Source status:</b> this first Red Cross version is seeded mostly from public FEMA RAPT services. Red Cross master geography and authoritative candidates will be added only after they pass freshness, redundancy, permission, and map-use checks.</div>
-      <div class="sb-actions"><span class="sourcechip">RAPT seed set</span><span class="sourcechip queue">414 candidates to triage</span></div>
+      <div class="sb-main"><b>Source status:</b> this Wrapped Red Cross version is seeded mostly from public FEMA RAPT services. Red Cross authoritative layers will be added only after they pass freshness, redundancy, permission, and map-use checks.</div>
+      <div class="sb-actions"><span class="sourcechip">RAPT / wrapped seed</span><span class="sourcechip queue">414 candidates to triage</span></div>
     </div>
   </div>
   <div class="catlayout" id="catlayout">
@@ -749,7 +749,7 @@ body.embed .mh-x{display:none}
         </div>
         <div class="sr-item">
           <span class="sr-num">2</span>
-          <span class="sr-copy"><b>Authoritative candidates next</b><span>AGOL authoritative items are candidates, not automatic catalog layers. Shelters and old state-specific products need freshness and redundancy checks against master services.</span><span class="sr-pill">414 to review</span></span>
+          <span class="sr-copy"><b>Red Cross authoritative next</b><span>AGOL authoritative items are candidates, not automatic catalog layers. Shelters and old state-specific products need freshness and redundancy checks against master services.</span><span class="sr-pill">414 to review</span></span>
         </div>
         <div class="sr-item">
           <span class="sr-num">3</span>
@@ -861,7 +861,7 @@ body.embed .mh-x{display:none}
       <h3 class="sec-h">Recommended Red Cross workflow</h3>
       <div class="sec-b"><ul>
         <li>Use the catalog to find the best layer before adding anything to an operational map.</li>
-        <li>Use the source filter to separate the current FEMA RAPT seed set from Red Cross layers as they are vetted and added.</li>
+        <li>Use the source filter to separate the current RAPT / wrapped seed set from Red Cross authoritative layers as they are vetted and added.</li>
         <li>Prefer the map preview when comparing layers that sound similar.</li>
         <li>Use the table view when you need a fast inventory of categories, geography, and update type.</li>
         <li>Use the copied layer URLs when building or repairing a map inside ArcGIS Experience Builder.</li>
@@ -908,10 +908,16 @@ const CATCOLORS={'Hazards, Weather & Risk':'#c33d2e','Infrastructure & Lifelines
 const CATBG={'Hazards, Weather & Risk':'#f1d8d0','Infrastructure & Lifelines':'#d7e6f4','People & Community':'#cfeaea'};
 const SOURCE_META={
   'rapt-seed':{
-    label:'FEMA RAPT seed set',
-    short:'RAPT seed',
+    label:'RAPT / wrapped seed set',
+    short:'RAPT / wrapped',
     description:'Public services carried into this Red Cross version from the FEMA RAPT catalog seed set.',
     exportNote:'Seeded from public FEMA RAPT service inventory'
+  },
+  'arc-authoritative':{
+    label:'Red Cross authoritative',
+    short:'ARC authoritative',
+    description:'Reviewed Red Cross authoritative feature, map, or image services promoted into this catalog.',
+    exportNote:'Promoted from reviewed Red Cross authoritative service inventory'
   },
   'arc-master':{
     label:'Red Cross master geography',
@@ -929,8 +935,9 @@ const SOURCE_META={
 const SOURCE_OPTIONS=[
   {key:'all',label:'All current catalog',short:'All',count:()=>LAYERS.length},
   {key:'rapt-seed',label:SOURCE_META['rapt-seed'].label,short:SOURCE_META['rapt-seed'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='rapt-seed').length},
+  {key:'arc-authoritative',label:SOURCE_META['arc-authoritative'].label,short:SOURCE_META['arc-authoritative'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='arc-authoritative').length},
   {key:'arc-master',label:SOURCE_META['arc-master'].label,short:SOURCE_META['arc-master'].short,pending:'next'},
-  {key:'arc-authoritative-candidate',label:SOURCE_META['arc-authoritative-candidate'].label,short:SOURCE_META['arc-authoritative-candidate'].short,pending:'414'}
+  {key:'arc-authoritative-candidate',label:'Authoritative review queue',short:SOURCE_META['arc-authoritative-candidate'].short,pending:'414'}
 ];
 /* Single icon source — used by BOTH the filter buttons and the catalog cards. Inherits color via currentColor. */
 const ICONS={
@@ -984,7 +991,7 @@ function summarize(r){
   const kind=cat.startsWith('Hazards')?'hazard & risk layer':cat.startsWith('Infrastructure')?'critical-infrastructure layer':'community indicator';
   return `${lvl} ${kind}${tags.length?' — '+tags.slice(0,3).join(', ').toLowerCase():''}.`;
 }
-const LAYERS=RAPT_DATA.map((r,i)=>({i,title:r[0],url:r[1],itemId:r[2],ltype:r[3],cat:r[4],geo:r[5],tags:r[6],rt:r[7],sourceKey:'rapt-seed',sum:summarize(r)}));
+const LAYERS=RAPT_DATA.map((r,i)=>({i,title:r[0],url:r[1],itemId:r[2],ltype:r[3],cat:r[4],geo:r[5],tags:r[6],rt:r[7],sourceKey:r[8]||'rapt-seed',sum:summarize(r)}));
 
 /* counts */
 const byCat=c=>LAYERS.filter(l=>l.cat===c).length;
@@ -1053,7 +1060,7 @@ function renderSourceFacets(){
     const active=curSource===o.key;
     const pending=o.pending||SOURCE_META[o.key]?.pending;
     const attrs=pending?'disabled aria-disabled="true" title="Pending source review"':'onclick="setSource(\''+o.key+'\')"';
-    const icon=o.key==='arc-authoritative-candidate'?'review':'source';
+    const icon=(o.key==='arc-authoritative'||o.key==='arc-authoritative-candidate')?'review':'source';
     const c=pending?pending:count;
     return `<button class="facet ${active?'active':''} ${pending?'pending':''}" ${attrs}>${svgIcon(icon)}<span class="fl">${o.label}</span><span class="fc">${c}</span></button>`;
   }).join('');
@@ -1122,7 +1129,9 @@ function render(){
   document.getElementById('clearFilters').style.display=active?'inline-flex':'none';
   if(curFocus!=null&&!list.some(l=>l.i===curFocus))curFocus=null;
   grid.className=table?'datatable':cards?'cardgrid':'layerlist';
-  const empty='<div class="emptylist">No layers match those filters.<br><button class="linklike" onclick="clearFilters()">Reset filters</button></div>';
+  const empty=curSource==='arc-authoritative'
+    ?'<div class="emptylist"><b>No Red Cross authoritative layers added yet.</b><br>Use this button as the landing zone for reviewed feature, map, and image services after freshness, redundancy, permission, and shelter-master checks.<br><button class="linklike" onclick="clearFilters()">Show current RAPT / wrapped seed layers</button></div>'
+    :'<div class="emptylist">No layers match those filters.<br><button class="linklike" onclick="clearFilters()">Reset filters</button></div>';
   if(table) grid.innerHTML=list.length?tableHTML(list):empty;
   else grid.innerHTML=list.length?list.map(cards?cardHTML:rowHTML).join(''):empty;
   if(!cards&&!table)renderDetail();
