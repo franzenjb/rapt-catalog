@@ -6,7 +6,7 @@ A discovery-first catalog of FEMA RAPT's operational layers — find, filter, pr
 
 - The FEMA version at `/` and `/options` is the original client/demo surface. Do not re-theme or repurpose those files for Red Cross.
 - The Red Cross Experience Builder version lives separately at `/redcross` (`redcross.html`). Use `/redcross?embed=1&open=1` for an ArcGIS Experience Builder Embed widget so the catalog fills the iframe without the stand-alone shell.
-- Domain split: `catalog.jbf.com` remains the FEMA/client-demo URL. `rcrapt.jbf.com` is the Red Cross URL and Vercel rewrites that host to `redcross.html` without changing the browser URL.
+- Domain split: `catalog.jbf.com` remains the FEMA/client-demo URL. `rcrapt.jbf.com` is the Red Cross URL and Vercel redirects that host root to `/redcross`.
 
 ## Where it lives
 - **FEMA live (canonical):** https://catalog.jbf.com  — also https://rapt-catalog.vercel.app
@@ -40,13 +40,13 @@ cd ~/dev/rapt-catalog          # wherever cloned on the M4
 npx vercel --prod --scope jbf-2539-e1ec6bfb --yes
 ```
 catalog.jbf.com follows the project's current production deployment, so a prod deploy updates it. (Custom domain already attached + verified; TLS cert already issued.)
-rcrapt.jbf.com is attached to the same Vercel project. `vercel.json` host-rewrites that domain to `redcross.html`, while `catalog.jbf.com` continues to serve the FEMA `index.html`.
+rcrapt.jbf.com is attached to the same Vercel project. `vercel.json` redirects that host root to `/redcross`, while `catalog.jbf.com` continues to serve the FEMA `index.html`.
 
 ## Domain wiring (done — for reference)
 - Cloudflare CNAME `catalog → cname.vercel-dns.com` (DNS-only) in zone jbf.com (`e3fbaac1c772786700d37440be8383d6`).
 - Vercel: `catalog.jbf.com` attached to the `rapt-catalog` project (verified). Cert minted via `npx vercel certs issue catalog.jbf.com`.
 - Cloudflare CNAME `rcrapt → cname.vercel-dns.com` (DNS-only) in zone jbf.com.
-- Vercel: `rcrapt.jbf.com` attached to the `rapt-catalog` project; cert entry issued via `npx vercel certs issue rcrapt.jbf.com`; the host rewrite in `vercel.json` sends it to the Red Cross route.
+- Vercel: `rcrapt.jbf.com` attached to the `rapt-catalog` project; cert entry issued via `npx vercel certs issue rcrapt.jbf.com`; the host redirect in `vercel.json` sends the root URL to the Red Cross route.
 - The old `maps.jbf.com/rapt-catalog` subpath was REMOVED from the `cvs` project (Jeff wanted it unrelated to maps). NOTE: `cvs` does NOT auto-deploy on git push — must `npx vercel --prod` from `~/dev/cvs`.
 - `rapt.jbf.com` is TAKEN (the `rapt-4` "RAPT 4 Command Console"); `rapt4.jbf.com` is taken (answer-engine).
 
