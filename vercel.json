@@ -3,7 +3,7 @@
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "rcrapt\\.jbf\\.com" }],
+      "has": [{ "type": "host", "value": "raptrc\\.jbf\\.com" }],
       "destination": "/redcross",
       "permanent": false
     }
