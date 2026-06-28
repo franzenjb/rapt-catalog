@@ -169,6 +169,13 @@ body.embed .mh-x{display:none}
 .seg.active{background:var(--navy);color:#fff}
 .seg.active svg{opacity:1}
 .seg .ct{font-family:var(--fd);font-weight:700;font-size:11px}
+.sourcebanner{display:flex;align-items:flex-start;gap:10px;margin-top:10px;background:#f7fafc;border:1px solid #d7e1ea;border-left:4px solid var(--red);border-radius:7px;padding:10px 12px;color:var(--body);font-size:13px;line-height:1.35}
+.sourcebanner svg{width:18px;height:18px;flex-shrink:0;color:var(--red);margin-top:1px}
+.sourcebanner b{color:var(--ink)}
+.sourcebanner .sb-main{flex:1;min-width:0}
+.sourcebanner .sb-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.sourcechip{font-family:var(--fd);font-size:10px;letter-spacing:.45px;text-transform:uppercase;font-weight:700;border:1px solid #c9d4df;border-radius:999px;padding:3px 8px;background:#fff;color:var(--navy);white-space:nowrap}
+.sourcechip.queue{color:#8b1b2c;border-color:#efb4bd;background:#fff5f6}
 
 /* ===== Master-detail layout ===== */
 .catlayout{flex:1;min-height:0;display:grid;grid-template-columns:var(--railw,232px) minmax(340px,1fr) var(--dw,392px);background:var(--panel)}
@@ -189,6 +196,21 @@ body.embed .mh-x{display:none}
 .facet:hover svg,.facet:hover .fc{color:var(--navy)}
 .facet.active{background:var(--navy);color:#fff;font-weight:600}
 .facet.active svg,.facet.active .fc{color:#fff}
+.facet.pending{cursor:default;opacity:.72}
+.facet.pending:hover{background:none;color:var(--body)}
+.facet.pending:hover svg,.facet.pending:hover .fc{color:var(--muted)}
+.sourcefacets{padding-bottom:6px}
+.source-roadmap{margin:2px 10px 16px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fafcfe}
+.source-roadmap .sr-head{padding:11px 12px;background:#f0f4f8;border-bottom:1px solid var(--line)}
+.source-roadmap .sr-head b{display:block;font-size:13px;color:var(--ink);line-height:1.2}
+.source-roadmap .sr-head span{display:block;margin-top:3px;font-size:12px;color:var(--body);line-height:1.35}
+.sr-item{display:grid;grid-template-columns:24px 1fr;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.sr-item:last-child{border-bottom:none}
+.sr-num{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-family:var(--fd);font-size:10px;font-weight:700}
+.sr-item b{display:block;font-size:12.5px;color:var(--ink);line-height:1.25}
+.sr-copy{display:block}
+.sr-copy>span{display:block;font-size:11.5px;color:var(--body);line-height:1.35;margin-top:2px}
+.sr-pill{display:inline-flex;margin-top:6px;font-family:var(--fd);font-size:10px;letter-spacing:.35px;text-transform:uppercase;color:#8b1b2c;background:#fff2f4;border:1px solid #efb4bd;border-radius:999px;padding:2px 7px}
 
 .listpane{display:flex;flex-direction:column;min-width:0;background:var(--panel)}
 .listbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 16px;border-bottom:1px solid var(--line);background:#fff;flex-shrink:0}
@@ -212,6 +234,7 @@ body.embed .mh-x{display:none}
 .lrbadge{font-family:var(--fd);font-size:9px;font-weight:600;letter-spacing:.7px;padding:2px 6px;border-radius:3px;flex-shrink:0}
 .lrbadge.live{background:var(--red);color:#fff}
 .lrbadge.svc{background:#e7edf2;color:var(--muted)}
+.lrbadge.source{background:#fff;color:#8b1b2c;border:1px solid #efb4bd}
 .lr-add{width:28px;height:28px;flex-shrink:0;border-radius:6px;border:1.5px solid #c2ccd6;color:var(--navy);background:#fff;display:inline-flex;align-items:center;justify-content:center;transition:.1s}
 .lr-add svg{width:16px;height:16px}
 .lr-add:hover{border-color:var(--navy);background:#eef4fa}
@@ -238,6 +261,7 @@ body.embed .mh-x{display:none}
 .ctags{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px;align-items:center}
 .ctag{font-family:var(--fd);font-size:10px;letter-spacing:.4px;text-transform:uppercase;font-weight:600;color:var(--body);background:#fff;border:1px solid var(--line);padding:3px 8px;border-radius:4px}
 .ctag.primary{font-weight:800;font-size:10.5px;color:#fff;border:none;padding:3px 9px}
+.ctag.source{color:#8b1b2c;background:#fff5f6;border-color:#efb4bd}
 .dt-facts{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px}
 .dt-facts>div{display:flex;justify-content:space-between;gap:12px;padding:9px 13px;background:#fff}
 .dt-facts dt{font-family:var(--fd);font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
@@ -466,6 +490,11 @@ body.embed .mh-x{display:none}
 .bigmodal.dark .tab.active{color:#fff}
 .bigmodal.dark #catview{background:#11263a}
 .bigmodal.dark .filterbar{background:#15314a;border-bottom-color:#0d2236}
+.bigmodal.dark .sourcebanner{background:#13283c;border-color:#284a6a;border-left-color:var(--gold);color:#b3c6d6}
+.bigmodal.dark .sourcebanner b{color:#fff}
+.bigmodal.dark .sourcebanner svg{color:var(--gold)}
+.bigmodal.dark .sourcechip{background:#0e2132;border-color:#3a5e80;color:#cfe0f0}
+.bigmodal.dark .sourcechip.queue{background:#2b2631;border-color:#7d3b50;color:#ffccd5}
 .bigmodal.dark .search{background:#0e2132;border-color:#284a6a}
 .bigmodal.dark .search input{color:#eaf2fa}
 .bigmodal.dark .iconbtn{background:#1b3a57;border-color:#284a6a;color:#cddae7}
@@ -484,6 +513,12 @@ body.embed .mh-x{display:none}
 .bigmodal.dark .facet:hover svg,.bigmodal.dark .facet:hover .fc{color:#cfe0f0}
 .bigmodal.dark .facet.active{background:var(--gold);color:#fff}
 .bigmodal.dark .facet.active svg,.bigmodal.dark .facet.active .fc{color:#fff}
+.bigmodal.dark .source-roadmap{background:#13283c;border-color:#284a6a}
+.bigmodal.dark .source-roadmap .sr-head{background:#0e2233;border-bottom-color:#284a6a}
+.bigmodal.dark .source-roadmap .sr-head b,.bigmodal.dark .sr-item b{color:#eaf2fa}
+.bigmodal.dark .source-roadmap .sr-head span,.bigmodal.dark .sr-copy>span{color:#aebfce}
+.bigmodal.dark .sr-item{border-bottom-color:#284a6a}
+.bigmodal.dark .sr-pill{background:#2b2631;border-color:#7d3b50;color:#ffccd5}
 .bigmodal.dark .listpane{background:#0e2233}
 .bigmodal.dark .listbar{background:#15324c;border-bottom-color:#0d2236}
 .bigmodal.dark .listbar #resultmeta{color:#b3c6d6}
@@ -500,6 +535,7 @@ body.embed .mh-x{display:none}
 .bigmodal.dark .lr-name{color:#eaf2fa}
 .bigmodal.dark .lr-meta{color:#8aa3ba}
 .bigmodal.dark .lrbadge.svc{background:#244766;color:#aebfce}
+.bigmodal.dark .lrbadge.source{background:#2b2631;border-color:#7d3b50;color:#ffccd5}
 .bigmodal.dark .lr-add{background:transparent;border-color:#3a5e80;color:#9fc4e6}
 .bigmodal.dark .lr-add:hover{background:#234a6e;color:#fff}
 .bigmodal.dark .lr-add.on{background:var(--gold);border-color:var(--gold);color:#fff}
@@ -542,6 +578,7 @@ body.embed .mh-x{display:none}
 .bigmodal.dark .dtable .t-add.on{background:var(--gold);border-color:var(--gold);color:#fff}
 .bigmodal.dark .ctag{color:#c2d3e2;border-color:#2f5273;background:transparent}
 .bigmodal.dark .ctag.primary{color:#fff;border:none}
+.bigmodal.dark .ctag.source{background:#2b2631;border-color:#7d3b50;color:#ffccd5}
 .bigmodal.dark .emptylist,.bigmodal.dark .dt-empty{color:#8aa3ba}
 </style>
 </head>
@@ -689,11 +726,36 @@ body.embed .mh-x{display:none}
         </button>
       </div>
     </div>
+    <div class="sourcebanner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-3.8 7-9.2V5.3L12 2.7 5 5.3v6.5C5 17.2 12 21 12 21z"/><path d="M8.7 12.2l2.1 2.1 4.7-5"/></svg>
+      <div class="sb-main"><b>Source status:</b> this first Red Cross version is seeded mostly from public FEMA RAPT services. Red Cross master geography and authoritative candidates will be added only after they pass freshness, redundancy, permission, and map-use checks.</div>
+      <div class="sb-actions"><span class="sourcechip">RAPT seed set</span><span class="sourcechip queue">414 candidates to triage</span></div>
+    </div>
   </div>
   <div class="catlayout" id="catlayout">
     <aside class="filterrail" id="filterrail">
+      <div class="railhead">Filter by source</div>
+      <div class="facets sourcefacets" id="sourcefacets"></div>
       <div class="railhead">Filter by topic</div>
       <div class="facets" id="tagfacets"></div>
+      <div class="source-roadmap">
+        <div class="sr-head">
+          <b>Red Cross additions queue</b>
+          <span>Add trusted layers deliberately, not by bulk dump.</span>
+        </div>
+        <div class="sr-item">
+          <span class="sr-num">1</span>
+          <span class="sr-copy"><b>Master geography first</b><span>Divisions, regions, chapters, counties, and FIPS-keyed hierarchy from the Red Cross master geography spine.</span></span>
+        </div>
+        <div class="sr-item">
+          <span class="sr-num">2</span>
+          <span class="sr-copy"><b>Authoritative candidates next</b><span>AGOL authoritative items are candidates, not automatic catalog layers. Shelters and old state-specific products need freshness and redundancy checks against master services.</span><span class="sr-pill">414 to review</span></span>
+        </div>
+        <div class="sr-item">
+          <span class="sr-num">3</span>
+          <span class="sr-copy"><b>Map-usable services only</b><span>Feature, map, and image services can graduate here. Dashboards, web maps, apps, and reports should stay in a separate reference inventory unless they expose usable layers.</span></span>
+        </div>
+      </div>
     </aside>
     <section class="listpane">
       <div class="listbar"><span id="resultmeta"></span><button class="clearbtn" id="clearFilters" onclick="clearFilters()" style="display:none">Reset filters</button></div>
@@ -758,7 +820,7 @@ body.embed .mh-x{display:none}
       <p>Copy or download a web map definition for staff who maintain ArcGIS content and need a portable recipe for the selected layers.</p>
       <div class="act"><button class="a fill" onclick="copyWebmapJSON()">Copy Web Map JSON</button><button class="a" onclick="downloadWebmap()">Download .json</button><button class="a" onclick="copyShare()">Copy selected-layer link</button></div>
     </div>
-    <div class="ft">Layer titles and service endpoints come from the source ArcGIS services. The preview map uses simple default styling so the catalog stays fast.</div>
+    <div class="ft">Layer titles and service endpoints come from the source ArcGIS services. Source labels describe catalog triage status; an authoritative AGOL flag is not treated as automatic approval for response use.</div>
   </div>
 </div>
 <div class="modal" id="howModal" onclick="if(event.target===this)closeHow()">
@@ -782,7 +844,7 @@ body.embed .mh-x{display:none}
           <span class="stn">2</span>
           <div class="sttx">
             <b>Filter until the list matches the job</b>
-            <p>Start with Hazards, Infrastructure, or People. Add topic filters when you need a tighter set. Filters stack together, so a search for flood plus a Housing tag gives a much shorter, more relevant list.</p>
+            <p>Start with source status, then Hazards, Infrastructure, or People. Add topic filters when you need a tighter set. Filters stack together, so a search for flood plus a Housing tag gives a much shorter, more relevant list.</p>
           </div>
         </div>
         <div class="step">
@@ -799,6 +861,7 @@ body.embed .mh-x{display:none}
       <h3 class="sec-h">Recommended Red Cross workflow</h3>
       <div class="sec-b"><ul>
         <li>Use the catalog to find the best layer before adding anything to an operational map.</li>
+        <li>Use the source filter to separate the current FEMA RAPT seed set from Red Cross layers as they are vetted and added.</li>
         <li>Prefer the map preview when comparing layers that sound similar.</li>
         <li>Use the table view when you need a fast inventory of categories, geography, and update type.</li>
         <li>Use the copied layer URLs when building or repairing a map inside ArcGIS Experience Builder.</li>
@@ -816,6 +879,8 @@ body.embed .mh-x{display:none}
       <h3 class="sec-h">Notes for response use</h3>
       <div class="sec-b">
         <p><b>Layer availability follows the source service.</b> Public layers open for everyone; protected layers still require the normal ArcGIS permissions.</p>
+        <p><b>Authoritative does not automatically mean current or useful here.</b> Red Cross authoritative candidates can include feature services, maps, dashboards, imagery, apps, and old incident products. Only map-usable feature, map, or image services should graduate into this catalog after review.</p>
+        <p><b>Shelter layers need special care.</b> State-specific shelter services may be old or redundant. Compare them against the master shelter layer before promoting any shelter candidate.</p>
         <p><b>The catalog does not change source data.</b> It reads layer endpoints and helps staff assemble a working map.</p>
         <p><b>Use current operational guidance first.</b> A layer can support planning and situational awareness, but it does not replace Disaster Cycle Services direction or incident leadership decisions.</p>
       </div>
@@ -841,6 +906,32 @@ const RAPT_DATA=[["NWS - Fire Weather Outlooks", "https://mapservices.weather.no
 /* ---------- derive ---------- */
 const CATCOLORS={'Hazards, Weather & Risk':'#c33d2e','Infrastructure & Lifelines':'#2766a3','People & Community':'#0f8285'};
 const CATBG={'Hazards, Weather & Risk':'#f1d8d0','Infrastructure & Lifelines':'#d7e6f4','People & Community':'#cfeaea'};
+const SOURCE_META={
+  'rapt-seed':{
+    label:'FEMA RAPT seed set',
+    short:'RAPT seed',
+    description:'Public services carried into this Red Cross version from the FEMA RAPT catalog seed set.',
+    exportNote:'Seeded from public FEMA RAPT service inventory'
+  },
+  'arc-master':{
+    label:'Red Cross master geography',
+    short:'Master geography',
+    description:'Divisions, regions, chapters, counties, and FIPS-keyed hierarchy from the Red Cross master geography spine.',
+    pending:'next'
+  },
+  'arc-authoritative-candidate':{
+    label:'Authoritative candidates',
+    short:'Authoritative candidates',
+    description:'AGOL authoritative items or services that still need freshness, redundancy, permission, and map-use review before promotion.',
+    pending:'414 to triage'
+  }
+};
+const SOURCE_OPTIONS=[
+  {key:'all',label:'All current catalog',short:'All',count:()=>LAYERS.length},
+  {key:'rapt-seed',label:SOURCE_META['rapt-seed'].label,short:SOURCE_META['rapt-seed'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='rapt-seed').length},
+  {key:'arc-master',label:SOURCE_META['arc-master'].label,short:SOURCE_META['arc-master'].short,pending:'next'},
+  {key:'arc-authoritative-candidate',label:SOURCE_META['arc-authoritative-candidate'].label,short:SOURCE_META['arc-authoritative-candidate'].short,pending:'414'}
+];
 /* Single icon source — used by BOTH the filter buttons and the catalog cards. Inherits color via currentColor. */
 const ICONS={
   Fire:'<path d="M12 2.5c.5 2.9 2 4.3 3.2 5.5C16.6 9.3 17.3 10.9 17.3 12.7a5.3 5.3 0 0 1-10.6 0c0-1.6.7-2.8 1.7-3.7.3 1 1.1 1.8 2 1.8C9.2 8.3 11 6.1 12 2.5z"/>',
@@ -869,7 +960,9 @@ const ICONS={
   storm:'<path d="M7.5 17.5a4.2 4.2 0 0 1-.5-8.4A5 5 0 0 1 17 7.7a3.6 3.6 0 0 1 .8 7.1"/><polyline points="12.5 12 10 15.5 13 15.5 10.5 20"/>',
   infra:'<rect x="3" y="8" width="7" height="13" rx="1"/><rect x="13" y="3" width="8" height="18" rx="1"/><line x1="15.5" y1="7.5" x2="18.5" y2="7.5"/><line x1="15.5" y1="11" x2="18.5" y2="11"/><line x1="15.5" y1="14.5" x2="18.5" y2="14.5"/>',
   people:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M16 5.2a3 3 0 0 1 0 5.6"/><path d="M17 15.3c2 .6 3.5 1.9 3.5 4.7"/>',
-  layers:'<polygon points="12 2.5 2.5 7 12 11.5 21.5 7 12 2.5"/><polyline points="2.5 16.5 12 21 21.5 16.5"/><polyline points="2.5 11.5 12 16 21.5 11.5"/>'
+  layers:'<polygon points="12 2.5 2.5 7 12 11.5 21.5 7 12 2.5"/><polyline points="2.5 16.5 12 21 21.5 16.5"/><polyline points="2.5 11.5 12 16 21.5 11.5"/>',
+  source:'<path d="M12 21s7-3.8 7-9.2V5.3L12 2.7 5 5.3v6.5C5 17.2 12 21 12 21z"/><path d="M8.7 12.2l2.1 2.1 4.7-5"/>',
+  review:'<circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/><path d="M8.5 11.5l1.9 1.9 3.5-4.6"/>'
 };
 function svgIcon(key){
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[key]||ICONS.layers}</svg>`;
@@ -891,7 +984,7 @@ function summarize(r){
   const kind=cat.startsWith('Hazards')?'hazard & risk layer':cat.startsWith('Infrastructure')?'critical-infrastructure layer':'community indicator';
   return `${lvl} ${kind}${tags.length?' — '+tags.slice(0,3).join(', ').toLowerCase():''}.`;
 }
-const LAYERS=RAPT_DATA.map((r,i)=>({i,title:r[0],url:r[1],itemId:r[2],ltype:r[3],cat:r[4],geo:r[5],tags:r[6],rt:r[7],sum:summarize(r)}));
+const LAYERS=RAPT_DATA.map((r,i)=>({i,title:r[0],url:r[1],itemId:r[2],ltype:r[3],cat:r[4],geo:r[5],tags:r[6],rt:r[7],sourceKey:'rapt-seed',sum:summarize(r)}));
 
 /* counts */
 const byCat=c=>LAYERS.filter(l=>l.cat===c).length;
@@ -908,6 +1001,7 @@ const TOPTAGS=Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
 
 /* ---------- state ---------- */
 let curCat='all';
+let curSource='all';
 const curTags=new Set();
 const sel=new Set();
 
@@ -939,16 +1033,30 @@ const checkSvg=()=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 })();
 
 function setTag(t){curTags.has(t)?curTags.delete(t):curTags.add(t);render();}
+function setSource(k){if(k!=='all'&&SOURCE_META[k]?.pending)return;curSource=k;render();}
 function setCat(c,el){curCat=c.replace(/&amp;/g,'&');document.querySelectorAll('.seg[data-cat]').forEach(p=>p.classList.remove('active'));el.classList.add('active');render();}
-function clearFilters(){curTags.clear();curCat='all';document.getElementById('q').value='';document.querySelectorAll('.seg[data-cat]').forEach(p=>p.classList.toggle('active',p.dataset.cat==='all'));render();}
+function clearFilters(){curTags.clear();curCat='all';curSource='all';document.getElementById('q').value='';document.querySelectorAll('.seg[data-cat]').forEach(p=>p.classList.toggle('active',p.dataset.cat==='all'));render();}
 function toggleRail(){const lay=document.getElementById('catlayout');lay.classList.toggle('norail');document.getElementById('railToggle').classList.toggle('on',!lay.classList.contains('norail'));}
 
 function matches(l){
   const q=document.getElementById('q').value.trim().toLowerCase();
+  const src=SOURCE_META[l.sourceKey]||SOURCE_META['rapt-seed'];
   if(curCat!=='all'&&l.cat!==curCat)return false;
+  if(curSource!=='all'&&l.sourceKey!==curSource)return false;
   if(curTags.size){for(const t of curTags){if(!l.tags.includes(t))return false;}}
-  if(q&&!(l.title.toLowerCase().includes(q)||l.tags.join(' ').toLowerCase().includes(q)||l.cat.toLowerCase().includes(q)))return false;
+  if(q&&!(l.title.toLowerCase().includes(q)||l.tags.join(' ').toLowerCase().includes(q)||l.cat.toLowerCase().includes(q)||src.label.toLowerCase().includes(q)||src.description.toLowerCase().includes(q)))return false;
   return true;
+}
+function renderSourceFacets(){
+  document.getElementById('sourcefacets').innerHTML=SOURCE_OPTIONS.map(o=>{
+    const count=o.count?o.count():null;
+    const active=curSource===o.key;
+    const pending=o.pending||SOURCE_META[o.key]?.pending;
+    const attrs=pending?'disabled aria-disabled="true" title="Pending source review"':'onclick="setSource(\''+o.key+'\')"';
+    const icon=o.key==='arc-authoritative-candidate'?'review':'source';
+    const c=pending?pending:count;
+    return `<button class="facet ${active?'active':''} ${pending?'pending':''}" ${attrs}>${svgIcon(icon)}<span class="fl">${o.label}</span><span class="fc">${c}</span></button>`;
+  }).join('');
 }
 function renderFacets(){
   document.getElementById('tagfacets').innerHTML=TOPTAGS.map(t=>
@@ -956,21 +1064,24 @@ function renderFacets(){
 }
 const grid=document.getElementById('grid');
 const badgeFor=l=>l.rt?'<span class="lrbadge live">LIVE</span>':(l.geo==='Service'?'<span class="lrbadge svc">SERVICE</span>':'');
+const sourceMeta=l=>SOURCE_META[l.sourceKey]||SOURCE_META['rapt-seed'];
+const sourceBadge=l=>`<span class="lrbadge source">${sourceMeta(l).short}</span>`;
 function rowHTML(l){
   const on=sel.has(l.i),foc=curFocus===l.i;
   return `<button class="lrow ${on?'on':''} ${foc?'foc':''}" onclick="focusLayer(${l.i})">
       <span class="lr-ic" style="color:${CATCOLORS[l.cat]}">${iconFor(l)}</span>
       <span class="lr-main">
         <span class="lr-name">${l.title.replace(/\s*\(zoom.*?\)/i,'')}</span>
-        <span class="lr-meta">${CATSHORT[l.cat]} · ${geoLabel(l)}</span>
+        <span class="lr-meta">${CATSHORT[l.cat]} · ${geoLabel(l)} · ${sourceMeta(l).short}</span>
       </span>
       ${badgeFor(l)}
+      ${sourceBadge(l)}
       <span class="lr-add ${on?'on':''}" title="${on?'Remove from map':'Add to map'}" onclick="event.stopPropagation();toggle(${l.i})">${on?checkSvg():plusSvg()}</span>
     </button>`;
 }
 function cardHTML(l){
   const on=sel.has(l.i),c=CATCOLORS[l.cat],tp=topicOf(l);
-  const chips=(tp?`<span class="ctag primary" style="background:${c}">${tp}</span>`:'')+l.tags.filter(t=>t!==tp).slice(0,2).map(t=>`<span class="ctag">${t}</span>`).join('');
+  const chips=`<span class="ctag source">${sourceMeta(l).short}</span>`+(tp?`<span class="ctag primary" style="background:${c}">${tp}</span>`:'')+l.tags.filter(t=>t!==tp).slice(0,2).map(t=>`<span class="ctag">${t}</span>`).join('');
   return `<div class="lcard ${on?'on':''}">
       <div class="lc-top"><span class="lc-ic" style="color:${c}">${iconFor(l)}</span>${badgeFor(l)}</div>
       <div class="lc-cat" style="color:${c}">${l.cat}</div>
@@ -989,22 +1100,25 @@ function tableHTML(list){
       <td class="tnm">${l.title.replace(/\s*\(zoom.*?\)/i,'')}</td>
       <td class="tmeta">${CATSHORT[l.cat]}</td>
       <td class="tmeta">${geoArea(l)}</td>
+      <td class="tmeta">${sourceMeta(l).short}</td>
       <td class="tup">${flag}</td>
       <td class="tact"><button class="t-add ${on?'on':''}" title="${on?'Remove from map':'Add to map'}" onclick="event.stopPropagation();toggle(${l.i})">${on?checkSvg():plusSvg()}</button></td>
     </tr>`;
   }).join('');
-  return `<table class="dtable"><thead><tr><th></th><th>Layer</th><th>Category</th><th>Geography</th><th>Updates</th><th class="thc">Add</th></tr></thead><tbody>${rows}</tbody></table>`;
+  return `<table class="dtable"><thead><tr><th></th><th>Layer</th><th>Category</th><th>Geography</th><th>Source</th><th>Updates</th><th class="thc">Add</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 function render(){
+  renderSourceFacets();
   renderFacets();
   const list=LAYERS.filter(matches);
-  const active=(curCat!=='all'||curTags.size||document.getElementById('q').value.trim());
+  const active=(curCat!=='all'||curSource!=='all'||curTags.size||document.getElementById('q').value.trim());
   const cards=viewMode==='cards', table=viewMode==='table';
   const lay=document.getElementById('catlayout');
   lay.classList.toggle('cards',cards);
   lay.classList.toggle('table',table);
   document.querySelectorAll('.vt').forEach(b=>b.classList.toggle('active',b.dataset.view===viewMode));
-  document.getElementById('resultmeta').innerHTML=`<b>${list.length}</b> of ${LAYERS.length} layers`+[...curTags].map(t=>` <span class="metatag">${t}<x onclick="event.stopPropagation();setTag('${t.replace(/'/g,"\\'")}')">&times;</x></span>`).join('');
+  const sourceChip=curSource==='all'?'':` <span class="metatag">${SOURCE_META[curSource].short}<x onclick="event.stopPropagation();setSource('all')">&times;</x></span>`;
+  document.getElementById('resultmeta').innerHTML=`<b>${list.length}</b> of ${LAYERS.length} layers`+sourceChip+[...curTags].map(t=>` <span class="metatag">${t}<x onclick="event.stopPropagation();setTag('${t.replace(/'/g,"\\'")}')">&times;</x></span>`).join('');
   document.getElementById('clearFilters').style.display=active?'inline-flex':'none';
   if(curFocus!=null&&!list.some(l=>l.i===curFocus))curFocus=null;
   grid.className=table?'datatable':cards?'cardgrid':'layerlist';
@@ -1023,7 +1137,7 @@ function renderDetail(){
     return;
   }
   const l=LAYERS[curFocus],on=sel.has(l.i),c=CATCOLORS[l.cat],tp=topicOf(l);
-  const chips=(tp?`<span class="ctag primary" style="background:${c}">${tp}</span>`:'')+l.tags.filter(t=>t!==tp).map(t=>`<span class="ctag">${t}</span>`).join('');
+  const chips=`<span class="ctag source">${sourceMeta(l).short}</span>`+(tp?`<span class="ctag primary" style="background:${c}">${tp}</span>`:'')+l.tags.filter(t=>t!==tp).map(t=>`<span class="ctag">${t}</span>`).join('');
   const ltypeLabel={ArcGISMapServiceLayer:'Map service',ArcGISFeatureLayer:'Feature layer'}[l.ltype]||l.ltype;
   const badge=l.rt?'<span class="lrbadge live">LIVE</span>':(l.geo==='Service'?'<span class="lrbadge svc">SERVICE</span>':'');
   box.innerHTML=`
@@ -1037,6 +1151,7 @@ function renderDetail(){
     <dl class="dt-facts">
       <div><dt>Type</dt><dd>${ltypeLabel}</dd></div>
       <div><dt>Geography</dt><dd>${geoArea(l)}</dd></div>
+      <div><dt>Source status</dt><dd>${sourceMeta(l).label}</dd></div>
       <div><dt>Updates</dt><dd>${l.rt?'Real-time feed':'Static / periodic'}</dd></div>
     </dl>
     <button class="dt-add ${on?'on':''}" onclick="toggle(${l.i})">${on?checkSvg()+' In your map':plusSvg()+' Add to map'}</button>`;
@@ -1088,13 +1203,18 @@ function showTab(t){
 let view,map,mapReady=false;const layerObjs={};
 function initMap(){
   if(mapReady)return;
-  require(["esri/Map","esri/views/MapView","esri/widgets/BasemapToggle","esri/widgets/Legend","esri/widgets/Expand","esri/layers/FeatureLayer","esri/layers/MapImageLayer"],
-  (Map,MapView,BasemapToggle,Legend,Expand,FeatureLayer,MapImageLayer)=>{
+  require(["esri/Map","esri/views/MapView","esri/widgets/Home","esri/widgets/ScaleBar","esri/widgets/Search","esri/widgets/BasemapGallery","esri/widgets/Legend","esri/widgets/Expand","esri/layers/FeatureLayer","esri/layers/MapImageLayer"],
+  (Map,MapView,Home,ScaleBar,Search,BasemapGallery,Legend,Expand,FeatureLayer,MapImageLayer)=>{
     window._FL=FeatureLayer;window._MIL=MapImageLayer;
     map=new Map({basemap:"gray-vector"});
     view=new MapView({container:"mapNode",map,center:[-96,38],zoom:4,
+      popupEnabled:false,
       ui:{components:["attribution","zoom"]}});
-    view.ui.add(new BasemapToggle({view,nextBasemap:"hybrid"}),"bottom-right");
+    view.ui.add(new Home({view}),"top-left");
+    view.ui.add(new Search({view,includeDefaultSources:true}),"top-right");
+    view.ui.add(new ScaleBar({view,unit:"dual"}),"bottom-left");
+    const basemaps=new Expand({view,content:new BasemapGallery({view}),expanded:false,expandTooltip:"Basemaps"});
+    view.ui.add(basemaps,"bottom-right");
     const lg=new Expand({view,content:new Legend({view}),expanded:false,expandTooltip:"Legend"});
     view.ui.add(lg,"top-right");
     mapReady=true;syncMapLayers();
@@ -1102,8 +1222,8 @@ function initMap(){
 }
 function buildLayer(l){
   try{
-    if(l.ltype==='ArcGISMapServiceLayer')return new window._MIL({url:l.url,title:l.title,opacity:.85});
-    return new window._FL({url:l.url,title:l.title,opacity:.9});
+    if(l.ltype==='ArcGISMapServiceLayer')return new window._MIL({url:l.url,title:l.title,opacity:.85,popupEnabled:false});
+    return new window._FL({url:l.url,title:l.title,opacity:.9,popupEnabled:false});
   }catch(e){return null;}
 }
 function syncMapLayers(){
