@@ -358,7 +358,7 @@ body.embed .mh-x{display:none}
 .emptymap{padding:36px 12px;text-align:center;color:#9fb6cb;font-size:13.5px;line-height:1.6}
 #mapNode{height:100%;width:100%}
 .mapstage{position:relative;height:100%;min-width:0;overflow:hidden;background:#d8dee6}
-.featurepanel{position:absolute;top:14px;right:14px;bottom:14px;width:var(--fpw,380px);max-width:calc(100% - 64px);min-width:300px;background:#fff;border:1px solid #c2ccd6;border-top:4px solid var(--red);border-radius:8px;box-shadow:0 18px 44px rgba(14,29,43,.24);z-index:6;display:flex;flex-direction:column;color:var(--ink);transition:transform .22s cubic-bezier(.2,.8,.2,1),opacity .18s}
+.featurepanel{--fp-ink:#253141;--fp-body:#4c5f73;--fp-muted:#6f8398;--fp-line:#cbd6e2;--fp-navy:#1c4063;position:absolute;top:14px;right:14px;bottom:14px;width:var(--fpw,380px);max-width:calc(100% - 64px);min-width:300px;background:#fff;border:1px solid #c2ccd6;border-top:4px solid var(--red);border-radius:8px;box-shadow:0 18px 44px rgba(14,29,43,.24);z-index:6;display:flex;flex-direction:column;color:var(--fp-ink);transition:transform .22s cubic-bezier(.2,.8,.2,1),opacity .18s}
 .featurepanel.empty{display:none}
 .featurepanel.collapsed{transform:translateX(calc(100% + 18px));opacity:0;pointer-events:none}
 .featuretab{position:absolute;top:82px;right:0;z-index:7;display:none;writing-mode:vertical-rl;transform:rotate(180deg);background:#2d2d2d;color:#fff;border:none;border-radius:8px 0 0 8px;padding:13px 8px;font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;box-shadow:0 8px 20px rgba(14,29,43,.22);cursor:pointer}
@@ -366,30 +366,30 @@ body.embed .mh-x{display:none}
 .featuretab:hover{background:#1f1f1f}
 .fp-resize{position:absolute;left:0;top:0;bottom:0;width:7px;cursor:col-resize;z-index:2}
 .fp-resize:hover{background:rgba(237,27,46,.14)}
-.fp-head{padding:17px 20px 14px 22px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+.fp-head{padding:17px 20px 14px 22px;border-bottom:1px solid var(--fp-line);display:flex;gap:12px;align-items:flex-start}
 .fp-icon{width:42px;height:42px;border-radius:10px;background:#ffe8ec;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .fp-icon svg{width:25px;height:25px}
 .fp-kicker{font-family:var(--fd);font-size:10.5px;letter-spacing:.9px;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:4px}
-.fp-title{font-size:19px;font-weight:700;line-height:1.2;color:var(--ink);margin:0}
-.fp-sub{font-size:13px;color:var(--body);line-height:1.35;margin-top:5px}
-.fp-close{margin-left:auto;background:#fff;border:1px solid #c2ccd6;color:var(--navy);width:30px;height:30px;border-radius:6px;font-size:18px;line-height:1;cursor:pointer;flex-shrink:0}
-.fp-close:hover{background:#f2f6fa;border-color:var(--navy)}
+.fp-title{font-size:19px;font-weight:700;line-height:1.2;color:var(--fp-ink);margin:0}
+.fp-sub{font-size:13px;color:var(--fp-body);line-height:1.35;margin-top:5px}
+.fp-close{margin-left:auto;background:#fff;border:1px solid #c2ccd6;color:var(--fp-navy);width:30px;height:30px;border-radius:6px;font-size:18px;line-height:1;cursor:pointer;flex-shrink:0}
+.fp-close:hover{background:#f2f6fa;border-color:var(--fp-navy)}
 .fp-body{padding:16px 20px 20px;overflow-y:auto}
 .fp-spot{border:1px solid #d5dde5;background:#f6f8fb;border-left:5px solid var(--red);border-radius:8px;padding:13px 14px;margin-bottom:14px}
-.fp-spot .label{font-family:var(--fd);font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px}
-.fp-spot .value{font-size:30px;font-weight:700;color:var(--ink);line-height:1}
-.fp-spot .desc{font-size:13px;color:var(--body);line-height:1.4;margin-top:7px}
+.fp-spot .label{font-family:var(--fd);font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--fp-muted);font-weight:700;margin-bottom:4px}
+.fp-spot .value{font-size:30px;font-weight:700;color:var(--fp-ink);line-height:1}
+.fp-spot .desc{font-size:13px;color:var(--fp-body);line-height:1.4;margin-top:7px}
 .fp-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.fp-mini{border:1px solid var(--line);border-radius:7px;background:#fff;padding:10px 11px}
-.fp-mini b{display:block;font-size:17px;color:var(--ink);line-height:1.1}
-.fp-mini span{display:block;margin-top:4px;font-family:var(--fd);font-size:10px;letter-spacing:.45px;text-transform:uppercase;color:var(--muted)}
+.fp-mini{border:1px solid var(--fp-line);border-radius:7px;background:#fff;padding:10px 11px}
+.fp-mini b{display:block;font-size:17px;color:var(--fp-ink);line-height:1.1}
+.fp-mini span{display:block;margin-top:4px;font-family:var(--fd);font-size:10px;letter-spacing:.45px;text-transform:uppercase;color:var(--fp-muted)}
 .fp-section{margin-top:16px}
-.fp-section h4{font-size:13px;color:var(--navy);font-weight:800;letter-spacing:.35px;text-transform:uppercase;margin:0 0 8px}
+.fp-section h4{font-size:13px;color:var(--fp-navy);font-weight:800;letter-spacing:.35px;text-transform:uppercase;margin:0 0 8px}
 .fp-metric{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid #edf0f3}
 .fp-metric:last-child{border-bottom:none}
-.fp-metric .m-label{font-size:13px;color:var(--body);line-height:1.3}
-.fp-metric .m-value{font-family:var(--fd);font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap}
-.fp-note{margin-top:14px;border-top:1px solid var(--line);padding-top:11px;font-size:12px;color:var(--muted);line-height:1.45}
+.fp-metric .m-label{font-size:13px;color:var(--fp-body);line-height:1.3}
+.fp-metric .m-value{font-family:var(--fd);font-size:12px;font-weight:700;color:var(--fp-ink);white-space:nowrap}
+.fp-note{margin-top:14px;border-top:1px solid var(--fp-line);padding-top:11px;font-size:12px;color:var(--fp-muted);line-height:1.45}
 .tribalhint{border:1px solid rgba(255,255,255,.18);border-left:3px solid var(--red);background:rgba(255,255,255,.08);color:#dbe7f2;border-radius:5px;padding:10px 11px;margin:12px 0 2px;font-size:12.5px;line-height:1.45}
 .tribalhint b{color:#ffccd3}
 .itemonlyhint{border:1px solid rgba(255,255,255,.16);border-left:3px solid #9fb6cb;background:rgba(255,255,255,.06);color:#dbe7f2;border-radius:5px;padding:10px 11px;margin:12px 0 2px;font-size:12.5px;line-height:1.45}
@@ -830,11 +830,11 @@ body.embed .mh-x{display:none}
       <aside class="featurepanel empty collapsed" id="featurePanel" aria-live="polite">
         <div class="fp-resize" id="fpResize" title="Drag to resize"></div>
         <div class="fp-head">
-          <span class="fp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4a6 6 0 0 0-8.5 0L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="3" y2="21"/><line x1="16.5" y1="14" x2="9" y2="14"/></svg></span>
+          <span class="fp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><rect x="7" y="11" width="3" height="5" rx=".7"/><rect x="12" y="7" width="3" height="9" rx=".7"/><rect x="17" y="9" width="3" height="7" rx=".7"/></svg></span>
           <div style="min-width:0;flex:1">
-            <div class="fp-kicker">Tribal Feature Details</div>
-            <h3 class="fp-title">Select a Tribal Boundary</h3>
-            <div class="fp-sub">Curated RAPT indicators appear here.</div>
+            <div class="fp-kicker">Feature Details</div>
+            <h3 class="fp-title">Select a Feature</h3>
+            <div class="fp-sub">Curated indicator details appear here.</div>
           </div>
           <button class="fp-close" onclick="closeFeaturePanel()" aria-label="Collapse details">&times;</button>
         </div>
@@ -1077,6 +1077,108 @@ function summarize(r){
 }
 const LAYERS=RAPT_DATA.map((r,i)=>({i,title:r[0],url:r[1],itemId:r[2],ltype:r[3],cat:r[4],geo:r[5],tags:r[6],rt:r[7],sourceKey:r[8]||'rapt-seed',ageDays:r[9]??null,itemOnly:Boolean(r[10]||(!r[1]&&r[2])),sum:summarize(r)}));
 
+const METRIC_LAYER_FIELDS=[
+  {rx:/FEMA Community Resilience Challenges Index/i,field:'cria_p',label:'CRCI Potential Challenges Percentile',kind:'pct'},
+  {rx:/Population without a High School Diploma/i,field:'Education',label:'Population without a High School Diploma',kind:'pct'},
+  {rx:/Population Age 65 and Older/i,field:'Age',label:'Population Age 65 and Older',kind:'pct',serviceField:{'County_Age_Indicator_ACS2022':'County_Indicators_Age'}},
+  {rx:/Population with a Disability/i,field:'Disability',label:'Population with a Disability',kind:'pct'},
+  {rx:/Households without a Vehicle/i,field:'No_Vehicle',label:'Households without a Vehicle',kind:'pct'},
+  {rx:/Households with Limited English/i,field:'Limited_English',label:'Households with Limited English',kind:'pct'},
+  {rx:/Single-Parent Households/i,field:'Single_Parent',label:'Single-Parent Households',kind:'pct'},
+  {rx:/Households without a Smartphone/i,field:'Low_Access_to_Communications',label:'Households without a Smartphone',kind:'pct'},
+  {rx:/Mobile Homes as a Percentage of Housing Units/i,field:'Mobile_Homes',label:'Mobile Homes as a Percentage of Housing Units',kind:'pct'},
+  {rx:/Housing Units that are Owner-Occupied/i,field:'Owner_Occupied',label:'Housing Units that are Owner-Occupied',kind:'pct'},
+  {rx:/Population without Health Insurance/i,field:'Uninsured_Population',label:'Population without Health Insurance',kind:'pct'},
+  {rx:/Medical Professional Capacity/i,field:'Medical',label:'Medical Professional Capacity',kind:'rate',palette:'capacity'},
+  {rx:/Number of Hospitals per 10k/i,field:'Hospitals',label:'Number of Hospitals per 10k',kind:'rate',palette:'capacity'},
+  {rx:/Population Below Poverty Level/i,field:'Poverty',label:'Population Below Poverty Level',kind:'pct'},
+  {rx:/Median Household Income/i,field:'Median_Income',label:'Median Household Income',kind:'currency',palette:'income'},
+  {rx:/Unemployed Women in the Labor Force/i,field:'Unemployed_Women',label:'Unemployed Women in the Labor Force',kind:'pct'},
+  {rx:/Unemployed Labor Force/i,field:'Unemployment',label:'Unemployed Labor Force',kind:'pct'},
+  {rx:/Workforce Employed in Predominant Sector/i,field:'Lack_of_Economic_Diversity',label:'Workforce Employed in Predominant Sector',kind:'pct'},
+  {rx:/Income Inequality/i,field:'GINI',label:'Income Inequality',kind:'index'},
+  {rx:/Presence of Social\/Civic Organizations/i,field:'Civil_Org',label:'Presence of Social/Civic Organizations',kind:'rate',palette:'capacity'},
+  {rx:/Population without Religious Affiliation/i,field:'Religion',label:'Population without Religious Affiliation',kind:'pct'},
+  {rx:/Inactive Voters/i,field:'Inactive_Voter',label:'Inactive Voters',kind:'pct'},
+  {rx:/Population Change/i,field:'Population_Change',label:'Population Change',kind:'change',palette:'diverging'},
+  {rx:/Housing Costs as a Percentage of Household Income/i,field:'Housing_Costs_Over30',label:'Housing Costs as a Percentage of Household Income',kind:'pct',serviceField:{'Census_Tracts___Housing_Costs_30_Percent_or_more_of_Household_Income':'HousingCostsHHOver30'}},
+  {rx:/Medicare Recipients with Power-Dependent Devices/i,field:'Power_Dependent_Devices_DME',label:'Medicare Recipients with Power-Dependent Devices',kind:'count'},
+  {rx:/Percent of Population without a Broadband Subscription/i,field:'broadband_no_cell_percwithout',label:'Population without a Broadband Subscription',kind:'pct'}
+];
+const METRIC_RAMPS={
+  red:[[237,249,247,0.9],[255,232,190,0.92],[255,178,108,0.94],[237,91,69,0.96],[174,20,37,0.98]],
+  capacity:[[239,249,248,0.9],[187,225,218,0.92],[117,189,180,0.94],[42,132,158,0.96],[20,64,99,0.98]],
+  income:[[255,244,214,0.9],[214,231,219,0.92],[137,195,189,0.94],[62,128,164,0.96],[24,64,101,0.98]],
+  diverging:[[43,102,170,0.95],[171,217,233,0.9],[247,247,247,0.9],[253,174,97,0.94],[178,24,43,0.98]]
+};
+function serviceFieldForMetric(l,meta){
+  if(!meta.serviceField)return meta.field;
+  const key=Object.keys(meta.serviceField).find(k=>(l.url||'').includes(k));
+  return key?meta.serviceField[key]:meta.field;
+}
+function metricForLayer(l){
+  if(!l||l.ltype!=='ArcGISFeatureLayer'||l.itemOnly)return null;
+  if(isTribalIndicatorLayer(l)){
+    const tm=tribalMetricForLayer(l);
+    return tm?{...tm,field:tm.field,label:tm.label,palette:'red'}:null;
+  }
+  const meta=METRIC_LAYER_FIELDS.find(m=>m.rx.test(l.title));
+  return meta?{...meta,field:serviceFieldForMetric(l,meta)}:null;
+}
+function metricStops(kind){
+  if(kind==='currency')return [25000,50000,75000,100000,150000];
+  if(kind==='index')return [0.35,0.45,0.55,0.65,0.75];
+  if(kind==='rate')return [0,10,25,50,100];
+  if(kind==='count')return [0,50,250,1000,5000];
+  if(kind==='change')return [-10,-2,0,5,15];
+  return [0,20,40,60,80];
+}
+function metricLegendValue(v,kind){
+  if(kind==='currency')return '$'+Number(v).toLocaleString();
+  if(kind==='pct')return v+'%';
+  if(kind==='index')return Number(v).toFixed(2);
+  if(kind==='change')return (v>0?'+':'')+v+'%';
+  return Number(v).toLocaleString();
+}
+function metricRenderer(l){
+  const metric=metricForLayer(l);
+  if(!metric)return null;
+  const ramp=METRIC_RAMPS[metric.palette]||METRIC_RAMPS.red;
+  const values=metricStops(metric.kind);
+  return {
+    type:'simple',
+    label:metric.label,
+    symbol:{type:'simple-fill',color:[237,249,247,0.55],outline:{color:[53,84,91,0.75],width:.55}},
+    visualVariables:[{
+      type:'color',
+      field:metric.field,
+      legendOptions:{title:metric.label},
+      stops:values.map((value,i)=>({value,color:ramp[Math.min(i,ramp.length-1)],label:metricLegendValue(value,metric.kind)}))
+    }]
+  };
+}
+function metricPopupInfo(l){
+  const metric=metricForLayer(l);
+  if(!metric||isTribalLayer(l))return null;
+  const title=l.geo==='County'?'{NAME} County, {STATE_NAME}':l.geo==='Census Tract'?'{NAMELSAD}':'{NAME}';
+  return {
+    title,
+    fieldInfos:[{fieldName:metric.field,label:metric.label,visible:true,format:{digitSeparator:true,places:metric.kind==='currency'||metric.kind==='count'?0:2}}],
+    showAttachments:false,
+    popupElements:[{type:'text',text:`<div style="font-family:Arial,Helvetica,sans-serif;color:#1f1f1f;line-height:1.45"><h2 style="margin:0 0 6px;font-size:18px;color:#1f1f1f">${title}</h2><p style="margin:0 0 10px;color:#4b4b4b">${esc(l.title)}</p><div style="border-left:4px solid #ed1b2e;background:#f6f8fb;padding:10px 12px;margin:10px 0"><div style="font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:#6f7377;font-weight:700">Selected Metric</div><div style="font-size:24px;font-weight:700;color:#1f1f1f">{${metric.field}}</div><div style="font-size:13px;color:#4b4b4b"><b>${esc(metric.label)}</b></div></div><p style="margin:10px 0 0;color:#6f7377;font-size:12px">Source: Red Cross Layer Catalog wrapped RAPT seed. Edit this popup after saving the web map if the operation needs different fields.</p></div>`}]
+  };
+}
+function genericPopupInfo(l){
+  if(!l||l.ltype!=='ArcGISFeatureLayer'||l.itemOnly||isTribalLayer(l)||metricForLayer(l))return null;
+  const title=l.geo==='County'?'{NAMELSAD}':l.geo==='Census Tract'?'{NAMELSAD}':'{NAME}';
+  return {
+    title,
+    fieldInfos:[],
+    showAttachments:false,
+    popupElements:[{type:'text',text:`<div style="font-family:Arial,Helvetica,sans-serif;color:#1f1f1f;line-height:1.45"><h2 style="margin:0 0 6px;font-size:18px;color:#1f1f1f">${esc(l.title)}</h2><p style="margin:0 0 10px;color:#4b4b4b">${esc(geoLabel(l))} layer from the Red Cross Layer Catalog.</p><div style="border-left:4px solid #ed1b2e;background:#f6f8fb;padding:10px 12px;margin:10px 0"><div style="font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:#6f7377;font-weight:700">Curated Popup</div><div style="font-size:13px;color:#4b4b4b">Only the most useful fields are shown. Edit this popup after saving your own web map if the operation needs different details.</div></div><p style="margin:10px 0 0;color:#6f7377;font-size:12px">Source: ${esc(sourceMeta(l).label)}.</p></div>`}]
+  };
+}
+
 const TRIBAL_INDICATOR_SERVICE='All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17';
 const TRIBAL_METRICS=[
   {field:'Education',label:'No High School Diploma or GED',kind:'pct',group:'Education and Access',desc:'Population age 25+ without a high school diploma or GED.'},
@@ -1171,6 +1273,83 @@ function renderTribalFeaturePanel(graphic,layerInfo){
   document.getElementById('featureBody').innerHTML=body;
   panel.classList.remove('empty','collapsed');
   document.getElementById('featureTab').classList.remove('show');
+}
+function featureAreaTitle(a,l){
+  if(l?.geo==='County')return [a.NAME?`${a.NAME} County`:a.NAMELSAD,a.STATE_NAME||a.STUSPS].filter(Boolean).join(', ')||'County';
+  if(l?.geo==='Census Tract')return [a.NAMELSAD||a.NAME,a.STATE_NAME||a.STUSPS].filter(Boolean).join(', ')||'Census Tract';
+  return a.NAMELSAD||a.NAME||'Feature';
+}
+function featureContextCards(a){
+  const pop=a.Total_Population??a.S0101_C01_001E_Total_Population??a.POPULATION;
+  const households=a.Total_Households??a.Households??a.B11016_001E;
+  const landSqMi=(a.ALAND||a.AREALAND)?Number(a.ALAND||a.AREALAND)/2589988.110336:null;
+  return `<div class="fp-actions">
+    ${pop!=null&&pop!==''?`<div class="fp-mini"><b>${Number(pop).toLocaleString()}</b><span>Population</span></div>`:''}
+    ${households!=null&&households!==''?`<div class="fp-mini"><b>${Number(households).toLocaleString()}</b><span>Households</span></div>`:''}
+    ${landSqMi?`<div class="fp-mini"><b>${landSqMi.toLocaleString(undefined,{maximumFractionDigits:1})}</b><span>Sq. Miles Land</span></div>`:''}
+  </div>`;
+}
+function renderMetricFeaturePanel(graphic,layerInfo){
+  const metric=metricForLayer(layerInfo);
+  if(!metric)return;
+  const a=graphic.attributes||{};
+  const title=featureAreaTitle(a,layerInfo);
+  const sourceLabel=`${layerInfo.geo} indicator`;
+  const spot=`<div class="fp-spot"><div class="label">Selected Metric</div><div class="value">${fmtValue(a[metric.field],metric.kind)}</div><div class="desc"><b>${esc(metric.label)}</b><br>${esc(layerInfo.title)}</div></div>`;
+  const rows=[
+    ['Geography',layerInfo.geo],
+    ['State',a.STATE_NAME||a.STUSPS]
+  ].filter(([,v])=>v!=null&&v!=='').map(([k,v])=>`<div class="fp-metric"><span class="m-label">${esc(k)}</span><span class="m-value">${esc(v)}</span></div>`).join('');
+  const context=rows?`<div class="fp-section"><h4>Map Context</h4>${rows}</div>`:'';
+  const body=`${spot}${featureContextCards(a)}${context}<div class="fp-note">Source: Red Cross Layer Catalog wrapped RAPT seed. Edit this card after saving the web map if the operation needs different fields.</div>`;
+  const panel=document.getElementById('featurePanel');
+  document.querySelector('#featurePanel .fp-title').textContent=title;
+  document.querySelector('#featurePanel .fp-sub').textContent=sourceLabel;
+  document.getElementById('featureBody').innerHTML=body;
+  panel.classList.remove('empty','collapsed');
+  document.getElementById('featureTab').classList.remove('show');
+}
+const GENERIC_FIELD_CANDIDATES=[
+  ['Name',['NAME','NAMELSAD','BASENAME','FACILITY_NAME','Facility_Name','HOSPITAL_NAME','SCHOOL_NAME','COLLEGE','ORGANIZATION','ORG_NAME','Label']],
+  ['Type',['TYPE','Type','CATEGORY','Category','SUBTYPE','NAICS_DESC','SOURCE_TYPE']],
+  ['Status',['STATUS','Status','OPERATIONAL_STATUS','CURRENT_STATUS']],
+  ['Address',['ADDRESS','Address','FULLADDR','FULL_ADDRESS','STREET','STREET_ADDRESS','LOCATION']],
+  ['City',['CITY','City','MUNICIPALITY','PLACE']],
+  ['State',['STATE_NAME','STATE','State','STUSPS']],
+  ['County',['COUNTY','County','COUNTY_NAME','COUNTYNAME']],
+  ['ZIP',['ZIP','ZIPCODE','ZIP_CODE','POSTAL']]
+];
+function genericFeatureRows(a){
+  const used=new Set();
+  const rows=[];
+  GENERIC_FIELD_CANDIDATES.forEach(([label,fields])=>{
+    const field=fields.find(f=>a[f]!=null&&a[f]!==''&&!used.has(f));
+    if(field){
+      used.add(field);
+      rows.push([label,a[field]]);
+    }
+  });
+  return rows.slice(0,8).map(([k,v])=>`<div class="fp-metric"><span class="m-label">${esc(k)}</span><span class="m-value">${esc(v)}</span></div>`).join('');
+}
+function renderGenericFeaturePanel(graphic,layerInfo){
+  const a=graphic.attributes||{};
+  const title=featureAreaTitle(a,layerInfo);
+  const rows=genericFeatureRows(a);
+  const body=`<div class="fp-spot"><div class="label">Curated Feature</div><div class="value" style="font-size:21px">${esc(layerInfo.title.replace(/\s*\(zoom.*?\)/i,''))}</div><div class="desc">This formatted card replaces the default Esri field dump. Customize fields after saving your own web map if needed.</div></div>${featureContextCards(a)}${rows?`<div class="fp-section"><h4>Feature Context</h4>${rows}</div>`:''}<div class="fp-note">Source: ${esc(sourceMeta(layerInfo).label)}. Edit this card after saving the web map if the operation needs different fields.</div>`;
+  const panel=document.getElementById('featurePanel');
+  document.querySelector('#featurePanel .fp-title').textContent=title;
+  document.querySelector('#featurePanel .fp-sub').textContent=`${geoLabel(layerInfo)} feature`;
+  document.getElementById('featureBody').innerHTML=body;
+  panel.classList.remove('empty','collapsed');
+  document.getElementById('featureTab').classList.remove('show');
+}
+function hasFeatureDetails(l){
+  return !!(isTribalLayer(l)||metricForLayer(l)||genericPopupInfo(l));
+}
+function renderFeatureDetails(graphic,layerInfo){
+  if(isTribalLayer(layerInfo))renderTribalFeaturePanel(graphic,layerInfo);
+  else if(metricForLayer(layerInfo))renderMetricFeaturePanel(graphic,layerInfo);
+  else renderGenericFeaturePanel(graphic,layerInfo);
 }
 function closeFeaturePanel(){
   const panel=document.getElementById('featurePanel');
@@ -1459,7 +1638,9 @@ function buildLayer(l){
     const common={url:l.url,title:l.title,opacity:isTribalLayer(l)?0.72:.9,popupEnabled:false};
     if(l.ltype==='ArcGISMapServiceLayer')return new window._MIL({...common,opacity:.85});
     const opts={...common,outFields:["*"]};
-    if(isTribalLayer(l))opts.renderer=tribalRenderer(l);
+    const renderer=metricRenderer(l);
+    if(renderer)opts.renderer=renderer;
+    else if(isTribalLayer(l))opts.renderer=tribalRenderer(l);
     const layer=new window._FL(opts);
     layer.__raptIndex=l.i;
     return layer;
@@ -1485,9 +1666,12 @@ function handleMapClick(event){
   view.hitTest(event).then(res=>{
     const hit=(res.results||[]).find(r=>{
       const l=layerForGraphic(r.graphic);
-      return isTribalLayer(l);
+      return hasFeatureDetails(l);
     });
-    if(hit)renderTribalFeaturePanel(hit.graphic,layerForGraphic(hit.graphic));
+    if(hit){
+      const l=layerForGraphic(hit.graphic);
+      renderFeatureDetails(hit.graphic,l);
+    }
   }).catch(()=>{});
 }
 function syncMapLayers(){
@@ -1496,17 +1680,21 @@ function syncMapLayers(){
   Object.keys(layerObjs).forEach(i=>{if(!sel.has(+i)){map.remove(layerObjs[i]);delete layerObjs[i];}});
   // add new
   [...sel].forEach(i=>{if(!layerObjs[i]){const o=buildLayer(LAYERS[i]);if(o){layerObjs[i]=o;map.add(o);}}});
-  if(![...sel].some(i=>isTribalLayer(LAYERS[i])))clearFeaturePanel();
+  if(![...sel].some(i=>hasFeatureDetails(LAYERS[i])))clearFeaturePanel();
   renderMapPanel();
 }
 function renderMapPanel(){
   const box=document.getElementById('mlayers');
   if(sel.size===0){box.innerHTML='<div class="emptymap">No layers yet.<br>Add layers from the Catalog, then they appear here — toggle, fade, and reorder before taking them to your own map.</div>';return;}
   const hasTribal=[...sel].some(i=>isTribalLayer(LAYERS[i]));
+  const hasMetric=[...sel].some(i=>metricForLayer(LAYERS[i])&&!isTribalLayer(LAYERS[i]));
+  const hasGeneric=[...sel].some(i=>genericPopupInfo(LAYERS[i]));
   const itemOnlyCount=[...sel].filter(i=>LAYERS[i].itemOnly).length;
   const hint=hasTribal?'<div class="tribalhint"><b>Tribal Proof Mode:</b> click a Tribal boundary on the map to open a formatted Red Cross catalog card. Default Esri popups are disabled.</div>':'';
+  const metricHint=hasMetric?'<div class="tribalhint"><b>Metric Styling:</b> selected county/tract indicator cards draw as Red Cross gradients. Click a feature for a formatted metric card.</div>':'';
+  const genericHint=hasGeneric?'<div class="tribalhint"><b>Formatted Popups:</b> supported feature layers open clean Red Cross catalog cards instead of raw Esri field tables.</div>':'';
   const itemHint=itemOnlyCount?`<div class="itemonlyhint"><b>${itemOnlyCount} item-backed layer${itemOnlyCount===1?'':'s'}:</b> preview requires Red Cross AGOL access. Use option 1 or 3 to carry the item ID, renderer, and source popup into ArcGIS after sign-in.</div>`:'';
-  box.innerHTML=hint+itemHint+[...sel].map(i=>{
+  box.innerHTML=hint+metricHint+genericHint+itemHint+[...sel].map(i=>{
     const l=LAYERS[i];const lo=layerObjs[i];const vis=lo?lo.visible!==false:!l.itemOnly;
     return `<div class="mlrow">
       <div class="top">
@@ -1570,7 +1758,10 @@ function webmapJSON(){
     if(l.url)base.url=l.url;
     base.layerType=l.ltype||((l.url||'').includes('/MapServer')?'ArcGISMapServiceLayer':'ArcGISFeatureLayer');
     if(l.itemId)base.itemId=l.itemId;
-    if(isTribalLayer(l))base.popupInfo=tribalPopupInfo(l);
+    const renderer=metricRenderer(l);
+    if(renderer)base.layerDefinition={drawingInfo:{renderer}};
+    const popup=isTribalLayer(l)?tribalPopupInfo(l):(metricPopupInfo(l)||genericPopupInfo(l));
+    if(popup)base.popupInfo=popup;
     return base;
   });
   return {operationalLayers:ops,
