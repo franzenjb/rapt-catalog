@@ -31,8 +31,9 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .raptbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:50;
   background:linear-gradient(180deg,#ed1b2e 0%,#c8102e 58%,#971b2f 100%);
   border-bottom:1px solid #7f1226;display:flex;align-items:center;padding:0 16px;gap:14px}
-.seal{width:34px;height:34px;border-radius:7px;border:2px solid rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;color:#ed1b2e;font-family:var(--fd);font-size:10px;font-weight:700;letter-spacing:.5px;flex-shrink:0;background:#fff}
-.fema{font-family:var(--fb);font-weight:700;font-size:19px;letter-spacing:1.8px;color:#fff}
+.arc-logo{width:190px;height:38px;display:block;flex-shrink:0}
+.arc-logo svg{display:block;width:100%;height:100%;overflow:visible}
+.arc-logo .arc-word{font-family:Arial,Helvetica,sans-serif;font-weight:700;letter-spacing:.1px;fill:#fff}
 .apptitle{font-family:var(--fh);font-size:23px;color:#dfe9f2;font-weight:400;letter-spacing:.3px;flex:1;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.3)}
 .std-adv{display:flex;border:1px solid rgba(255,255,255,.55);border-radius:16px;overflow:hidden;font-size:12px;font-weight:600}
 .std-adv span{padding:5px 14px;color:#ffe5e9}
@@ -357,6 +358,41 @@ body.embed .mh-x{display:none}
 .mlrow input[type=range]{width:100%;accent-color:var(--gold)}
 .emptymap{padding:36px 12px;text-align:center;color:#9fb6cb;font-size:13.5px;line-height:1.6}
 #mapNode{height:100%;width:100%}
+.mapstage{position:relative;height:100%;min-width:0;overflow:hidden;background:#d8dee6}
+.featurepanel{position:absolute;top:14px;right:14px;bottom:14px;width:var(--fpw,380px);max-width:calc(100% - 64px);min-width:300px;background:#fff;border:1px solid #c2ccd6;border-top:4px solid var(--red);border-radius:8px;box-shadow:0 18px 44px rgba(14,29,43,.24);z-index:6;display:flex;flex-direction:column;color:var(--ink);transition:transform .22s cubic-bezier(.2,.8,.2,1),opacity .18s}
+.featurepanel.empty{display:none}
+.featurepanel.collapsed{transform:translateX(calc(100% + 18px));opacity:0;pointer-events:none}
+.featuretab{position:absolute;top:82px;right:0;z-index:7;display:none;writing-mode:vertical-rl;transform:rotate(180deg);background:#2d2d2d;color:#fff;border:none;border-radius:8px 0 0 8px;padding:13px 8px;font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;box-shadow:0 8px 20px rgba(14,29,43,.22);cursor:pointer}
+.featuretab.show{display:block}
+.featuretab:hover{background:#1f1f1f}
+.fp-resize{position:absolute;left:0;top:0;bottom:0;width:7px;cursor:col-resize;z-index:2}
+.fp-resize:hover{background:rgba(237,27,46,.14)}
+.fp-head{padding:17px 20px 14px 22px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+.fp-icon{width:42px;height:42px;border-radius:10px;background:#ffe8ec;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fp-icon svg{width:25px;height:25px}
+.fp-kicker{font-family:var(--fd);font-size:10.5px;letter-spacing:.9px;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:4px}
+.fp-title{font-size:19px;font-weight:700;line-height:1.2;color:var(--ink);margin:0}
+.fp-sub{font-size:13px;color:var(--body);line-height:1.35;margin-top:5px}
+.fp-close{margin-left:auto;background:#fff;border:1px solid #c2ccd6;color:var(--navy);width:30px;height:30px;border-radius:6px;font-size:18px;line-height:1;cursor:pointer;flex-shrink:0}
+.fp-close:hover{background:#f2f6fa;border-color:var(--navy)}
+.fp-body{padding:16px 20px 20px;overflow-y:auto}
+.fp-spot{border:1px solid #d5dde5;background:#f6f8fb;border-left:5px solid var(--red);border-radius:8px;padding:13px 14px;margin-bottom:14px}
+.fp-spot .label{font-family:var(--fd);font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px}
+.fp-spot .value{font-size:30px;font-weight:700;color:var(--ink);line-height:1}
+.fp-spot .desc{font-size:13px;color:var(--body);line-height:1.4;margin-top:7px}
+.fp-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.fp-mini{border:1px solid var(--line);border-radius:7px;background:#fff;padding:10px 11px}
+.fp-mini b{display:block;font-size:17px;color:var(--ink);line-height:1.1}
+.fp-mini span{display:block;margin-top:4px;font-family:var(--fd);font-size:10px;letter-spacing:.45px;text-transform:uppercase;color:var(--muted)}
+.fp-section{margin-top:16px}
+.fp-section h4{font-size:13px;color:var(--navy);font-weight:800;letter-spacing:.35px;text-transform:uppercase;margin:0 0 8px}
+.fp-metric{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid #edf0f3}
+.fp-metric:last-child{border-bottom:none}
+.fp-metric .m-label{font-size:13px;color:var(--body);line-height:1.3}
+.fp-metric .m-value{font-family:var(--fd);font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap}
+.fp-note{margin-top:14px;border-top:1px solid var(--line);padding-top:11px;font-size:12px;color:var(--muted);line-height:1.45}
+.tribalhint{border:1px solid rgba(255,255,255,.18);border-left:3px solid var(--red);background:rgba(255,255,255,.08);color:#dbe7f2;border-radius:5px;padding:10px 11px;margin:12px 0 2px;font-size:12.5px;line-height:1.45}
+.tribalhint b{color:#ffccd3}
 .maptop{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
 .maptop .ct{font-family:var(--fd);font-size:11px;color:#9fb6cb;letter-spacing:.5px}
 .buildbtn{width:100%;margin-top:16px;background:linear-gradient(180deg,#ed1b2e,#c8102e);color:#fff;border:none;padding:12px;font-family:var(--fb);font-weight:700;font-size:14px;cursor:pointer;letter-spacing:.3px;border-radius:4px}
@@ -454,6 +490,7 @@ body.embed .mh-x{display:none}
   .maplayout{grid-template-columns:1fr}
   .mappanel{max-height:240px;border-right:none;border-bottom:1px solid #0d2236}
   #mapNode{height:55vh}
+  .featurepanel{top:8px;right:8px;bottom:8px;min-width:260px;max-width:calc(100% - 48px)}
   .chips{display:none}
   .bigmodal{width:100vw}
 }
@@ -466,6 +503,8 @@ body.embed .mh-x{display:none}
   .detailpane{display:none}
   .filterbar .segmented{display:none}
   .filterbar{padding:9px 12px}
+  .sourcebanner{display:grid;grid-template-columns:18px minmax(0,1fr);align-items:flex-start}
+  .sourcebanner .sb-actions{grid-column:2;justify-content:flex-start}
 }
 @media(max-width:520px){
   .modalhead{padding:10px 16px 0}
@@ -474,6 +513,8 @@ body.embed .mh-x{display:none}
   .titlepill{font-size:14px;padding:7px 14px}
   .howbtn,.themetog{font-size:12px;padding:5px 10px}
   .tabs{margin-top:8px}
+  .arc-logo{width:48px}
+  .arc-logo .arc-word{display:none}
 }
 
 /* theme toggle + dark mode (catalog surfaces) */
@@ -586,8 +627,14 @@ body.embed .mh-x{display:none}
 
 <div class="raptbar">
   <button class="logobtn" id="logoBtn" onclick="toggleDesign()" title="Design options — choose a layout" aria-label="Toggle design options">
-    <div class="seal">+</div>
-    <span class="fema">RED CROSS</span>
+    <span class="arc-logo" role="img" aria-label="American Red Cross logo">
+      <svg viewBox="0 0 220 46" aria-hidden="true" focusable="false">
+        <rect x="1" y="1" width="44" height="44" rx="6" fill="#fff"/>
+        <path d="M19 8h9v11h11v8.5H28V39h-9V27.5H7.5V19H19z" fill="#ed1b2e"/>
+        <text class="arc-word" x="58" y="19" font-size="15">American</text>
+        <text class="arc-word" x="58" y="36" font-size="17">Red Cross</text>
+      </svg>
+    </span>
     <span class="logochev">&#9662;</span>
   </button>
   <span class="apptitle">Disaster GIS Layer Catalog</span>
@@ -729,7 +776,7 @@ body.embed .mh-x{display:none}
     <div class="sourcebanner">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-3.8 7-9.2V5.3L12 2.7 5 5.3v6.5C5 17.2 12 21 12 21z"/><path d="M8.7 12.2l2.1 2.1 4.7-5"/></svg>
       <div class="sb-main"><b>Source status:</b> this Wrapped Red Cross version is seeded mostly from public FEMA RAPT services. Red Cross authoritative layers will be added only after they pass freshness, redundancy, permission, and map-use checks.</div>
-      <div class="sb-actions"><span class="sourcechip">RAPT / wrapped seed</span><span class="sourcechip queue">414 candidates to triage</span></div>
+      <div class="sb-actions"><span class="sourcechip">RAPT / Wrapped Seed</span><span class="sourcechip queue">414 Candidates to Triage</span></div>
     </div>
   </div>
   <div class="catlayout" id="catlayout">
@@ -745,15 +792,15 @@ body.embed .mh-x{display:none}
         </div>
         <div class="sr-item">
           <span class="sr-num">1</span>
-          <span class="sr-copy"><b>Master geography first</b><span>Divisions, regions, chapters, counties, and FIPS-keyed hierarchy from the Red Cross master geography spine.</span></span>
+          <span class="sr-copy"><b>Master Geography First</b><span>Divisions, regions, chapters, counties, and FIPS-keyed hierarchy from the Red Cross master geography spine.</span></span>
         </div>
         <div class="sr-item">
           <span class="sr-num">2</span>
-          <span class="sr-copy"><b>Red Cross authoritative next</b><span>AGOL authoritative items are candidates, not automatic catalog layers. Shelters and old state-specific products need freshness and redundancy checks against master services.</span><span class="sr-pill">414 to review</span></span>
+          <span class="sr-copy"><b>Red Cross Authoritative Next</b><span>AGOL authoritative items are candidates, not automatic catalog layers. Shelters and old state-specific products need freshness and redundancy checks against master services.</span><span class="sr-pill">414 to Review</span></span>
         </div>
         <div class="sr-item">
           <span class="sr-num">3</span>
-          <span class="sr-copy"><b>Map-usable services only</b><span>Feature, map, and image services can graduate here. Dashboards, web maps, apps, and reports should stay in a separate reference inventory unless they expose usable layers.</span></span>
+          <span class="sr-copy"><b>Map-Usable Services Only</b><span>Feature, map, and image services can graduate here. Dashboards, web maps, apps, and reports should stay in a separate reference inventory unless they expose usable layers.</span></span>
         </div>
       </div>
     </aside>
@@ -778,7 +825,23 @@ body.embed .mh-x{display:none}
       <div id="mlayers"></div>
       <button class="buildbtn" id="buildBtn" onclick="openBuild()">Add these layers to my map →</button>
     </div>
-    <div id="mapNode"></div>
+    <div class="mapstage">
+      <div id="mapNode"></div>
+      <button class="featuretab" id="featureTab" onclick="openFeaturePanel()">Details</button>
+      <aside class="featurepanel empty collapsed" id="featurePanel" aria-live="polite">
+        <div class="fp-resize" id="fpResize" title="Drag to resize"></div>
+        <div class="fp-head">
+          <span class="fp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4a6 6 0 0 0-8.5 0L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="3" y2="21"/><line x1="16.5" y1="14" x2="9" y2="14"/></svg></span>
+          <div style="min-width:0;flex:1">
+            <div class="fp-kicker">Tribal Feature Details</div>
+            <h3 class="fp-title">Select a Tribal Boundary</h3>
+            <div class="fp-sub">Curated RAPT indicators appear here.</div>
+          </div>
+          <button class="fp-close" onclick="closeFeaturePanel()" aria-label="Collapse details">&times;</button>
+        </div>
+        <div class="fp-body" id="featureBody"></div>
+      </aside>
+    </div>
   </div>
 </div>
 
@@ -861,7 +924,7 @@ body.embed .mh-x{display:none}
       <h3 class="sec-h">Recommended Red Cross workflow</h3>
       <div class="sec-b"><ul>
         <li>Use the catalog to find the best layer before adding anything to an operational map.</li>
-        <li>Use the source filter to separate the current RAPT / wrapped seed set from Red Cross authoritative layers as they are vetted and added.</li>
+        <li>Use the source filter to separate the current RAPT / Wrapped Seed Set from Red Cross Authoritative layers as they are vetted and added.</li>
         <li>Prefer the map preview when comparing layers that sound similar.</li>
         <li>Use the table view when you need a fast inventory of categories, geography, and update type.</li>
         <li>Use the copied layer URLs when building or repairing a map inside ArcGIS Experience Builder.</li>
@@ -908,36 +971,36 @@ const CATCOLORS={'Hazards, Weather & Risk':'#c33d2e','Infrastructure & Lifelines
 const CATBG={'Hazards, Weather & Risk':'#f1d8d0','Infrastructure & Lifelines':'#d7e6f4','People & Community':'#cfeaea'};
 const SOURCE_META={
   'rapt-seed':{
-    label:'RAPT / wrapped seed set',
-    short:'RAPT / wrapped',
+    label:'RAPT / Wrapped Seed Set',
+    short:'RAPT / Wrapped',
     description:'Public services carried into this Red Cross version from the FEMA RAPT catalog seed set.',
     exportNote:'Seeded from public FEMA RAPT service inventory'
   },
   'arc-authoritative':{
-    label:'Red Cross authoritative',
-    short:'ARC authoritative',
+    label:'Red Cross Authoritative',
+    short:'ARC Authoritative',
     description:'Reviewed Red Cross authoritative feature, map, or image services promoted into this catalog.',
     exportNote:'Promoted from reviewed Red Cross authoritative service inventory'
   },
   'arc-master':{
-    label:'Red Cross master geography',
-    short:'Master geography',
+    label:'Red Cross Master Geography',
+    short:'Master Geography',
     description:'Divisions, regions, chapters, counties, and FIPS-keyed hierarchy from the Red Cross master geography spine.',
     pending:'next'
   },
   'arc-authoritative-candidate':{
-    label:'Authoritative candidates',
-    short:'Authoritative candidates',
+    label:'Authoritative Candidates',
+    short:'Authoritative Candidates',
     description:'AGOL authoritative items or services that still need freshness, redundancy, permission, and map-use review before promotion.',
     pending:'414 to triage'
   }
 };
 const SOURCE_OPTIONS=[
-  {key:'all',label:'All current catalog',short:'All',count:()=>LAYERS.length},
+  {key:'all',label:'All Current Catalog',short:'All',count:()=>LAYERS.length},
   {key:'rapt-seed',label:SOURCE_META['rapt-seed'].label,short:SOURCE_META['rapt-seed'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='rapt-seed').length},
   {key:'arc-authoritative',label:SOURCE_META['arc-authoritative'].label,short:SOURCE_META['arc-authoritative'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='arc-authoritative').length},
   {key:'arc-master',label:SOURCE_META['arc-master'].label,short:SOURCE_META['arc-master'].short,pending:'next'},
-  {key:'arc-authoritative-candidate',label:'Authoritative review queue',short:SOURCE_META['arc-authoritative-candidate'].short,pending:'414'}
+  {key:'arc-authoritative-candidate',label:'Authoritative Review Queue',short:SOURCE_META['arc-authoritative-candidate'].short,pending:'414'}
 ];
 /* Single icon source — used by BOTH the filter buttons and the catalog cards. Inherits color via currentColor. */
 const ICONS={
@@ -992,6 +1055,129 @@ function summarize(r){
   return `${lvl} ${kind}${tags.length?' — '+tags.slice(0,3).join(', ').toLowerCase():''}.`;
 }
 const LAYERS=RAPT_DATA.map((r,i)=>({i,title:r[0],url:r[1],itemId:r[2],ltype:r[3],cat:r[4],geo:r[5],tags:r[6],rt:r[7],sourceKey:r[8]||'rapt-seed',sum:summarize(r)}));
+
+const TRIBAL_INDICATOR_SERVICE='All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17';
+const TRIBAL_METRICS=[
+  {field:'Education',label:'No High School Diploma or GED',kind:'pct',group:'Education and Access',desc:'Population age 25+ without a high school diploma or GED.'},
+  {field:'Age',label:'Age 65 and Older',kind:'pct',group:'Education and Access',desc:'Share of residents age 65 and older.'},
+  {field:'Disability',label:'Population With a Disability',kind:'pct',group:'Education and Access',desc:'Residents reporting one or more disabilities.'},
+  {field:'No_Vehicle',label:'Households Without a Vehicle',kind:'pct',group:'Education and Access',desc:'Households with no available vehicle.'},
+  {field:'Limited_English',label:'Limited English Households',kind:'pct',group:'Education and Access',desc:'Households where no one over 14 speaks English very well.'},
+  {field:'Single_Parent',label:'Single-Parent Households',kind:'pct',group:'Household and Housing',desc:'Single-parent households with children under 18.'},
+  {field:'Low_Access_to_Communications',label:'Households Without a Smartphone',kind:'pct',group:'Household and Housing',desc:'Households without smartphone access.'},
+  {field:'Mobile_Homes',label:'Mobile Homes',kind:'pct',group:'Household and Housing',desc:'Housing units that are mobile homes.'},
+  {field:'Owner_Occupied',label:'Owner-Occupied Housing',kind:'pct',group:'Household and Housing',desc:'Housing units that are owner-occupied.'},
+  {field:'Uninsured_Population',label:'Population Without Health Insurance',kind:'pct',group:'Health and Economy',desc:'Residents without health insurance coverage.'},
+  {field:'Medical',label:'Medical Practitioners',kind:'rate',group:'Health and Economy',desc:'Medical practitioners per 1,000 residents.'},
+  {field:'Poverty',label:'Population Below Poverty Level',kind:'pct',group:'Health and Economy',desc:'Residents below the U.S. Census poverty level.'},
+  {field:'Median_Income',label:'Median Household Income',kind:'currency',group:'Health and Economy',desc:'Income where half of households earn more and half earn less.'},
+  {field:'Unemployment',label:'Unemployed Labor Force',kind:'pct',group:'Workforce and Inequality',desc:'Civilian labor force age 16+ that is unemployed.'},
+  {field:'Unemployed_Women',label:'Unemployed Women in Labor Force',kind:'pct',group:'Workforce and Inequality',desc:'Women in the civilian labor force age 16+ who are unemployed.'},
+  {field:'Lack_of_Economic_Diversity',label:'Workforce in Predominant Sector',kind:'pct',group:'Workforce and Inequality',desc:'Workforce share employed in the predominant sector.'},
+  {field:'GINI',label:'Income Inequality Index',kind:'index',group:'Workforce and Inequality',desc:'Gini index of income distribution.'}
+];
+const TRIBAL_METRIC_LOOKUP=Object.fromEntries(TRIBAL_METRICS.map(m=>[m.field,m]));
+const TRIBAL_TITLE_METRIC=[
+  [/Income Inequality/i,'GINI'],
+  [/Workforce Employed in Predominant Sector/i,'Lack_of_Economic_Diversity'],
+  [/Unemployed Women/i,'Unemployed_Women'],
+  [/Unemployed Labor Force/i,'Unemployment'],
+  [/Median Household Income/i,'Median_Income'],
+  [/Population Below Poverty/i,'Poverty'],
+  [/Medical Professional Capacity/i,'Medical'],
+  [/without Health Insurance/i,'Uninsured_Population'],
+  [/Owner-Occupied/i,'Owner_Occupied'],
+  [/Mobile Homes/i,'Mobile_Homes'],
+  [/without a Smartphone/i,'Low_Access_to_Communications'],
+  [/Single-Parent/i,'Single_Parent'],
+  [/Limited English/i,'Limited_English'],
+  [/without a Vehicle/i,'No_Vehicle'],
+  [/with a Disability/i,'Disability'],
+  [/Age 65 and Older/i,'Age'],
+  [/High School Diploma/i,'Education']
+];
+function esc(v){return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function isTribalLayer(l){return l&&l.geo==='Tribal';}
+function isTribalIndicatorLayer(l){return isTribalLayer(l)&&l.url.includes(TRIBAL_INDICATOR_SERVICE);}
+function tribalMetricForLayer(l){
+  if(!l)return null;
+  const hit=TRIBAL_TITLE_METRIC.find(([rx])=>rx.test(l.title));
+  return hit?TRIBAL_METRIC_LOOKUP[hit[1]]:null;
+}
+function fmtValue(v,kind){
+  if(v==null||v===''||Number.isNaN(Number(v)))return 'No data';
+  const n=Number(v);
+  if(kind==='pct')return `${n.toFixed(n>=10?1:2).replace(/\.0$/,'')}%`;
+  if(kind==='currency')return `$${Math.round(n).toLocaleString()}`;
+  if(kind==='rate')return `${n.toFixed(1).replace(/\.0$/,'')} / 1k`;
+  if(kind==='index')return n.toFixed(3);
+  return n.toLocaleString();
+}
+function tribalAreaTitle(a){return a.NAMELSAD||a.NAME||a.BASENAME||'Tribal Area';}
+function tribalState(a){return a.StateName||a.StateAbbrev||'';}
+function tribalMiniCards(a){
+  const pop=a.S0101_C01_001E_Total_Population??a.POP100??a.Population;
+  const landSqMi=(a.ALAND||a.AREALAND)?Number(a.ALAND||a.AREALAND)/2589988.110336:null;
+  return `<div class="fp-actions">
+    <div class="fp-mini"><b>${pop==null||pop===''?'No data':Number(pop).toLocaleString()}</b><span>Population</span></div>
+    <div class="fp-mini"><b>${landSqMi?landSqMi.toLocaleString(undefined,{maximumFractionDigits:1}):'No data'}</b><span>Sq. Miles Land</span></div>
+  </div>`;
+}
+function metricRow(metric,a){
+  return `<div class="fp-metric"><span class="m-label">${esc(metric.label)}</span><span class="m-value">${fmtValue(a[metric.field],metric.kind)}</span></div>`;
+}
+function metricSections(a){
+  const groups=[...new Set(TRIBAL_METRICS.map(m=>m.group))];
+  return groups.map(g=>`<div class="fp-section"><h4>${esc(g)}</h4>${TRIBAL_METRICS.filter(m=>m.group===g).map(m=>metricRow(m,a)).join('')}</div>`).join('');
+}
+function renderTribalFeaturePanel(graphic,layerInfo){
+  const a=graphic.attributes||{};
+  const title=tribalAreaTitle(a);
+  const state=tribalState(a);
+  const metric=tribalMetricForLayer(layerInfo);
+  const serviceLabel=isTribalIndicatorLayer(layerInfo)?'FEMA RAPT ACS 2022 Tribal Indicators':'National Tribal Boundary';
+  const spot=metric
+    ? `<div class="fp-spot"><div class="label">Selected Layer Spotlight</div><div class="value">${fmtValue(a[metric.field],metric.kind)}</div><div class="desc"><b>${esc(metric.label)}</b> - ${esc(metric.desc)}</div></div>`
+    : `<div class="fp-spot"><div class="label">Curated Boundary Profile</div><div class="value">${esc(a.NAME||a.BASENAME||'Tribal Area')}</div><div class="desc">Clicking Tribal layers opens this formatted card instead of the default Esri field dump.</div></div>`;
+  const body=isTribalIndicatorLayer(layerInfo)
+    ? `${spot}${tribalMiniCards(a)}${metricSections(a)}<div class="fp-note">Source: ${serviceLabel}. Internal schema fields are intentionally hidden.</div>`
+    : `${spot}${tribalMiniCards(a)}<div class="fp-section"><h4>Boundary Reference</h4>
+        ${['NAME','BASENAME','GEOID','AIANNHNS'].map(k=>a[k]?`<div class="fp-metric"><span class="m-label">${esc({NAME:'Area Name',BASENAME:'Base Name',GEOID:'Area Code',AIANNHNS:'National Standard Code'}[k])}</span><span class="m-value">${esc(a[k])}</span></div>`:'').join('')}
+      </div><div class="fp-note">Source: ${serviceLabel}. Internal schema fields are intentionally hidden.</div>`;
+  const panel=document.getElementById('featurePanel');
+  document.querySelector('#featurePanel .fp-title').textContent=title;
+  document.querySelector('#featurePanel .fp-sub').textContent=[state,serviceLabel].filter(Boolean).join(' - ');
+  document.getElementById('featureBody').innerHTML=body;
+  panel.classList.remove('empty','collapsed');
+  document.getElementById('featureTab').classList.remove('show');
+}
+function closeFeaturePanel(){
+  const panel=document.getElementById('featurePanel');
+  if(panel.classList.contains('empty'))return;
+  panel.classList.add('collapsed');
+  document.getElementById('featureTab').classList.add('show');
+}
+function openFeaturePanel(){
+  const panel=document.getElementById('featurePanel');
+  if(panel.classList.contains('empty'))return;
+  panel.classList.remove('collapsed');
+  document.getElementById('featureTab').classList.remove('show');
+}
+function clearFeaturePanel(){
+  const panel=document.getElementById('featurePanel');
+  panel.classList.add('empty','collapsed');
+  document.getElementById('featureTab').classList.remove('show');
+}
+function tribalPopupInfo(l){
+  const metric=tribalMetricForLayer(l);
+  const source=`<p style="margin:10px 0 0;color:#6f7377;font-size:12px">Source: FEMA RAPT / Wrapped Seed Set. Internal schema fields are intentionally hidden.</p>`;
+  if(!isTribalIndicatorLayer(l)){
+    return {title:'{NAME}',fieldInfos:[],showAttachments:false,popupElements:[{type:'text',text:`<div style="font-family:Arial,Helvetica,sans-serif;color:#1f1f1f;line-height:1.45"><h2 style="margin:0 0 6px;font-size:18px;color:#1f1f1f">{NAMELSAD}</h2><p style="margin:0 0 10px;color:#4b4b4b">National Tribal Boundary</p><table style="width:100%;border-collapse:collapse"><tr><td style="padding:6px 0;color:#6f7377">Area Name</td><td style="padding:6px 0;text-align:right;font-weight:700">{NAME}</td></tr><tr><td style="padding:6px 0;color:#6f7377">Base Name</td><td style="padding:6px 0;text-align:right;font-weight:700">{BASENAME}</td></tr></table>${source}</div>`}]};
+  }
+  const spotlight=metric?`<div style="border-left:4px solid #ed1b2e;background:#f6f8fb;padding:10px 12px;margin:10px 0"><div style="font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:#6f7377;font-weight:700">Selected Layer Spotlight</div><div style="font-size:24px;font-weight:700;color:#1f1f1f">{${metric.field}}</div><div style="font-size:13px;color:#4b4b4b"><b>${metric.label}</b> - ${metric.desc}</div></div>`:'';
+  const metricRows=TRIBAL_METRICS.map(m=>`<tr><td style="padding:5px 0;border-bottom:1px solid #edf0f3;color:#4b4b4b">${m.label}</td><td style="padding:5px 0;border-bottom:1px solid #edf0f3;text-align:right;font-weight:700;color:#1f1f1f">{${m.field}}</td></tr>`).join('');
+  return {title:'{NAMELSAD}',fieldInfos:[],showAttachments:false,popupElements:[{type:'text',text:`<div style="font-family:Arial,Helvetica,sans-serif;color:#1f1f1f;line-height:1.45"><h2 style="margin:0 0 6px;font-size:18px;color:#1f1f1f">{NAMELSAD}</h2><p style="margin:0 0 10px;color:#4b4b4b">FEMA RAPT ACS 2022 Tribal Indicators</p>${spotlight}<table style="width:100%;border-collapse:collapse">${metricRows}</table>${source}</div>`}]};
+}
 
 /* counts */
 const byCat=c=>LAYERS.filter(l=>l.cat===c).length;
@@ -1130,7 +1316,7 @@ function render(){
   if(curFocus!=null&&!list.some(l=>l.i===curFocus))curFocus=null;
   grid.className=table?'datatable':cards?'cardgrid':'layerlist';
   const empty=curSource==='arc-authoritative'
-    ?'<div class="emptylist"><b>No Red Cross authoritative layers added yet.</b><br>Use this button as the landing zone for reviewed feature, map, and image services after freshness, redundancy, permission, and shelter-master checks.<br><button class="linklike" onclick="clearFilters()">Show current RAPT / wrapped seed layers</button></div>'
+    ?'<div class="emptylist"><b>No Red Cross Authoritative Layers Added Yet.</b><br>Use this button as the landing zone for reviewed feature, map, and image services after freshness, redundancy, permission, and shelter-master checks.<br><button class="linklike" onclick="clearFilters()">Show Current RAPT / Wrapped Seed Layers</button></div>'
     :'<div class="emptylist">No layers match those filters.<br><button class="linklike" onclick="clearFilters()">Reset filters</button></div>';
   if(table) grid.innerHTML=list.length?tableHTML(list):empty;
   else grid.innerHTML=list.length?list.map(cards?cardHTML:rowHTML).join(''):empty;
@@ -1172,6 +1358,15 @@ function renderDetail(){
   h.addEventListener('mousedown',e=>{drag=true;sx=e.clientX;sw=pane.offsetWidth;document.body.style.userSelect='none';e.preventDefault();});
   window.addEventListener('mousemove',e=>{if(!drag)return;const w=Math.min(640,Math.max(300,sw-(e.clientX-sx)));lay.style.setProperty('--dw',w+'px');});
   window.addEventListener('mouseup',()=>{if(drag){drag=false;document.body.style.userSelect='';}});
+})();
+/* map feature panel resize */
+(function(){
+  const h=document.getElementById('fpResize'),panel=document.getElementById('featurePanel');
+  let sx=0,sw=0,drag=false;
+  try{const saved=localStorage.getItem('redcross-feature-panel-width');if(saved)panel.style.setProperty('--fpw',saved);}catch(e){}
+  h.addEventListener('mousedown',e=>{drag=true;sx=e.clientX;sw=panel.offsetWidth||380;document.body.style.userSelect='none';e.preventDefault();});
+  window.addEventListener('mousemove',e=>{if(!drag)return;const w=Math.min(560,Math.max(300,sw-(e.clientX-sx)));panel.style.setProperty('--fpw',w+'px');});
+  window.addEventListener('mouseup',()=>{if(drag){drag=false;document.body.style.userSelect='';try{localStorage.setItem('redcross-feature-panel-width',panel.style.getPropertyValue('--fpw'));}catch(e){}}});
 })();
 
 /* ---------- selection ---------- */
@@ -1219,6 +1414,7 @@ function initMap(){
     view=new MapView({container:"mapNode",map,center:[-96,38],zoom:4,
       popupEnabled:false,
       ui:{components:["attribution","zoom"]}});
+    view.popupEnabled=false;
     view.ui.add(new Home({view}),"top-left");
     view.ui.add(new Search({view,includeDefaultSources:true}),"top-right");
     view.ui.add(new ScaleBar({view,unit:"dual"}),"bottom-left");
@@ -1226,14 +1422,45 @@ function initMap(){
     view.ui.add(basemaps,"bottom-right");
     const lg=new Expand({view,content:new Legend({view}),expanded:false,expandTooltip:"Legend"});
     view.ui.add(lg,"top-right");
+    view.on("click",handleMapClick);
     mapReady=true;syncMapLayers();
   });
 }
 function buildLayer(l){
   try{
-    if(l.ltype==='ArcGISMapServiceLayer')return new window._MIL({url:l.url,title:l.title,opacity:.85,popupEnabled:false});
-    return new window._FL({url:l.url,title:l.title,opacity:.9,popupEnabled:false});
+    const common={url:l.url,title:l.title,opacity:isTribalLayer(l)?0.72:.9,popupEnabled:false};
+    if(l.ltype==='ArcGISMapServiceLayer')return new window._MIL({...common,opacity:.85});
+    const opts={...common,outFields:["*"]};
+    if(isTribalLayer(l))opts.renderer=tribalRenderer(l);
+    const layer=new window._FL(opts);
+    layer.__raptIndex=l.i;
+    return layer;
   }catch(e){return null;}
+}
+function tribalRenderer(l){
+  const indicator=isTribalIndicatorLayer(l);
+  return {
+    type:"simple",
+    symbol:{
+      type:"simple-fill",
+      color:indicator?[237,27,46,0.18]:[0,124,137,0.12],
+      outline:{color:indicator?[237,27,46,0.95]:[0,124,137,0.95],width:indicator?1.2:1.5}
+    }
+  };
+}
+function layerForGraphic(graphic){
+  const idx=graphic?.layer?.__raptIndex;
+  return Number.isInteger(idx)?LAYERS[idx]:null;
+}
+function handleMapClick(event){
+  if(!view)return;
+  view.hitTest(event).then(res=>{
+    const hit=(res.results||[]).find(r=>{
+      const l=layerForGraphic(r.graphic);
+      return isTribalLayer(l);
+    });
+    if(hit)renderTribalFeaturePanel(hit.graphic,layerForGraphic(hit.graphic));
+  }).catch(()=>{});
 }
 function syncMapLayers(){
   if(!mapReady)return;
@@ -1241,12 +1468,15 @@ function syncMapLayers(){
   Object.keys(layerObjs).forEach(i=>{if(!sel.has(+i)){map.remove(layerObjs[i]);delete layerObjs[i];}});
   // add new
   [...sel].forEach(i=>{if(!layerObjs[i]){const o=buildLayer(LAYERS[i]);if(o){layerObjs[i]=o;map.add(o);}}});
+  if(![...sel].some(i=>isTribalLayer(LAYERS[i])))clearFeaturePanel();
   renderMapPanel();
 }
 function renderMapPanel(){
   const box=document.getElementById('mlayers');
   if(sel.size===0){box.innerHTML='<div class="emptymap">No layers yet.<br>Add layers from the Catalog, then they appear here — toggle, fade, and reorder before taking them to your own map.</div>';return;}
-  box.innerHTML=[...sel].map(i=>{
+  const hasTribal=[...sel].some(i=>isTribalLayer(LAYERS[i]));
+  const hint=hasTribal?'<div class="tribalhint"><b>Tribal Proof Mode:</b> click a Tribal boundary on the map to open a formatted Red Cross catalog card. Default Esri popups are disabled.</div>':'';
+  box.innerHTML=hint+[...sel].map(i=>{
     const l=LAYERS[i];const lo=layerObjs[i];const vis=lo?lo.visible!==false:true;
     return `<div class="mlrow">
       <div class="top">
@@ -1301,6 +1531,7 @@ function webmapJSON(){
     const base={id:'lyr_'+k+'_'+Math.random().toString(36).slice(2,7),title:l.title,opacity:1,visibility:true,url:l.url};
     base.layerType=l.ltype||(l.url.includes('/MapServer')?'ArcGISMapServiceLayer':'ArcGISFeatureLayer');
     if(l.itemId)base.itemId=l.itemId;
+    if(isTribalLayer(l))base.popupInfo=tribalPopupInfo(l);
     return base;
   });
   return {operationalLayers:ops,

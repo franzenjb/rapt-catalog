@@ -26,6 +26,8 @@ A discovery-first catalog of FEMA RAPT's operational layers — find, filter, pr
 - **Red Cross version** (`/redcross`, and `https://raptrc.jbf.com`) keeps the catalog functions and source layer inventory but changes the visible shell to Red Cross operations language, red/charcoal styling, a staff-facing "How to use" guide, separate localStorage keys, and `?embed=1&open=1` mode for Experience Builder iframes.
 - **Red Cross source/provenance UI** is explicit: the current 106 records are labeled as the RAPT / wrapped seed set. The filter rail has clickable source buttons for current RAPT / wrapped records and future Red Cross authoritative records, plus pending buckets for Red Cross master geography and the 414-item authoritative review queue. The app copy says authoritative candidates are not automatically trusted catalog layers; they require freshness, redundancy, permission, and map-use checks before promotion.
 - **Red Cross map preview controls** now follow Jeff's ArcGIS map standard: Home, Zoom, Search, ScaleBar, BasemapGallery in an Expand widget, Legend, and default Esri popups disabled at the view/layer level.
+- **Red Cross Tribal-layer popup proof** is implemented in `redcross.html`. Selecting a Tribal layer and previewing the map disables Esri default popups, styles Tribal polygons in Red Cross colors, and opens a formatted, resizable/retractable right-side app panel on Tribal feature click. The Red Cross Web Map JSON export also writes curated `popupInfo` for Tribal layers so Map Viewer imports do not fall back to raw `OBJECTID`/schema-field tables. These are editable starter popups, not locked service-level changes.
+- **Red Cross logo/header pass** replaced the generic plus placeholder with a Red Cross logo/wordmark treatment and title-cased the source filter labels. The mobile header hides the wordmark and keeps the mark compact.
 - **Red Cross Option 3** includes `Copy Web Map JSON` as the primary action, plus `Download .json` and `Copy selected-layer link`. The copy button exists so users can paste directly into ArcGIS Assistant without opening a downloaded JSON file in macOS.
 
 ## Data (real)
@@ -60,7 +62,7 @@ raptrc.jbf.com is attached to the same Vercel project. `vercel.json` redirects t
 
 ## Open items / next (for the M4 session)
 1. **OPEN DECISION (Jeff to confirm):** should the app open in **dark mode + cards by default**? He asked for this; pending a yes/which. If yes: default `viewMode='cards'` + apply `.dark` on open. (He may instead just want a screenshot of dark+cards — the harness was down here, see #2.)
-2. **Browser harness was DEAD the entire 2026-06-26 session** (Chrome disconnected — every `browser-harness` call printed its usage banner, never a screenshot). On the M4, confirm Chrome + the harness work so the app can actually be screenshotted/verified live.
+2. Browser QA worked on 2026-06-28 for the Red Cross route via the in-app browser/local server. Verified desktop Tribal click opens the custom panel and shows no Esri popup; mobile source-banner layout was fixed after the first mobile smoke check exposed a narrow-column wrap.
 3. Rebuild the M4's `~/dev/projects.json` registry to pick up this repo + catalog.jbf.com.
 
 ## Continue in Claude Code (on the M4)
