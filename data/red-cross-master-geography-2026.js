@@ -1,0 +1,93 @@
+window.RED_CROSS_MASTER_GEOGRAPHY_2026 = [
+  [
+    "Master Geography 2026 - Chapter HQ",
+    "https://services.arcgis.com/pGfbNJoYypmNq86F/arcgis/rest/services/Master_ARC_Geography_2022/FeatureServer/0",
+    "8c6753c3c5814d05be65723cd4615d7c",
+    "ArcGISFeatureLayer",
+    "People & Community",
+    "Chapter HQ",
+    ["Master Geography", "Red Cross Geography", "FY26", "Chapter", "Headquarters"],
+    false,
+    "arc-master",
+    null,
+    false
+  ],
+  [
+    "Master Geography 2026 - Division Boundaries",
+    "https://services.arcgis.com/pGfbNJoYypmNq86F/arcgis/rest/services/Master_ARC_Geography_2022/FeatureServer/1",
+    "8c6753c3c5814d05be65723cd4615d7c",
+    "ArcGISFeatureLayer",
+    "People & Community",
+    "Division",
+    ["Master Geography", "Red Cross Geography", "FY26", "Division"],
+    false,
+    "arc-master",
+    null,
+    false
+  ],
+  [
+    "Master Geography 2026 - Region Boundaries",
+    "https://services.arcgis.com/pGfbNJoYypmNq86F/arcgis/rest/services/Master_ARC_Geography_2022/FeatureServer/2",
+    "8c6753c3c5814d05be65723cd4615d7c",
+    "ArcGISFeatureLayer",
+    "People & Community",
+    "Region",
+    ["Master Geography", "Red Cross Geography", "FY26", "Region"],
+    false,
+    "arc-master",
+    null,
+    false
+  ],
+  [
+    "Master Geography 2026 - Chapter Boundaries",
+    "https://services.arcgis.com/pGfbNJoYypmNq86F/arcgis/rest/services/Master_ARC_Geography_2022/FeatureServer/3",
+    "8c6753c3c5814d05be65723cd4615d7c",
+    "ArcGISFeatureLayer",
+    "People & Community",
+    "Chapter",
+    ["Master Geography", "Red Cross Geography", "FY26", "Chapter"],
+    false,
+    "arc-master",
+    null,
+    false
+  ],
+  [
+    "Master Geography 2026 - State Boundaries",
+    "https://services.arcgis.com/pGfbNJoYypmNq86F/arcgis/rest/services/Master_ARC_Geography_2022/FeatureServer/4",
+    "8c6753c3c5814d05be65723cd4615d7c",
+    "ArcGISFeatureLayer",
+    "People & Community",
+    "State",
+    ["Master Geography", "Red Cross Geography", "FY26", "State"],
+    false,
+    "arc-master",
+    null,
+    false
+  ],
+  [
+    "Master Geography 2026 - County Boundaries",
+    "https://services.arcgis.com/pGfbNJoYypmNq86F/arcgis/rest/services/Master_ARC_Geography_2022/FeatureServer/5",
+    "8c6753c3c5814d05be65723cd4615d7c",
+    "ArcGISFeatureLayer",
+    "People & Community",
+    "County",
+    ["Master Geography", "Red Cross Geography", "FY26", "County", "FIPS"],
+    false,
+    "arc-master",
+    null,
+    false
+  ],
+  [
+    "Master Geography 2026 - Puerto Rico Response Territories",
+    "https://services.arcgis.com/pGfbNJoYypmNq86F/arcgis/rest/services/Master_ARC_Geography_2022/FeatureServer/6",
+    "8c6753c3c5814d05be65723cd4615d7c",
+    "ArcGISFeatureLayer",
+    "People & Community",
+    "Puerto Rico",
+    ["Master Geography", "Red Cross Geography", "FY26", "Puerto Rico", "Chapter"],
+    false,
+    "arc-master",
+    null,
+    false
+  ]
+];
