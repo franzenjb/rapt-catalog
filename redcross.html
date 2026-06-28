@@ -755,8 +755,8 @@ body.embed .mh-x{display:none}
     </div>
     <div class="opt">
       <h3><span class="num">03</span> Download Web Map JSON</h3>
-      <p>Download a web map definition for staff who maintain ArcGIS content and need a portable recipe for the selected layers.</p>
-      <div class="act"><button class="a" onclick="downloadWebmap()">Download .json</button><button class="a" onclick="copyShare()">Copy shareable recipe link</button></div>
+      <p>Copy or download a web map definition for staff who maintain ArcGIS content and need a portable recipe for the selected layers.</p>
+      <div class="act"><button class="a fill" onclick="copyWebmapJSON()">Copy Web Map JSON</button><button class="a" onclick="downloadWebmap()">Download .json</button><button class="a" onclick="copyShare()">Copy selected-layer link</button></div>
     </div>
     <div class="ft">Layer titles and service endpoints come from the source ArcGIS services. The preview map uses simple default styling so the catalog stays fast.</div>
   </div>
@@ -809,7 +809,7 @@ body.embed .mh-x{display:none}
         <ul>
           <li><b>Open in Map Viewer</b> when the selected item-backed layers can be handed to ArcGIS automatically.</li>
           <li><b>Add by URL</b> when you want the most reliable route: copy each layer URL and paste it into Map Viewer or Experience Builder.</li>
-          <li><b>Download Web Map JSON</b> when an ArcGIS content owner needs a portable recipe for the selected layers.</li>
+          <li><b>Copy or download Web Map JSON</b> when an ArcGIS content owner needs a portable recipe for the selected layers.</li>
         </ul>
       </div>
 
@@ -1159,14 +1159,14 @@ let urlStep=0;
 function copyNextUrl(){
   const ls=selList(); if(!ls.length)return;
   const l=ls[urlStep%ls.length];
-  navigator.clipboard.writeText(l.url).then(()=>{
+  copyText(l.url,()=>{
     toast(`Copied ${(urlStep%ls.length)+1} of ${ls.length} — paste into Add → URL, then click for next`);
     urlStep=(urlStep+1)%ls.length;
     document.getElementById('stepBtn').textContent=`Copy URL ${urlStep+1} of ${ls.length}`;
   });
 }
-function copyOne(i){const l=selList()[i];navigator.clipboard.writeText(l.url).then(()=>toast(`Copied ${i+1}: ${l.title.slice(0,32)}`));}
-function copyShare(){navigator.clipboard.writeText(location.href).then(()=>toast('Recipe link copied — opens this exact selection'));}
+function copyOne(i){const l=selList()[i];copyText(l.url,()=>toast(`Copied ${i+1}: ${l.title.slice(0,32)}`));}
+function copyShare(){copyText(location.href,()=>toast('Selected-layer link copied — opens this exact selection'));}
 function webmapJSON(){
   const ops=selList().map((l,k)=>{
     const base={id:'lyr_'+k+'_'+Math.random().toString(36).slice(2,7),title:l.title,opacity:1,visibility:true,url:l.url};
@@ -1183,6 +1183,33 @@ function downloadWebmap(){
   const blob=new Blob([JSON.stringify(webmapJSON(),null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='red-cross-layer-selection-webmap.json';a.click();
   toast('Web map JSON downloaded');
+}
+function copyWebmapJSON(){
+  copyText(JSON.stringify(webmapJSON(),null,2),()=>toast('Web Map JSON copied — paste into ArcGIS Assistant data JSON'));
+}
+function copyText(text,onSuccess){
+  const done=()=>{if(onSuccess)onSuccess();};
+  if(fallbackCopy(text)){
+    done();
+  }else if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(()=>toast('Copy failed — use Download .json instead'));
+  }else{
+    toast('Copy failed — use Download .json instead');
+  }
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');
+  ta.value=text;
+  ta.setAttribute('readonly','');
+  ta.style.position='fixed';
+  ta.style.left='-9999px';
+  ta.style.top='0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  const ok=document.execCommand('copy');
+  document.body.removeChild(ta);
+  return ok;
 }
 let toastT;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200);}
 
