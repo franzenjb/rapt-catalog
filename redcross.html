@@ -31,9 +31,8 @@ body{font-family:var(--fb);color:var(--ink);line-height:1.5;-webkit-font-smoothi
 .raptbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:50;
   background:linear-gradient(180deg,#ed1b2e 0%,#c8102e 58%,#971b2f 100%);
   border-bottom:1px solid #7f1226;display:flex;align-items:center;padding:0 16px;gap:14px}
-.arc-logo{width:190px;height:38px;display:block;flex-shrink:0}
-.arc-logo svg{display:block;width:100%;height:100%;overflow:visible}
-.arc-logo .arc-word{font-family:Arial,Helvetica,sans-serif;font-weight:700;letter-spacing:.1px;fill:#fff}
+.arc-logo{width:214px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fff;border-radius:3px;padding:5px 9px;box-shadow:0 1px 2px rgba(0,0,0,.24)}
+.arc-logo img{display:block;width:100%;height:100%;object-fit:contain}
 .apptitle{font-family:var(--fh);font-size:23px;color:#dfe9f2;font-weight:400;letter-spacing:.3px;flex:1;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.3)}
 .std-adv{display:flex;border:1px solid rgba(255,255,255,.55);border-radius:16px;overflow:hidden;font-size:12px;font-weight:600}
 .std-adv span{padding:5px 14px;color:#ffe5e9}
@@ -393,6 +392,8 @@ body.embed .mh-x{display:none}
 .fp-note{margin-top:14px;border-top:1px solid var(--line);padding-top:11px;font-size:12px;color:var(--muted);line-height:1.45}
 .tribalhint{border:1px solid rgba(255,255,255,.18);border-left:3px solid var(--red);background:rgba(255,255,255,.08);color:#dbe7f2;border-radius:5px;padding:10px 11px;margin:12px 0 2px;font-size:12.5px;line-height:1.45}
 .tribalhint b{color:#ffccd3}
+.itemonlyhint{border:1px solid rgba(255,255,255,.16);border-left:3px solid #9fb6cb;background:rgba(255,255,255,.06);color:#dbe7f2;border-radius:5px;padding:10px 11px;margin:12px 0 2px;font-size:12.5px;line-height:1.45}
+.itemonlyhint b{color:#fff}
 .maptop{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
 .maptop .ct{font-family:var(--fd);font-size:11px;color:#9fb6cb;letter-spacing:.5px}
 .buildbtn{width:100%;margin-top:16px;background:linear-gradient(180deg,#ed1b2e,#c8102e);color:#fff;border:none;padding:12px;font-family:var(--fb);font-weight:700;font-size:14px;cursor:pointer;letter-spacing:.3px;border-radius:4px}
@@ -513,8 +514,11 @@ body.embed .mh-x{display:none}
   .titlepill{font-size:14px;padding:7px 14px}
   .howbtn,.themetog{font-size:12px;padding:5px 10px}
   .tabs{margin-top:8px}
-  .arc-logo{width:48px}
-  .arc-logo .arc-word{display:none}
+  .arc-logo{width:98px;padding:5px 7px;overflow:hidden}
+  .arc-logo img{width:100%;max-width:100%;object-fit:contain}
+  .apptitle{display:none}
+  .raptfoot .lk{display:none}
+  .raptfoot .v,.raptfoot .fb{flex:1;justify-content:center;padding:0 8px;text-align:center}
 }
 
 /* theme toggle + dark mode (catalog surfaces) */
@@ -628,12 +632,7 @@ body.embed .mh-x{display:none}
 <div class="raptbar">
   <button class="logobtn" id="logoBtn" onclick="toggleDesign()" title="Design options — choose a layout" aria-label="Toggle design options">
     <span class="arc-logo" role="img" aria-label="American Red Cross logo">
-      <svg viewBox="0 0 220 46" aria-hidden="true" focusable="false">
-        <rect x="1" y="1" width="44" height="44" rx="6" fill="#fff"/>
-        <path d="M19 8h9v11h11v8.5H28V39h-9V27.5H7.5V19H19z" fill="#ed1b2e"/>
-        <text class="arc-word" x="58" y="19" font-size="15">American</text>
-        <text class="arc-word" x="58" y="36" font-size="17">Red Cross</text>
-      </svg>
+      <img src="assets/american-red-cross-logo.svg" alt="American Red Cross">
     </span>
     <span class="logochev">&#9662;</span>
   </button>
@@ -694,8 +693,8 @@ body.embed .mh-x{display:none}
         <h3>Find the right layer in seconds</h3>
         <p>Hazards, lifelines, facilities, demographics, and community indicators in one field-ready catalog. Search, preview, and carry the layers you need into an ArcGIS map for planning or response.</p>
         <div class="lc-stats">
-          <div class="lc-stat"><b>106</b><span>Layers</span></div>
-          <div class="lc-stat"><b>12</b><span>Live Feeds</span></div>
+          <div class="lc-stat"><b id="heroTotal">106</b><span>Layers</span></div>
+          <div class="lc-stat"><b id="heroLive">12</b><span>Live Feeds</span></div>
           <div class="lc-stat"><b>3</b><span>Categories</span></div>
         </div>
         <button class="lc-btn" onclick="openCatalog()">Browse the Layer Catalog <span aria-hidden="true">&rarr;</span></button>
@@ -753,7 +752,7 @@ body.embed .mh-x{display:none}
       </button>
       <div class="search">
         <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="11" y1="11" x2="15" y2="15" stroke="currentColor" stroke-width="1.6"/></svg>
-        <input id="q" placeholder="Search 106 layers — e.g. flood, disability, hospitals, tornado…" oninput="render()">
+        <input id="q" placeholder="Search layers - e.g. flood, disability, hospitals, tornado..." oninput="render()">
       </div>
       <div class="segmented" id="segCats">
         <button class="seg active" data-cat="all" onclick="setCat('all',this)">All <span class="ct" id="cAll"></span></button>
@@ -776,7 +775,7 @@ body.embed .mh-x{display:none}
     <div class="sourcebanner">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-3.8 7-9.2V5.3L12 2.7 5 5.3v6.5C5 17.2 12 21 12 21z"/><path d="M8.7 12.2l2.1 2.1 4.7-5"/></svg>
       <div class="sb-main"><b>Source status:</b> this Wrapped Red Cross version is seeded mostly from public FEMA RAPT services. Red Cross authoritative layers will be added only after they pass freshness, redundancy, permission, and map-use checks.</div>
-      <div class="sb-actions"><span class="sourcechip">RAPT / Wrapped Seed</span><span class="sourcechip queue">414 Candidates to Triage</span></div>
+      <div class="sb-actions"><span class="sourcechip">RAPT / Wrapped Seed</span><span class="sourcechip">Franzen</span><span class="sourcechip queue">414 Candidates to Triage</span></div>
     </div>
   </div>
   <div class="catlayout" id="catlayout">
@@ -874,7 +873,7 @@ body.embed .mh-x{display:none}
     </div>
     <div class="opt">
       <h3><span class="num">02</span> Add by URL &mdash; one at a time</h3>
-      <p>Map Viewer's <b>Add &rarr; From URL</b> box takes <b>one</b> endpoint per paste. Click below to copy each layer in turn: paste it, add it, then click again for the next. Works for all 106 layers, including the real-time feeds.</p>
+      <p>Map Viewer's <b>Add &rarr; From URL</b> box takes <b>one</b> endpoint per paste. Click below to copy each available service URL in turn. Item-backed Franzen records without a public endpoint should use option 1 or 3 after ArcGIS sign-in.</p>
       <div class="act"><button class="a fill" id="stepBtn" onclick="copyNextUrl()">Copy URL 1</button><button class="a" onclick="togglePre('preUrls')">Show all</button></div>
       <div id="preUrls" style="display:none"></div>
     </div>
@@ -924,7 +923,7 @@ body.embed .mh-x{display:none}
       <h3 class="sec-h">Recommended Red Cross workflow</h3>
       <div class="sec-b"><ul>
         <li>Use the catalog to find the best layer before adding anything to an operational map.</li>
-        <li>Use the source filter to separate the current RAPT / Wrapped Seed Set from Red Cross Authoritative layers as they are vetted and added.</li>
+        <li>Use the source filter to separate the current RAPT / Wrapped Seed Set, Franzen working layers, and Red Cross Authoritative layers as they are vetted and added.</li>
         <li>Prefer the map preview when comparing layers that sound similar.</li>
         <li>Use the table view when you need a fast inventory of categories, geography, and update type.</li>
         <li>Use the copied layer URLs when building or repairing a map inside ArcGIS Experience Builder.</li>
@@ -965,8 +964,10 @@ body.embed .mh-x{display:none}
 <script>
 const RAPT_DATA=[["NWS - Fire Weather Outlooks", "https://mapservices.weather.noaa.gov/vector/rest/services/fire_weather/SPC_firewx/MapServer", "", "ArcGISMapServiceLayer", "Hazards, Weather & Risk", "Service", ["Fire"], true], ["NWS - Excessive Rainfall Outlook (Risk of rainfall % exceeding flash flood guidance within 25 miles of a point)", "https://mapservices.weather.noaa.gov/vector/rest/services/hazards/wpc_precip_hazards/MapServer", "", "ArcGISMapServiceLayer", "Hazards, Weather & Risk", "Service", ["Flood"], true], ["NWS - Severe Weather Outlook", "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer", "", "ArcGISMapServiceLayer", "Hazards, Weather & Risk", "Service", [], true], ["NWS - Weather Hazard Outlooks", "https://mapservices.weather.noaa.gov/vector/rest/services/hazards/cpc_weather_hazards/MapServer", "", "ArcGISMapServiceLayer", "Hazards, Weather & Risk", "Service", [], true], ["NHC - Tropical Weather Summary", "https://mapservices.weather.noaa.gov/tropical/rest/services/tropical/NHC_tropical_weather_summary/MapServer", "", "ArcGISMapServiceLayer", "Hazards, Weather & Risk", "Service", [], true], ["NOAA - River Gauges (zoom to activate)", "https://mapservices.weather.noaa.gov/eventdriven/rest/services/water/riv_gauges/MapServer", "", "ArcGISMapServiceLayer", "Hazards, Weather & Risk", "Service", ["Real-Time"], true], ["NWS - Watches and Warnings", "https://mapservices.weather.noaa.gov/eventdriven/rest/services/WWA/watch_warn_adv/MapServer", "", "ArcGISMapServiceLayer", "Hazards, Weather & Risk", "Service", ["Real-Time"], true], ["NWS - NEXRAD Real-Time Weather Radar", "https://mapservices.weather.noaa.gov/eventdriven/rest/services/radar/radar_base_reflectivity/MapServer", "", "ArcGISMapServiceLayer", "Hazards, Weather & Risk", "Service", ["Real-Time"], true], ["NOAA - Hurricane Tracks (1990+)", "https://services2.arcgis.com/FiaPA4ga0iQKduv3/ArcGIS/rest/services/IBTrACS_ALL_list_v04r00_lines_1/FeatureServer/0", "", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Wind"], true], ["NOAA - Historical Tornado Tracks: 1950-2022", "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Tornado_Tracks_1950_2017_1/FeatureServer/0", "", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Wind"], true], ["NRI - Expected Annual Losses (18 hazards)", "https://services.arcgis.com/XG15cJAlne2vxtgt/ArcGIS/rest/services/National_Risk_Index_Census_Tracts/FeatureServer/0", "", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Risk Index"], false], ["2023 USGS National Seismic Hazard Model", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/2023_National_Seismic_Hazard_Model/FeatureServer/0", "07aaf2a729f64bb28c84aa92bc3a9513", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Earthquake"], false], ["FEMA - Flood Hazard (zoom to activate)", "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Flood_Hazard_Reduced_Set_gdb/FeatureServer/0", "", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Flood"], false], ["NIFC - Wildfires - Current Incidents (Perimeters) (zoom to activate)", "https://services9.arcgis.com/RHVPKKiFTONKtxq3/ArcGIS/rest/services/USA_Wildfires_v1/FeatureServer/1", "", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Fire", "Housing"], true], ["IRWIN - Wildfires - Current Incidents (Points)", "https://services9.arcgis.com/RHVPKKiFTONKtxq3/ArcGIS/rest/services/USA_Wildfires_v1/FeatureServer/0", "", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Fire", "Housing"], true], ["Counties - Population Change", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Demographics"], false], ["Counties - Inactive Voters", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["Civic", "County"], false], ["Counties - Population without Religious Affiliation", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Demographics", "Social Capital"], false], ["Counties - Presence of Social/Civic Organizations", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Social Capital"], false], ["Counties - Income Inequality", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Economic"], false], ["Counties - Workforce Employed in Predominant Sector", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Economic"], false], ["Counties - Unemployed Women in the Labor Force", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Economic"], false], ["Counties - Unemployed Labor Force", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Economic"], false], ["Counties - Median Household Income", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Economic"], false], ["Counties - Population Below Poverty Level", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Demographics", "Economic"], false], ["Counties - Medicare Recipients with Power-Dependent Devices (zoom in to activate)", "https://services2.arcgis.com/ZQ4jTQn6k7VPXEwO/ArcGIS/rest/services/HHS_emPOWER_REST_Service_Public/FeatureServer/2", "e6f7b3ebcec64edd9093664927d25b7d", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "County", ["County", "Health"], false], ["Counties - Number of Hospitals per 10k", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "County", ["County", "Health"], false], ["Counties - Medical Professional Capacity", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Health"], false], ["Counties - Population without Health Insurance", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Demographics", "Health"], false], ["Residential Structures in SFHA with Flood Insurance", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/Residential_Structures_in_SFHA_with_Flood_Insurance/FeatureServer/17", "3ad3c28009344b2b8965cc300668e277", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Flood"], false], ["Counties - Housing Costs as a Percentage of Household Income", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/Counties_Housing_Costs_as_a_Percentage_of_HH_Income/FeatureServer/40", "94cd014ddf2d4a54997c85daeddd520b", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Economic", "Housing"], false], ["Counties - Housing Units that are Owner-Occupied", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Housing"], false], ["Counties - Mobile Homes as a Percentage of Housing Units", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Housing"], false], ["Counties - Households without a Smartphone", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Digital Access"], false], ["Counties - Single-Parent Households", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Household", "Housing"], false], ["Counties - Households with Limited English", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/County_Language_Layer_ACS2022/FeatureServer/32", "df2e9eb21ae346a1ae1f1f612f69adf2", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Language"], false], ["Counties - Households without a Vehicle", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Transportation Access"], false], ["Counties - Population with a Disability", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/County_Disability_Layer_ACS2022/FeatureServer/37", "81ea7ee03a4d4420857f373e4154fffb", "ArcGISFeatureLayer", "People & Community", "County", ["Access & Functional Needs", "County", "Demographics"], false], ["Counties - Population Age 65 and Older", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/County_Age_Indicator_ACS2022/FeatureServer/7", "46b8f516169341808fa36a999220e11e", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Demographics", "Older Adults"], false], ["Counties - Population without a High School Diploma", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "County", ["County", "Demographics", "Education"], false], ["Counties - FEMA Community Resilience Challenges Index (CRCI): Potential Challenges to Resilience", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_County_Boundaries_ACS2022/FeatureServer/31", "2358ff8a804f4274bd11aa60ed62c616", "ArcGISFeatureLayer", "People & Community", "County", ["County", "Resilience Index"], false], ["Tribal Boundaries - Income Inequality", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Economic", "Tribal"], false], ["Tribal Boundaries - Workforce Employed in Predominant Sector", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Economic", "Tribal"], false], ["Tribal Boundaries - Unemployed Women in the Labor Force", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Economic", "Tribal"], false], ["Tribal Boundaries - Unemployed Labor Force", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Economic", "Tribal"], false], ["Tribal Boundaries - Median Household Income", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Economic", "Tribal"], false], ["Tribal Boundaries - Population Below Poverty Level", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Demographics", "Economic", "Tribal"], false], ["Tribal Boundaries - Medical Professional Capacity", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Health", "Tribal"], false], ["Tribal Boundaries - Population without Health Insurance", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Demographics", "Health", "Tribal"], false], ["Tribal Boundaries - Housing Units that are Owner-Occupied", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Housing", "Tribal"], false], ["Tribal Boundaries - Mobile Homes as a Percentage of Housing Units", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Housing", "Tribal"], false], ["Tribal Boundaries - Households without a Smartphone", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Digital Access", "Tribal"], false], ["Tribal Boundaries - Single-Parent Households", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Household", "Housing", "Tribal"], false], ["Tribal Boundaries - Households with Limited English", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Language", "Tribal"], false], ["Tribal Boundaries - Households without a Vehicle", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Transportation Access", "Tribal"], false], ["Tribal Boundaries - Population with a Disability", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Access & Functional Needs", "Demographics", "Tribal"], false], ["Tribal Boundaries - Population Age 65 and Older", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Demographics", "Older Adults", "Tribal"], false], ["Tribal Boundaries - Population without a High School Diploma", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Tribal", ["Demographics", "Education", "Tribal"], false], ["Tribal Boundaries (click on boundary for data on 17 CRCI Indicators)", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17", "42009da1cb9f4d0c90e0d7c4252cab13", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Resilience Index", "Tribal"], false], ["Census Tracts - Income Inequality", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Economic"], false], ["Census Tracts - Workforce Employed in Predominant Sector", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Economic"], false], ["Census Tracts - Unemployed Women in the Labor Force", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Economic"], false], ["Census Tracts - Unemployed Labor Force", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Economic"], false], ["Census Tracts - Median Household Income", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Economic"], false], ["Census Tracts - Population Below Poverty Level", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Demographics", "Economic"], false], ["Census Tracts - Number of Hospitals per 10k", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Census Tract", ["Census Tract", "Health"], false], ["Census Tracts - Medical Professional Capacity", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Health"], false], ["Census Tracts - Population without Health Insurance", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Demographics", "Health"], false], ["Census Tracts - Housing Costs as a Percentage of Household Income", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/Census_Tracts___Housing_Costs_30_Percent_or_more_of_Household_Income/FeatureServer/13", "7d63f12d24554aa6a79b97ddcde23ac5", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Economic", "Housing"], false], ["Census Tracts - Housing Units that are Owner-Occupied", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Housing"], false], ["Census Tracts - Mobile Homes as a Percentage of Housing Units", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Housing"], false], ["Census Tracts - Percent of Population without a Broadband Subscription", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/Census_Tracts_Percent_Broadband_Subscription/FeatureServer/2", "45d7fc0037094482ad96ff8a36af5ec5", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Demographics", "Digital Access"], false], ["Census Tracts - Households without a Smartphone", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Digital Access"], false], ["Census Tracts - Single-Parent Households", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Household", "Housing"], false], ["Census Tracts - Households with Limited English", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Language"], false], ["Census Tracts - Households without a Vehicle", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Transportation Access"], false], ["Census Tracts - Population with a Disability", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Access & Functional Needs", "Census Tract", "Demographics"], false], ["Census Tracts - Population Age 65 and Older", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Demographics", "Older Adults"], false], ["Census Tracts - Population without a High School Diploma", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Census Tract", ["Census Tract", "Demographics", "Education"], false], ["Census Tracts - FEMA Community Resilience Challenges Index (CRCI): Potential Challenges to Resilience", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Indicators_Tract_Boundaries_ACS2022/FeatureServer/23", "126dd3c5536840a4bda6aa588137e063", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract", "Resilience Index"], false], ["Municipal Boundaries", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/CommunityLayer_2022_v01/FeatureServer/2", "bc3e6708b8f54f7f8cbb328b01ac52b5", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["Census Tract Boundaries", "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2022/Tracts_Blocks/MapServer/3", "", "ArcGISFeatureLayer", "People & Community", "Census Tract", ["Census Tract"], false], ["County Boundaries", "https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2022/State_County/MapServer/11", "", "ArcGISFeatureLayer", "People & Community", "County", ["County"], false], ["Tribal Boundaries", "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/AIANNHA_v1/FeatureServer/0", "70c973c7e48949f9845e320f3b79a1d7", "ArcGISFeatureLayer", "People & Community", "Tribal", ["Tribal"], false], ["USA States (Generalized)", "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_States_Generalized_Boundaries/FeatureServer/0", "", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["RAPT WEA Alerts", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/RAPT_WEA_Alerts/FeatureServer/0", "c3c96865290c4f2eafa0b36cfdabb919", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["NID - High Hazard Potential Dam Lines", "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/NID_v1/FeatureServer/0", "", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", [], false], ["Principal Ports", "https://services7.arcgis.com/n1YM8pTrFmm7L4hs/ArcGIS/rest/services/ndc/FeatureServer/1", "a2055b36408b440fb9fbc4704906f05f", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", [], false], ["Wastewater Treatment Plants (FRS)", "https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/FRS_Wastewater/FeatureServer/0", "", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["Public Health Departments", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/Public_Health_Departments_HIFLD/FeatureServer/41", "4435085f37254d20b2491e53575cad3a", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["All Places Of Worship", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/All_Places_Of_Worship__HiFLD_Open_/FeatureServer/42", "495cc33ef490462ab2d8933247a66a87", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["Pharmacies (RxOpen)", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/RxOpen_041323_Pharmacies/FeatureServer/38", "b72062c68ea644debfa55759dc5debd8", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", [], false], ["Dialysis Centers (RxOpen)", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/RXopen_040623_Dialysis_Centers/FeatureServer/36", "9aece47e1c934e75991c8e72b7e32c25", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", [], false], ["Urgent Care Facilities", "https://maps.nccs.nasa.gov/mapping/rest/services/hifld_open/public_health/FeatureServer/4", "", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", [], false], ["Nursing Homes", "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/NursingHomes2024/FeatureServer/0", "", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", [], false], ["Hospitals", "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/ArcGIS/rest/services/Hospitals_gdb/FeatureServer/0", "", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", ["Health"], false], ["SNAP Authorized Retailers (zoom in to activate)", "https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/snap_retailer_location_data/FeatureServer/0", "", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["Colleges and Universities", "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/ArcGIS/rest/services/Colleges_and_Universities/FeatureServer/0", "", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["Private Schools", "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Private_Schools/FeatureServer/0", "", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", [], false], ["Public Schools", "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/ArcGIS/rest/services/Public_Schools/FeatureServer/0", "", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", [], false], ["Mobile Home Parks", "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/ArcGIS/rest/services/Mobile_Home_Parks/FeatureServer/0", "", "ArcGISFeatureLayer", "Infrastructure & Lifelines", "Service", ["Housing"], false], ["Prison Boundaries", "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Prison_Boundaries/FeatureServer/0", "", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["Local Law Enforcement Locations", "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/ArcGIS/rest/services/Local_Law_Enforcement_Locations/FeatureServer/0", "", "ArcGISFeatureLayer", "People & Community", "Service", [], false], ["Fire Stations", "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/2", "", "ArcGISFeatureLayer", "Hazards, Weather & Risk", "Service", ["Fire"], false], ["Top 3 Lowest Drivers of CRCI Value", "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/Counties_Top3Drivers_ACS2022/FeatureServer/4", "08d8da8accd9406c8b5d687276211642", "ArcGISFeatureLayer", "People & Community", "Service", ["Resilience Index"], false], ["RAPT Population Counter Output", "https://disgeoportal.egs.anl.gov/arcgis/rest/services/RAPT/RAPT_PopSummaryTool_DataLayers/MapServer/1", "", "ArcGISFeatureLayer", "People & Community", "Service", ["Demographics"], false]];
 </script>
+<script src="data/franzen-recent-feature-services.js"></script>
 <script>
 /* ---------- derive ---------- */
+RAPT_DATA.push(...(window.FRANZEN_RECENT_FEATURE_SERVICES||[]));
 const CATCOLORS={'Hazards, Weather & Risk':'#c33d2e','Infrastructure & Lifelines':'#2766a3','People & Community':'#0f8285'};
 const CATBG={'Hazards, Weather & Risk':'#f1d8d0','Infrastructure & Lifelines':'#d7e6f4','People & Community':'#cfeaea'};
 const SOURCE_META={
@@ -981,6 +982,12 @@ const SOURCE_META={
     short:'ARC Authoritative',
     description:'Reviewed Red Cross authoritative feature, map, or image services promoted into this catalog.',
     exportNote:'Promoted from reviewed Red Cross authoritative service inventory'
+  },
+  'franzen':{
+    label:'Franzen',
+    short:'Franzen',
+    description:'Trusted working layers curated by Franzen before formal Red Cross authoritative promotion.',
+    exportNote:'Franzen-curated working layer; not yet formal Red Cross authoritative source'
   },
   'arc-master':{
     label:'Red Cross Master Geography',
@@ -998,8 +1005,9 @@ const SOURCE_META={
 const SOURCE_OPTIONS=[
   {key:'all',label:'All Current Catalog',short:'All',count:()=>LAYERS.length},
   {key:'rapt-seed',label:SOURCE_META['rapt-seed'].label,short:SOURCE_META['rapt-seed'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='rapt-seed').length},
-  {key:'arc-authoritative',label:SOURCE_META['arc-authoritative'].label,short:SOURCE_META['arc-authoritative'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='arc-authoritative').length},
   {key:'arc-master',label:SOURCE_META['arc-master'].label,short:SOURCE_META['arc-master'].short,pending:'next'},
+  {key:'arc-authoritative',label:SOURCE_META['arc-authoritative'].label,short:SOURCE_META['arc-authoritative'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='arc-authoritative').length},
+  {key:'franzen',label:SOURCE_META['franzen'].label,short:SOURCE_META['franzen'].short,count:()=>LAYERS.filter(l=>l.sourceKey==='franzen').length},
   {key:'arc-authoritative-candidate',label:'Authoritative Review Queue',short:SOURCE_META['arc-authoritative-candidate'].short,pending:'414'}
 ];
 /* Single icon source — used by BOTH the filter buttons and the catalog cards. Inherits color via currentColor. */
@@ -1048,13 +1056,18 @@ function iconFor(l){
   return svgIcon(key);
 }
 function summarize(r){
-  const [title,,, ltype,cat,geo,tags,rt]=r;
+  const [title,,, ltype,cat,geo,tags,rt,sourceKey,ageDays,itemOnly]=r;
+  if(sourceKey==='franzen'){
+    const touched=Number.isFinite(ageDays)?` touched ${ageDays} days ago`:' touched in the last 12 months';
+    const access=itemOnly?' Item-backed Red Cross AGOL feature service; use Map Viewer or Web Map JSON after sign-in.':' Franzen-curated Red Cross feature service.';
+    return `${geo==='Service'?'Operational':geo} layer${touched}.${access}`;
+  }
   if(rt)return 'Live operational feed — updates automatically as conditions change.';
   const lvl={County:'County-level',['Census Tract']:'Census-tract-level',Tribal:'Tribal-area',Service:'Point / service'}[geo];
   const kind=cat.startsWith('Hazards')?'hazard & risk layer':cat.startsWith('Infrastructure')?'critical-infrastructure layer':'community indicator';
   return `${lvl} ${kind}${tags.length?' — '+tags.slice(0,3).join(', ').toLowerCase():''}.`;
 }
-const LAYERS=RAPT_DATA.map((r,i)=>({i,title:r[0],url:r[1],itemId:r[2],ltype:r[3],cat:r[4],geo:r[5],tags:r[6],rt:r[7],sourceKey:r[8]||'rapt-seed',sum:summarize(r)}));
+const LAYERS=RAPT_DATA.map((r,i)=>({i,title:r[0],url:r[1],itemId:r[2],ltype:r[3],cat:r[4],geo:r[5],tags:r[6],rt:r[7],sourceKey:r[8]||'rapt-seed',ageDays:r[9]??null,itemOnly:Boolean(r[10]||(!r[1]&&r[2])),sum:summarize(r)}));
 
 const TRIBAL_INDICATOR_SERVICE='All_Indicators_Tribal_Boundaries_ACS2022/FeatureServer/17';
 const TRIBAL_METRICS=[
@@ -1181,12 +1194,15 @@ function tribalPopupInfo(l){
 
 /* counts */
 const byCat=c=>LAYERS.filter(l=>l.cat===c).length;
+document.getElementById('heroTotal').textContent=LAYERS.length;
+document.getElementById('heroLive').textContent=LAYERS.filter(l=>l.rt).length;
 document.getElementById('cAll').textContent=LAYERS.length;
 document.getElementById('cHaz').textContent=byCat('Hazards, Weather & Risk');
 document.getElementById('cInf').textContent=byCat('Infrastructure & Lifelines');
 document.getElementById('cPpl').textContent=byCat('People & Community');
 document.getElementById('sTotal').textContent=LAYERS.length;
 document.getElementById('sLive').textContent=LAYERS.filter(l=>l.rt).length;
+document.getElementById('q').placeholder=`Search ${LAYERS.length} layers - e.g. flood, disability, hospitals, tornado...`;
 
 /* tag universe */
 const tagCounts={};LAYERS.forEach(l=>l.tags.forEach(t=>tagCounts[t]=(tagCounts[t]||0)+1));
@@ -1237,7 +1253,7 @@ function matches(l){
   if(curCat!=='all'&&l.cat!==curCat)return false;
   if(curSource!=='all'&&l.sourceKey!==curSource)return false;
   if(curTags.size){for(const t of curTags){if(!l.tags.includes(t))return false;}}
-  if(q&&!(l.title.toLowerCase().includes(q)||l.tags.join(' ').toLowerCase().includes(q)||l.cat.toLowerCase().includes(q)||src.label.toLowerCase().includes(q)||src.description.toLowerCase().includes(q)))return false;
+  if(q&&!(l.title.toLowerCase().includes(q)||l.itemId.toLowerCase().includes(q)||l.tags.join(' ').toLowerCase().includes(q)||l.cat.toLowerCase().includes(q)||src.label.toLowerCase().includes(q)||src.description.toLowerCase().includes(q)))return false;
   return true;
 }
 function renderSourceFacets(){
@@ -1256,7 +1272,7 @@ function renderFacets(){
     `<button class="facet ${curTags.has(t)?'active':''}" onclick="setTag('${t.replace(/'/g,"\\'")}')">${svgIcon(t)}<span class="fl">${t}</span><span class="fc">${tagCounts[t]}</span></button>`).join('');
 }
 const grid=document.getElementById('grid');
-const badgeFor=l=>l.rt?'<span class="lrbadge live">LIVE</span>':(l.geo==='Service'?'<span class="lrbadge svc">SERVICE</span>':'');
+const badgeFor=l=>l.itemOnly?'<span class="lrbadge svc">ITEM</span>':l.rt?'<span class="lrbadge live">LIVE</span>':(l.geo==='Service'?'<span class="lrbadge svc">SERVICE</span>':'');
 const sourceMeta=l=>SOURCE_META[l.sourceKey]||SOURCE_META['rapt-seed'];
 const sourceBadge=l=>`<span class="lrbadge source">${sourceMeta(l).short}</span>`;
 function rowHTML(l){
@@ -1317,6 +1333,8 @@ function render(){
   grid.className=table?'datatable':cards?'cardgrid':'layerlist';
   const empty=curSource==='arc-authoritative'
     ?'<div class="emptylist"><b>No Red Cross Authoritative Layers Added Yet.</b><br>Use this button as the landing zone for reviewed feature, map, and image services after freshness, redundancy, permission, and shelter-master checks.<br><button class="linklike" onclick="clearFilters()">Show Current RAPT / Wrapped Seed Layers</button></div>'
+    :curSource==='franzen'
+    ?'<div class="emptylist"><b>No Franzen Layers Added Yet.</b><br>This is the trusted working-layer lane for high-quality Franzen-curated Red Cross services before formal authoritative promotion.<br><button class="linklike" onclick="clearFilters()">Show Current RAPT / Wrapped Seed Layers</button></div>'
     :'<div class="emptylist">No layers match those filters.<br><button class="linklike" onclick="clearFilters()">Reset filters</button></div>';
   if(table) grid.innerHTML=list.length?tableHTML(list):empty;
   else grid.innerHTML=list.length?list.map(cards?cardHTML:rowHTML).join(''):empty;
@@ -1333,8 +1351,8 @@ function renderDetail(){
   }
   const l=LAYERS[curFocus],on=sel.has(l.i),c=CATCOLORS[l.cat],tp=topicOf(l);
   const chips=`<span class="ctag source">${sourceMeta(l).short}</span>`+(tp?`<span class="ctag primary" style="background:${c}">${tp}</span>`:'')+l.tags.filter(t=>t!==tp).map(t=>`<span class="ctag">${t}</span>`).join('');
-  const ltypeLabel={ArcGISMapServiceLayer:'Map service',ArcGISFeatureLayer:'Feature layer'}[l.ltype]||l.ltype;
-  const badge=l.rt?'<span class="lrbadge live">LIVE</span>':(l.geo==='Service'?'<span class="lrbadge svc">SERVICE</span>':'');
+  const ltypeLabel=l.itemOnly?'Feature layer item':({ArcGISMapServiceLayer:'Map service',ArcGISFeatureLayer:'Feature layer'}[l.ltype]||l.ltype);
+  const badge=badgeFor(l);
   box.innerHTML=`
     <div class="dt-top">
       <span class="dt-ic" style="color:${c}">${iconFor(l)}</span>
@@ -1347,6 +1365,7 @@ function renderDetail(){
       <div><dt>Type</dt><dd>${ltypeLabel}</dd></div>
       <div><dt>Geography</dt><dd>${geoArea(l)}</dd></div>
       <div><dt>Source status</dt><dd>${sourceMeta(l).label}</dd></div>
+      ${l.itemOnly?'<div><dt>Access</dt><dd>AGOL item ID / sign-in</dd></div>':''}
       <div><dt>Updates</dt><dd>${l.rt?'Real-time feed':'Static / periodic'}</dd></div>
     </dl>
     <button class="dt-add ${on?'on':''}" onclick="toggle(${l.i})">${on?checkSvg()+' In your map':plusSvg()+' Add to map'}</button>`;
@@ -1428,6 +1447,7 @@ function initMap(){
 }
 function buildLayer(l){
   try{
+    if(!l.url)return null;
     const common={url:l.url,title:l.title,opacity:isTribalLayer(l)?0.72:.9,popupEnabled:false};
     if(l.ltype==='ArcGISMapServiceLayer')return new window._MIL({...common,opacity:.85});
     const opts={...common,outFields:["*"]};
@@ -1475,16 +1495,18 @@ function renderMapPanel(){
   const box=document.getElementById('mlayers');
   if(sel.size===0){box.innerHTML='<div class="emptymap">No layers yet.<br>Add layers from the Catalog, then they appear here — toggle, fade, and reorder before taking them to your own map.</div>';return;}
   const hasTribal=[...sel].some(i=>isTribalLayer(LAYERS[i]));
+  const itemOnlyCount=[...sel].filter(i=>LAYERS[i].itemOnly).length;
   const hint=hasTribal?'<div class="tribalhint"><b>Tribal Proof Mode:</b> click a Tribal boundary on the map to open a formatted Red Cross catalog card. Default Esri popups are disabled.</div>':'';
-  box.innerHTML=hint+[...sel].map(i=>{
-    const l=LAYERS[i];const lo=layerObjs[i];const vis=lo?lo.visible!==false:true;
+  const itemHint=itemOnlyCount?`<div class="itemonlyhint"><b>${itemOnlyCount} item-backed Franzen layer${itemOnlyCount===1?'':'s'}:</b> preview requires Red Cross AGOL access. Use option 1 or 3 to carry the item ID, renderer, and source popup into ArcGIS after sign-in.</div>`:'';
+  box.innerHTML=hint+itemHint+[...sel].map(i=>{
+    const l=LAYERS[i];const lo=layerObjs[i];const vis=lo?lo.visible!==false:!l.itemOnly;
     return `<div class="mlrow">
       <div class="top">
         <div class="sw ${vis?'on':''}" onclick="togVis(${i})"><b></b></div>
         <div class="nm">${l.title.replace(/\s*\(zoom.*?\)/i,'')}</div>
         <span class="rm" onclick="toggle(${i})" title="Remove">×</span>
       </div>
-      <input type="range" min="0" max="100" value="${Math.round((lo?lo.opacity:0.9)*100)}" oninput="setOpa(${i},this.value)">
+      <input type="range" min="0" max="100" value="${Math.round((lo?lo.opacity:0.9)*100)}" ${l.itemOnly?'disabled title="Preview requires Red Cross AGOL sign-in"':''} oninput="setOpa(${i},this.value)">
     </div>`;
   }).join('');
 }
@@ -1500,23 +1522,31 @@ function openBuild(){
   // 01 deep link (item-backed)
   const ids=[...new Set(ls.filter(l=>l.itemId).map(l=>l.itemId))];
   const mv=document.getElementById('mvLink');
-  if(ids.length){mv.href='https://www.arcgis.com/apps/mapviewer/index.html?layers='+ids.join(',');mv.style.opacity=1;mv.style.pointerEvents='auto';}
-  else{mv.href='https://www.arcgis.com/apps/mapviewer/index.html';}
+  const mvHref='https://arc-nhq-gis.maps.arcgis.com/apps/mapviewer/index.html?layers='+ids.join(',');
+  const mvTooLong=mvHref.length>1900;
+  if(ids.length&&!mvTooLong){mv.href=mvHref;mv.style.opacity=1;mv.style.pointerEvents='auto';}
+  else{mv.href='https://arc-nhq-gis.maps.arcgis.com/apps/mapviewer/index.html';mv.style.opacity=.55;mv.style.pointerEvents='none';}
+  const urlLayers=ls.filter(l=>l.url);
+  const itemOnly=ls.filter(l=>l.itemOnly).length;
   const urlOnly=ls.length-ls.filter(l=>l.itemId).length;
-  document.getElementById('mvNote').textContent=ids.length?`${ids.length} item-backed`+(urlOnly?` · ${urlOnly} via URL (option 2)`:''):'No item IDs — use option 2';
+  document.getElementById('mvNote').textContent=ids.length
+    ? mvTooLong?`${ids.length} item-backed - use option 3 for bulk JSON`:`${ids.length} item-backed`+(itemOnly?` · ${itemOnly} sign-in required`:'')+(urlOnly?` · ${urlOnly} via URL (option 2)`:'')
+    :'No item IDs - use option 2';
   // 02 urls — one-at-a-time stepper + per-URL list
   urlStep=0;
-  document.getElementById('stepBtn').textContent='Copy URL 1 of '+ls.length;
-  document.getElementById('preUrls').innerHTML=ls.map((l,i)=>
+  const stepBtn=document.getElementById('stepBtn');
+  stepBtn.disabled=!urlLayers.length;
+  stepBtn.textContent=urlLayers.length?'Copy URL 1 of '+urlLayers.length:'No service URLs in selection';
+  document.getElementById('preUrls').innerHTML=urlLayers.length?urlLayers.map((l,i)=>
     `<div class="urlrow"><span class="un">${i+1}</span><span class="ut">${l.title.replace(/\s*\(.*?\)/,'')}</span><button class="ucopy" onclick="copyOne(${i})">Copy</button></div>`
-  ).join('');
+  ).join(''):'<div class="urlrow"><span class="ut">These selected layers are item-backed only. Use option 1 or copy/download option 3 JSON.</span></div>';
   document.getElementById('modal').classList.add('show');
 }
 function closeBuild(){document.getElementById('modal').classList.remove('show');}
 function togglePre(id){const p=document.getElementById(id);p.style.display=p.style.display==='block'?'none':'block';}
 let urlStep=0;
 function copyNextUrl(){
-  const ls=selList(); if(!ls.length)return;
+  const ls=selList().filter(l=>l.url); if(!ls.length)return;
   const l=ls[urlStep%ls.length];
   copyText(l.url,()=>{
     toast(`Copied ${(urlStep%ls.length)+1} of ${ls.length} — paste into Add → URL, then click for next`);
@@ -1524,12 +1554,13 @@ function copyNextUrl(){
     document.getElementById('stepBtn').textContent=`Copy URL ${urlStep+1} of ${ls.length}`;
   });
 }
-function copyOne(i){const l=selList()[i];copyText(l.url,()=>toast(`Copied ${i+1}: ${l.title.slice(0,32)}`));}
+function copyOne(i){const l=selList().filter(x=>x.url)[i];if(!l)return;copyText(l.url,()=>toast(`Copied ${i+1}: ${l.title.slice(0,32)}`));}
 function copyShare(){copyText(location.href,()=>toast('Selected-layer link copied — opens this exact selection'));}
 function webmapJSON(){
   const ops=selList().map((l,k)=>{
-    const base={id:'lyr_'+k+'_'+Math.random().toString(36).slice(2,7),title:l.title,opacity:1,visibility:true,url:l.url};
-    base.layerType=l.ltype||(l.url.includes('/MapServer')?'ArcGISMapServiceLayer':'ArcGISFeatureLayer');
+    const base={id:'lyr_'+k+'_'+Math.random().toString(36).slice(2,7),title:l.title,opacity:1,visibility:true};
+    if(l.url)base.url=l.url;
+    base.layerType=l.ltype||((l.url||'').includes('/MapServer')?'ArcGISMapServiceLayer':'ArcGISFeatureLayer');
     if(l.itemId)base.itemId=l.itemId;
     if(isTribalLayer(l))base.popupInfo=tribalPopupInfo(l);
     return base;
